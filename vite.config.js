@@ -1,5 +1,4 @@
 import { defineConfig, loadEnv } from "vite";
-//import reactRefresh from "@vitejs/plugin-react-refresh";
 import laravel from "laravel-vite-plugin";
 
 export default ({ mode }) => {
@@ -7,10 +6,9 @@ export default ({ mode }) => {
     return defineConfig({
         plugins: [
             laravel({
-                input: ["resources/css/app.scss", "resources/js/HiroApp.jsx"],
+                input: ["resources/css/app.scss", "resources/js/myApp.jsx"],
                 refresh: true,
             }),
-            //reactRefresh(),
             {
                 name: "css-static-url-fixer",
                 enforce: "post",
