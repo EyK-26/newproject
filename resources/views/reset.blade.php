@@ -13,6 +13,15 @@
 
 <body>
     <h1>Reset Password</h1>
+    @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     @isset($email)
     @guest
     <form action="{{ route('password.update') }}" method="post">

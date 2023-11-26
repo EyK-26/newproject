@@ -21,20 +21,13 @@ class PasswordResetController extends Controller
         $user->password = Hash::make($request->input('password'));
         $user->save();
         return redirect('/')->with('status', 'Profile updated!');
-
-
-        // if ($request->input('password') !== $request->input('password_confirmation')) {
-        //     return view('reset', compact('token', 'email'));
-        // }
-
-
     }
 
     private function validatePassword(Request $request)
     {
         $this->validate($request, [
-            'password' => 'required',
-            'password_confirmation' => 'required'
+            'password' => 'required | min:8 | confirmed',
+            'password_confirmation' => 'required | min:8'
         ]);
     }
 }
