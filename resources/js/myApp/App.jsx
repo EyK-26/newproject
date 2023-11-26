@@ -8,7 +8,7 @@ const App = () => {
     const [contextValue, setContextValue] = useReducer(reducer, {
         theme: "light",
         user: null,
-        error: {},
+        error: [],
     });
 
     return (

@@ -8,7 +8,7 @@ const Login = () => {
         email: "",
         password: "",
     });
-    const { dispatch } = useContext(Context);
+    const { state, dispatch } = useContext(Context);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -39,6 +39,8 @@ const Login = () => {
 
     return (
         <>
+            {state.error.length > 0 &&
+                state.error.map((el, i) => <span key={i}>{el}</span>)}
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email</label>
                 <input

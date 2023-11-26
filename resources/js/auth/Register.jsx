@@ -10,7 +10,7 @@ const Register = ({ fetchUserStatus }) => {
         password: "",
         password_confirmation: "",
     });
-    const { dispatch } = useContext(Context);
+    const { state, dispatch } = useContext(Context);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -37,41 +37,47 @@ const Register = ({ fetchUserStatus }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="name">Name</label>
-            <input
-                type="text"
-                name="name"
-                id="name"
-                value={values.name}
-                onChange={handleChange}
-            />
-            <label htmlFor="email">Email</label>
-            <input
-                type="email"
-                name="email"
-                id="email"
-                value={values.email}
-                onChange={handleChange}
-            />
-            <label htmlFor="password">Password</label>
-            <input
-                type="password"
-                name="password"
-                id="password"
-                value={values.password}
-                onChange={handleChange}
-            />
-            <label htmlFor="password_confirmation">Password Confirmation</label>
-            <input
-                type="password"
-                name="password_confirmation"
-                id="password_confirmation"
-                value={values.password_confirmation}
-                onChange={handleChange}
-            />
-            <input type="submit" value="Register" />
-        </form>
+        <>
+            {state.error.length > 0 &&
+                state.error.map((el, i) => <span key={i}>{el}</span>)}{" "}
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="name">Name</label>
+                <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    value={values.name}
+                    onChange={handleChange}
+                />
+                <label htmlFor="email">Email</label>
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    value={values.email}
+                    onChange={handleChange}
+                />
+                <label htmlFor="password">Password</label>
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    value={values.password}
+                    onChange={handleChange}
+                />
+                <label htmlFor="password_confirmation">
+                    Password Confirmation
+                </label>
+                <input
+                    type="password"
+                    name="password_confirmation"
+                    id="password_confirmation"
+                    value={values.password_confirmation}
+                    onChange={handleChange}
+                />
+                <input type="submit" value="Register" />
+            </form>
+        </>
     );
 };
 
