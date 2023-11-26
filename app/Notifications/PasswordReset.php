@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class Authentification extends Notification
+class PasswordReset extends Notification
 {
     use Queueable;
     private $user;
@@ -34,7 +34,7 @@ class Authentification extends Notification
         return (new MailMessage)
             ->subject("Password Reset for {$this->user->email}")
             ->line('Click below to reset your password')
-            ->action('Reset Password', url('/password-reset', ['token' => csrf_token(), 'email' => $this->user->email]))
+            ->action('Reset Password', url("/password-reset/{$this->user->email}", ['token' => csrf_token()]))
             ->line('Thank you for using our application!');
     }
 

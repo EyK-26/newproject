@@ -5,16 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="">
+    @isset($token)
     <meta name="csrf-token" content="{{ $token }}">
+    @endisset
     <title>MyApp</title>
 </head>
 
 <body>
     <h1>Reset Password</h1>
+    @isset($email)
     @guest
-    <form action="/password-reset/action" method="post">
+    <form action="{{ route('password.update') }}" method="post">
+        @method('put')
         @csrf
-        <input type="hidden" name="email" value={{ $email }}>
+        <input type="hidden" name="email" value="{{ $email }}">
         <label for="password">New password</label>
         <input type="password" name="password" id="password">
         <label for="password_confirmation">Confirm new password</label>
@@ -24,6 +28,7 @@
     @else
     <h1>404 Not Authorized</h1>
     @endguest
+    @endisset
 </body>
 
 </html>
