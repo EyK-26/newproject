@@ -8,6 +8,7 @@ import Context from "../myApp/Context/Context";
 import axios from "axios";
 import Unauthorized from "../auth/Unauthorized";
 import Home from "../components/Home";
+import PasswordReset from "../auth/PasswordReset";
 
 const MyRoutes = () => {
     const { state, dispatch } = useContext(Context);
@@ -55,6 +56,12 @@ const MyRoutes = () => {
                     />
                 )}
                 {!state.user && <Route path="/login" element={<Login />} />}
+                {!state.user && (
+                    <Route
+                        path="/forgot-password"
+                        element={<PasswordReset />}
+                    />
+                )}
                 {state.user && <Route path="/logout" element={<Logout />} />}
                 <Route path="*" element={<Unauthorized />} />
             </Route>

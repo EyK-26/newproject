@@ -59,6 +59,9 @@ const Login = () => {
                 <input type="submit" value="Login" />
             </form>
             <span>
+                <Link to="/forgot-password">Forgot Password</Link>
+            </span>
+            <span>
                 You don't have an account?{" "}
                 <Link to="/register">Register Now</Link>
             </span>
