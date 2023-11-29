@@ -1,6 +1,11 @@
 body {
     background-color: rgba(244, 161, 161, 0.56);
     margin: 0;
+    .reset__success {
+        width: 100%;
+        text-align: center;
+        background-color: green;
+    }
     #root {
         height: 100vh;
         display: flex;
