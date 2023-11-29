@@ -7,12 +7,13 @@ const Logout = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios.post("/logout");
-        dispatch({
-            type: "user/set",
-            payload: null,
-        });
-        navigate("/");
+        const response = await axios.post("/logout");
+        if (Math.floor(response.status / 100) === 2) {
+            dispatch({
+                type: "user/set",
+                payload: null,
+            });
+        }
     };
 
     return (

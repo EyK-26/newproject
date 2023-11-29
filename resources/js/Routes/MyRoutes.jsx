@@ -22,15 +22,12 @@ const MyRoutes = () => {
                     type: "user/set",
                     payload: response.data,
                 });
-            } else if (response.status === 401) {
-                dispatch({
-                    type: "user/set",
-                    payload: false,
-                });
-                navigate("/login");
             }
         } catch (error) {
-            navigate("/login");
+            dispatch({
+                type: "user/set",
+                payload: false,
+            });
         }
     };
 
@@ -41,7 +38,7 @@ const MyRoutes = () => {
     return (
         <Routes>
             <Route path="/" element={<Layout />}>
-                {state.user && <Route index element={<Home />} />}
+                <Route index element={<Home />} />
                 {!state.user && (
                     <Route
                         path="/register"

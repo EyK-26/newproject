@@ -1,10 +1,16 @@
 import React, { useContext } from "react";
 import Context from "../myApp/Context/Context";
+import { Link } from "react-router-dom";
 
 const Home = () => {
     const { state } = useContext(Context);
 
-    return <h1>Welcome {state.user?.name}</h1>;
+    return (
+        <>
+            {!state.user && <Link to="/login">Login</Link>}
+            {state.user && <span>Welcome {state.user.name}</span>}{" "}
+        </>
+    );
 };
 
 export default Home;

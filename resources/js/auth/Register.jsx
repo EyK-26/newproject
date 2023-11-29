@@ -19,7 +19,7 @@ const Register = ({ fetchUserStatus }) => {
             const response = await axios.post("/register", values);
             if (Math.floor(response.status / 100) === 2) {
                 fetchUserStatus();
-                navigate("/");
+                navigate("/", { state: { userRegistered: true } });
             }
         } catch (error) {
             dispatch({
