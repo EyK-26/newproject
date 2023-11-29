@@ -3,10 +3,10 @@ import Navigation from "../components/Navigation";
 
 const Header = () => {
     return (
-        <>
-            <div>header</div>
+        <div className="navbar">
+            <span>header</span>
             <Navigation />
-        </>
+        </div>
     );
 };
 

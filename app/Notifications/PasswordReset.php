@@ -35,6 +35,7 @@ class PasswordReset extends Notification
             ->subject("Password Reset for {$this->user->email}")
             ->line('Click below to reset your password')
             ->action('Reset Password', url("/password-reset/{$this->user->email}", ['token' => csrf_token()]))
+            ->line('please note that this link is valid for 1 hour only')
             ->line('Thank you for using our application!');
     }
 

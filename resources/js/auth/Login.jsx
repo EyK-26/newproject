@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Context from "../myApp/Context/Context";
 import axios from "axios";
 
-const Login = () => {
+const Login = ({ fetchUserStatus }) => {
     const [values, setValues] = useState({
         email: "",
         password: "",
@@ -16,10 +16,7 @@ const Login = () => {
         try {
             const response = await axios.post("/login", values);
             if (Math.floor(response.status / 100) === 2) {
-                dispatch({
-                    type: "user/set",
-                    payload: response.data,
-                });
+                fetchUserStatus();
                 navigate("/");
             }
         } catch (error) {
@@ -39,12 +36,6 @@ const Login = () => {
 
     return (
         <>
-            {state.error?.email?.map((el, i) => (
-                <span key={i}>{el}</span>
-            ))}
-            {state.error?.password?.map((el, i) => (
-                <span key={i}>{el}</span>
-            ))}
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email</label>
                 <input
@@ -64,6 +55,12 @@ const Login = () => {
                 />
                 <input type="submit" value="Login" />
             </form>
+            {state.error?.email?.map((el, i) => (
+                <span key={i}>{el}</span>
+            ))}
+            {state.error?.password?.map((el, i) => (
+                <span key={i}>{el}</span>
+            ))}
             <span>
                 <Link to="/forgot-password">Forgot Password</Link>
             </span>

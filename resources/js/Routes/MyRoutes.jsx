@@ -15,7 +15,6 @@ const MyRoutes = () => {
     const navigate = useNavigate();
 
     const fetchUserStatus = async () => {
-        console.log(state.user);
         try {
             const response = await axios.get("/api/user");
             if (Math.floor(response.status / 100) === 2) {
@@ -31,18 +30,12 @@ const MyRoutes = () => {
                 navigate("/login");
             }
         } catch (error) {
-            dispatch({
-                type: "error/set",
-                payload: error.response.data.errors,
-            });
             navigate("/login");
         }
     };
 
     useEffect(() => {
-        if (state.user === null) {
-            fetchUserStatus();
-        }
+        if (state.user === null) fetchUserStatus();
     }, [state.user]);
 
     return (
@@ -55,7 +48,12 @@ const MyRoutes = () => {
                         element={<Register fetchUserStatus={fetchUserStatus} />}
                     />
                 )}
-                {!state.user && <Route path="/login" element={<Login />} />}
+                {!state.user && (
+                    <Route
+                        path="/login"
+                        element={<Login fetchUserStatus={fetchUserStatus} />}
+                    />
+                )}
                 {!state.user && (
                     <Route
                         path="/forgot-password"

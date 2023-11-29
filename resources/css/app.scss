@@ -15,5 +15,9 @@ body {
                 flex-direction: column;
             }
         }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+        }
     }
 }

@@ -40,15 +40,6 @@ const Register = ({ fetchUserStatus }) => {
 
     return (
         <>
-            {state.error?.name?.map((el, i) => (
-                <span key={i}>{el}</span>
-            ))}
-            {state.error?.email?.map((el, i) => (
-                <span key={i}>{el}</span>
-            ))}
-            {state.error?.password?.map((el, i) => (
-                <span key={i}>{el}</span>
-            ))}
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">Name</label>
                 <input
@@ -86,6 +77,15 @@ const Register = ({ fetchUserStatus }) => {
                 />
                 <input type="submit" value="Register" />
             </form>
+            {state.error?.name?.map((el, i) => (
+                <span key={i}>{el}</span>
+            ))}
+            {state.error?.email?.map((el, i) => (
+                <span key={i}>{el}</span>
+            ))}
+            {state.error?.password?.map((el, i) => (
+                <span key={i}>{el}</span>
+            ))}
         </>
     );
 };

@@ -1,5 +1,4 @@
 export default function reducer(state, action) {
-    console.log(state, action);
     switch (action.type) {
         case "theme/set":
             return {
