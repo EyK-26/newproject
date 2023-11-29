@@ -4,14 +4,18 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class PasswordResetController extends Controller
 {
-    public function reset(string $email, string $token)
+    public function reset(string $email, string $token, string $datetime)
     {
-        return view('reset', compact('email', 'token'));
+        $baseTime = strtotime(decrypt($datetime));
+        return strtotime('+30 minutes', $baseTime) <= strtotime('now')
+            ? "Link expired"
+            : view('reset', ['email' => decrypt($email), 'token' => decrypt($token)]);
     }
 
     public function update(Request $request)
