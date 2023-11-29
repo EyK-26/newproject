@@ -20,7 +20,7 @@ class PasswordResetController extends Controller
         $user = User::where('email', $request->input('email'))->first();
         $user->password = Hash::make($request->input('password'));
         $user->save();
-        return redirect('/')->with('status', 'Profile updated!');
+        return redirect('/')->with('status', 'Password updated!');
     }
 
     private function validatePassword(Request $request)

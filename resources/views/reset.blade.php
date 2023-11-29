@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="">
+    @vite('resources/css/reset.scss')
     @isset($token)
     <meta name="csrf-token" content="{{ $token }}">
     @endisset
@@ -13,15 +14,6 @@
 
 <body>
     <h1>Reset Password</h1>
-    @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
     @isset($email)
     @guest
     <form action="{{ route('password.update') }}" method="post">
@@ -38,6 +30,13 @@
     <h1>404 Not Authorized</h1>
     @endguest
     @endisset
+    @if (count($errors) > 0)
+    <ul class="errors">
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+    @endif
 </body>
 
 </html>

@@ -36,10 +36,19 @@ const Register = ({ fetchUserStatus }) => {
         }));
     };
 
+    console.log(state.error);
+
     return (
         <>
-            {state.error.length > 0 &&
-                state.error.map((el, i) => <span key={i}>{el}</span>)}{" "}
+            {state.error?.name?.map((el, i) => (
+                <span key={i}>{el}</span>
+            ))}
+            {state.error?.email?.map((el, i) => (
+                <span key={i}>{el}</span>
+            ))}
+            {state.error?.password?.map((el, i) => (
+                <span key={i}>{el}</span>
+            ))}
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">Name</label>
                 <input

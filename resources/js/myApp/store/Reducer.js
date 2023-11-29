@@ -14,7 +14,7 @@ export default function reducer(state, action) {
         case "error/set":
             return {
                 ...state,
-                error: [...state.error, action.payload],
+                error: action.payload,
             };
         default:
             return state;

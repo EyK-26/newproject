@@ -4,6 +4,7 @@ import Navigation from "../components/Navigation";
 const Header = () => {
     return (
         <>
+            <div>header</div>
             <Navigation />
         </>
     );
