@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import UserContext from "../myApp/context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const PasswordReset = () => {
     const [email, setEmail] = useState("");
     const [sending, setSending] = useState(null);
     const [message, setMessage] = useState("");
     const { state, dispatch } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -28,7 +30,7 @@ const PasswordReset = () => {
                 navigate("/login");
             }
         } else {
-            setMessage("Please fill the email.");
+            setMessage("Please fill the email field.");
         }
     };
 
@@ -37,13 +39,18 @@ const PasswordReset = () => {
     };
 
     return (
-        <>
+        <div className="reset_password">
             {sending === null ? (
                 <span>{message}</span>
             ) : sending ? (
                 <span>Please wait...</span>
             ) : (
-                <span>{message}</span>
+                <>
+                    <span>{message}</span>
+                    <button onClick={() => navigate("/")}>
+                        back to main page
+                    </button>
+                </>
             )}
             {state.error?.email?.map((el, i) => (
                 <span key={i}>{el}</span>
@@ -56,7 +63,7 @@ const PasswordReset = () => {
                 <input type="email" onChange={handleChange} />
                 <input type="submit" value="Submit" />
             </form>
-        </>
+        </div>
     );
 };
 

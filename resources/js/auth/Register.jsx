@@ -39,7 +39,7 @@ const Register = ({ fetchUserStatus }) => {
     console.log(state.error);
 
     return (
-        <>
+        <div className="register_form">
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">Name</label>
                 <input
@@ -86,7 +86,7 @@ const Register = ({ fetchUserStatus }) => {
             {state.error?.password?.map((el, i) => (
                 <span key={i}>{el}</span>
             ))}
-        </>
+        </div>
     );
 };
 

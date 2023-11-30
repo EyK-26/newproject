@@ -1,4 +1,4 @@
-export default function UserReducer(state, action) {
+const UserReducer = (state, action) => {
     switch (action.type) {
         case "theme/set":
             return {
@@ -18,4 +18,6 @@ export default function UserReducer(state, action) {
         default:
             return state;
     }
-}
+};
+
+export default UserReducer;

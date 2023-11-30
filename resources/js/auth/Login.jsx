@@ -35,7 +35,7 @@ const Login = ({ fetchUserStatus }) => {
     };
 
     return (
-        <>
+        <div className="login_form">
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email</label>
                 <input
@@ -68,7 +68,7 @@ const Login = ({ fetchUserStatus }) => {
                 You don't have an account?{" "}
                 <Link to="/register">Register Now</Link>
             </span>
-        </>
+        </div>
     );
 };
 

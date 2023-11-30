@@ -1,10 +1,11 @@
 import React from "react";
 import Navigation from "../components/Navigation";
+import { Link } from "react-router-dom";
 
 const Header = () => {
     return (
-        <div className="navbar">
-            <span>header</span>
+        <div className="header">
+            <Link to="/">Logo</Link>
             <Navigation />
         </div>
     );
