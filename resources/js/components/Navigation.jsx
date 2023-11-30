@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import Logout from "../auth/Logout";
-import Context from "../myApp/context/Context";
+import UserContext from "../myApp/context/UserContext";
 
 const Navigation = () => {
-    const { state } = useContext(Context);
+    const { state } = useContext(UserContext);
     return <>{state.user && <Logout />}</>;
 };
 

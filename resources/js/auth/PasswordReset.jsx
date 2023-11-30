@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
-import Context from "../myApp/context/Context";
+import UserContext from "../myApp/context/UserContext";
 
 const PasswordReset = () => {
     const [email, setEmail] = useState("");
     const [sending, setSending] = useState(null);
     const [message, setMessage] = useState("");
-    const { state, dispatch } = useContext(Context);
+    const { state, dispatch } = useContext(UserContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

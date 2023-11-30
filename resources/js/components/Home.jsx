@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import Context from "../myApp/context/Context";
 import { Link } from "react-router-dom";
+import UserContext from "../myApp/context/UserContext";
 
 const Home = () => {
-    const { state } = useContext(Context);
+    const { state } = useContext(UserContext);
 
     return (
         <>

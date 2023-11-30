@@ -1,4 +1,4 @@
-export default function reducer(state, action) {
+export default function UserReducer(state, action) {
     switch (action.type) {
         case "theme/set":
             return {

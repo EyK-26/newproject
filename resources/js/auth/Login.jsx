@@ -1,15 +1,14 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Context from "../myApp/context/Context";
-
 import axios from "axios";
+import UserContext from "../myApp/context/UserContext";
 
 const Login = ({ fetchUserStatus }) => {
     const [values, setValues] = useState({
         email: "",
         password: "",
     });
-    const { state, dispatch } = useContext(Context);
+    const { state, dispatch } = useContext(UserContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {

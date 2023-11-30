@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import Context from "../myApp/context/Context";
 import axios from "axios";
+import UserContext from "../myApp/context/UserContext";
 
 const Logout = () => {
-    const { dispatch } = useContext(Context);
+    const { dispatch } = useContext(UserContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

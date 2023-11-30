@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
-import Context from "../myApp/context/Context";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../myApp/context/UserContext";
 
 const Register = ({ fetchUserStatus }) => {
     const [values, setValues] = useState({
@@ -10,7 +10,7 @@ const Register = ({ fetchUserStatus }) => {
         password: "",
         password_confirmation: "",
     });
-    const { state, dispatch } = useContext(Context);
+    const { state, dispatch } = useContext(UserContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {

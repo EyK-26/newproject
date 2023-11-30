@@ -1,11 +1,11 @@
 import React, { useReducer } from "react";
 import { BrowserRouter } from "react-router-dom";
-import Context from "./context/Context";
 import MyRoutes from "../Routes/MyRoutes";
-import reducer from "./store/Reducer";
+import UserContext from "./context/UserContext";
+import UserReducer from "./store/UserReducer";
 
 const App = () => {
-    const [contextValue, setContextValue] = useReducer(reducer, {
+    const [userContextValue, setUserContextValue] = useReducer(UserReducer, {
         theme: "light",
         user: null,
         error: null,
@@ -13,11 +13,14 @@ const App = () => {
 
     return (
         <BrowserRouter>
-            <Context.Provider
-                value={{ state: contextValue, dispatch: setContextValue }}
+            <UserContext.Provider
+                value={{
+                    state: userContextValue,
+                    dispatch: setUserContextValue,
+                }}
             >
                 <MyRoutes />
-            </Context.Provider>
+            </UserContext.Provider>
         </BrowserRouter>
     );
 };
