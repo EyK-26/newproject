@@ -4,7 +4,7 @@ import Layout from "../layout/Layout";
 import Register from "../auth/Register";
 import Logout from "../auth/Logout";
 import Login from "../auth/Login";
-import Context from "../myApp/Context/Context";
+import Context from "../myApp/context/Context";
 import axios from "axios";
 import Unauthorized from "../auth/Unauthorized";
 import Home from "../components/Home";

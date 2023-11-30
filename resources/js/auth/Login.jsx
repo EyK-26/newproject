@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Context from "../myApp/Context/Context";
+import Context from "../myApp/context/Context";
+
 import axios from "axios";
 
 const Login = ({ fetchUserStatus }) => {

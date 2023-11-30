@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
-import Context from "../myApp/Context/Context";
+import Context from "../myApp/context/Context";
 import { useNavigate } from "react-router-dom";
 
 const Register = ({ fetchUserStatus }) => {
