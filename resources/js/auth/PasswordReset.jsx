@@ -55,9 +55,6 @@ const PasswordReset = () => {
             {state.error?.email?.map((el, i) => (
                 <span key={i}>{el}</span>
             ))}
-            {state.error?.password?.map((el, i) => (
-                <span key={i}>{el}</span>
-            ))}
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email</label>
                 <input type="email" onChange={handleChange} />

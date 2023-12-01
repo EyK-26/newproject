@@ -5,29 +5,37 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class PasswordResetController extends Controller
 {
-    public function reset(string $email, string $token, string $datetime)
+    public function reset(string $email, string $token, string $datetime): string
     {
         $baseTime = strtotime(decrypt($datetime));
         return strtotime('+30 minutes', $baseTime) <= strtotime('now')
             ? "Link expired"
-            : view('reset', ['email' => decrypt($email), 'token' => decrypt($token)]);
+            : view('reset', compact('email', 'token'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request): RedirectResponse
     {
-        $this->validatePassword($request);
         $user = User::where('email', $request->input('email'))->first();
+        if (
+            Hash::check($request->input('password'), $user->password)
+            && Hash::check($request->input('password_confirmation'), $user->password)
+        ) {
+            return redirect()->back()->with('message', 'The new password is the same as the current password.');
+        }
+        $this->validatePassword($request);
         $user->password = Hash::make($request->input('password'));
         $user->save();
         return redirect('/login')->with('message', 'Password updated!');
     }
 
-    private function validatePassword(Request $request)
+    private function validatePassword(Request $request): void
     {
         $this->validate($request, [
             'password' => 'required | min:8 | confirmed',

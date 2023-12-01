@@ -30,13 +30,18 @@
     <h1>404 Not Authorized</h1>
     @endguest
     @endisset
-    @if (count($errors) > 0)
+
     <ul class="errors">
+        @if(session('message'))
+        <li>{{ session('message') }}</li>
+        @endif
+        @if (count($errors) > 0)
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
         @endforeach
+        @endif
     </ul>
-    @endif
+
 </body>
 
 </html>

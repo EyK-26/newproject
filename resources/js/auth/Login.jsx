@@ -32,7 +32,7 @@ const Login = ({ fetchUserStatus }) => {
             setTimeout(() => {
                 document.querySelector(".reset__success").style.display =
                     "none";
-            }, 3000);
+            }, 5000);
         }
     }, []);
 

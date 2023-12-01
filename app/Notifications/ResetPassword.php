@@ -35,7 +35,7 @@ class ResetPassword extends Notification
         return (new MailMessage)
             ->subject("Password Reset for {$this->user->email}")
             ->line('Click below to reset your password')
-            ->action('Reset Password', url("/password-reset", ['emai' => encrypt($this->user->email), 'token' => encrypt(csrf_token()), 'datetime' => encrypt(Carbon::now())]))
+            ->action('Reset Password', url("/password-reset", ['emai' => $this->user->email, 'token' => csrf_token(), 'datetime' => encrypt(Carbon::now())]))
             ->line('please note that this link is valid for 30 minutes')
             ->line('Thank you for using our application!');
     }
