@@ -8,6 +8,20 @@
     justify-content: space-between;
 }
 
+@mixin justify {
+    display: flex;
+    justify-content: center;
+}
+
+html {
+    box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
 body {
     background-color: rgba(244, 161, 161, 0.56);
     margin: 0;
@@ -89,47 +103,63 @@ body {
                         }
                     }
                 }
-            }
 
-            .selection_container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                .selected_product {
-                    padding: 0.3em;
-                    margin: 1em;
-                    border: 0.1em solid gray;
-                    border-radius: 1em;
-                    height: 35em;
-                    .image__container {
-                        display: flex;
-                        align-items: center;
-                        width: 100%;
-                        .arrowLeft,
-                        .arrowRight {
-                            width: 2em;
-                            height: 150%;
-                            cursor: pointer;
-                        }
-                        img {
-                            width: 100%;
+                .product_view__container {
+                    display: flex;
+                    img {
+                        width: 40em;
+                        border-radius: 1.4em;
+                    }
+                    .image__container--main {
+                        padding: 2em;
+                        .controls {
+                            @include justify;
+                            .arrowLeft,
+                            .arrowRight {
+                                width: 3em;
+                                cursor: pointer;
+                            }
                         }
                     }
+                }
 
-                    .product_details {
-                        font-size: 0.9em;
-                        list-style: none;
-                        padding-left: 0;
-                        @include column;
-                        justify-content: space-between;
-                        li {
-                            @include flex-between;
-                            margin-bottom: 0.5em;
-                            &.product__company {
-                                justify-content: flex-start;
-                                align-items: center;
-                                img {
-                                    width: 5em;
+                .selection_container {
+                    @include justify;
+                    align-items: center;
+                    .selected_product {
+                        padding: 0.3em;
+                        margin: 1em;
+                        border: 0.1em solid gray;
+                        border-radius: 1em;
+                        height: 40em;
+                        .image__container {
+                            display: flex;
+                            align-items: center;
+                            width: 100%;
+                            .arrowLeft,
+                            .arrowRight {
+                                width: 2em;
+                                height: 150%;
+                                cursor: pointer;
+                            }
+                            img {
+                                width: 100%;
+                                border-radius: 1em;
+                            }
+                        }
+
+                        .product_details {
+                            font-size: 0.9em;
+                            list-style: none;
+                            padding-left: 0;
+                            @include column;
+                            justify-content: space-between;
+                            li {
+                                @include flex-between;
+                                margin-bottom: 0.5em;
+                                &.product__company {
+                                    justify-content: flex-start;
+                                    align-items: center;
                                 }
                             }
                         }

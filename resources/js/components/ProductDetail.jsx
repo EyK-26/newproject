@@ -1,16 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import PropertyContext from "../myApp/context/PropertyContext";
-import { FaArrowRight } from "react-icons/fa";
-import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import ImageToggler from "./ImageToggler";
 
 export const ProductDetail = ({ prod }) => {
     const { state } = useContext(PropertyContext);
     const styleGreen = { backgroundColor: "green" };
     const styleRed = { backgroundColor: "red" };
-    const [imageIndex, setImageIndex] = useState(0);
-
-    console.log(prod.images);
 
     return (
         <>
@@ -18,23 +14,7 @@ export const ProductDetail = ({ prod }) => {
                 "Preview not available"
             ) : (
                 <div className="selected_product">
-                    <div className="image__container">
-                        <FaArrowLeft
-                            className="arrowLeft"
-                            onClick={() => {
-                                if (imageIndex > 0)
-                                    setImageIndex((prev) => prev - 1);
-                            }}
-                        />
-                        <img src={prod.images[imageIndex]} alt={prod.name} />
-                        <FaArrowRight
-                            className="arrowRight"
-                            onClick={() => {
-                                if (imageIndex < prod.images.length - 1)
-                                    setImageIndex((prev) => prev + 1);
-                            }}
-                        />
-                    </div>
+                    <ImageToggler images={prod.images} name={prod.name} />
                     <div>{prod.name}</div>
                     <ul className="product_details">
                         <li

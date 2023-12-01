@@ -36,8 +36,6 @@ const Register = ({ fetchUserStatus }) => {
         }));
     };
 
-    console.log(state.error);
-
     return (
         <div className="register_form">
             <form onSubmit={handleSubmit}>
