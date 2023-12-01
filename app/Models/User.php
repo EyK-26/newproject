@@ -45,6 +45,6 @@ class User extends Authenticatable
 
     public function Wishes()
     {
-        return $this->hasMany(Wishes::class);
+        return $this->hasMany(Wish::class);
     }
 }

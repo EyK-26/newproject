@@ -1,21 +1,42 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ImageToggler from "./ImageToggler";
 import { FaRegHeart } from "react-icons/fa";
+import UserContext from "../myApp/context/UserContext";
 
 const ProductView = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
+    const { state } = useContext(UserContext);
+    const [added, setAdded] = useState(false);
 
-    const addToWishlist = () => {};
+    const addToWishlist = async () => {
+        try {
+            const response = await axios.post("/api/add-to-wishlist", {
+                product_id: id,
+                user_id: state.user.id,
+            });
+            if (Math.floor(response.status / 100) === 2) {
+                setAdded(true);
+            }
+        } catch (error) {
+            console.log(err);
+        }
+    };
+
+    console.log(added);
 
     useEffect(() => {
         (async () => {
-            const response = await axios.get(
-                `https://estate-comparison.codeboot.cz/detail.php?id=${id}`
-            );
-            setProduct(response.data);
+            try {
+                const response = await axios.get(
+                    `https://estate-comparison.codeboot.cz/detail.php?id=${id}`
+                );
+                setProduct(response.data);
+            } catch (err) {
+                console.log(err);
+            }
         })();
     }, []);
 
