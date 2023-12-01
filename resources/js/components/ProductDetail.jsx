@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import PropertyContext from "../myApp/context/PropertyContext";
 import { FaArrowRight } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export const ProductDetail = ({ prod }) => {
     const { state } = useContext(PropertyContext);
@@ -82,6 +83,7 @@ export const ProductDetail = ({ prod }) => {
                             <div>{prod?.company_name}</div>
                         </li>
                     </ul>
+                    <Link to={`prod_view/${prod.id}`}>View Property</Link>
                 </div>
             )}
         </>

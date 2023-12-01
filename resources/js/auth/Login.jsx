@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../myApp/context/UserContext";
@@ -26,6 +26,15 @@ const Login = ({ fetchUserStatus }) => {
             });
         }
     };
+
+    useEffect(() => {
+        if (document.querySelector(".reset__success") !== undefined) {
+            setTimeout(() => {
+                document.querySelector(".reset__success").style.display =
+                    "none";
+            }, 3000);
+        }
+    }, []);
 
     const handleChange = (e) => {
         setValues((prev) => ({
