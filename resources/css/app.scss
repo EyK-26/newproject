@@ -106,12 +106,16 @@ body {
 
                 .product_view__container {
                     display: flex;
+                    padding: 2em;
+
+                    ul {
+                        list-style: none;
+                    }
                     img {
                         width: 40em;
                         border-radius: 1.4em;
                     }
                     .image__container--main {
-                        padding: 2em;
                         .controls {
                             @include justify;
                             .arrowLeft,
@@ -120,6 +124,9 @@ body {
                                 cursor: pointer;
                             }
                         }
+                    }
+                    .wishlist__container {
+                        cursor: pointer;
                     }
                 }
 

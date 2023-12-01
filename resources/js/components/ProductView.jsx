@@ -2,10 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ImageToggler from "./ImageToggler";
+import { FaRegHeart } from "react-icons/fa";
 
 const ProductView = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
+
+    const addToWishlist = () => {};
 
     useEffect(() => {
         (async () => {
@@ -18,12 +21,13 @@ const ProductView = () => {
 
     const convertObject = (product) =>
         Object.keys(product).map((attribute, index) => {
-            console.log(attribute);
-            if (typeof product[attribute] !== "object" && attribute !== "") {
+            if (typeof product[attribute] !== "object") {
                 return (
-                    <li key={index}>
-                        {attribute}: {product[attribute] || "unknown"}
-                    </li>
+                    attribute !== "company_logo" && (
+                        <li key={index}>
+                            {attribute}: {product[attribute] || "unknown"}
+                        </li>
+                    )
                 );
             } else if (attribute !== "images") {
                 return product[attribute] && convertObject(product[attribute]);
@@ -40,6 +44,13 @@ const ProductView = () => {
                         mainview
                     />
                     <ul>{convertObject(product)}</ul>
+                    <div
+                        className="wishlist__container"
+                        onClick={addToWishlist}
+                    >
+                        <FaRegHeart />
+                        <span>Add to Wishlist</span>
+                    </div>
                 </>
             )}
         </div>
