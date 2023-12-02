@@ -1,15 +1,18 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ImageToggler from "./ImageToggler";
-import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import UserContext from "../myApp/context/UserContext";
+import EnquiryForm from "./EnquiryForm";
 
 const ProductView = () => {
     const { id } = useParams();
-    const [product, setProduct] = useState(null);
     const { state } = useContext(UserContext);
+    const [product, setProduct] = useState(null);
     const [added, setAdded] = useState(false);
+    const [formOpen, setFormOpen] = useState(false);
+    const navigate = useNavigate(-1);
 
     const toggleWishlist = async () => {
         try {
@@ -69,27 +72,50 @@ const ProductView = () => {
         });
 
     return (
-        <div className="product_view__container">
-            {product && (
-                <>
-                    <ImageToggler
-                        images={product.images}
-                        name={product.name}
-                        mainview
-                    />
-                    <ul>{convertObject(product)}</ul>
-                    <div
-                        className="wishlist__container"
-                        onClick={toggleWishlist}
-                    >
-                        <FaRegHeart
-                            className={added ? "property__added" : undefined}
-                        />
-                        <span>Add to Wishlist</span>
-                    </div>
-                </>
-            )}
-        </div>
+        <>
+            <button onClick={() => navigate(-1)}>Back</button>
+            <div className="product_view__container">
+                {product && (
+                    <>
+                        <div className="controls__main">
+                            <ImageToggler
+                                images={product.images}
+                                name={product.name}
+                                mainview
+                            />
+                            <div
+                                className="wishlist__container"
+                                onClick={toggleWishlist}
+                            >
+                                <FaHeart
+                                    className={
+                                        added ? "property__added" : undefined
+                                    }
+                                />
+
+                                <span>
+                                    {!added
+                                        ? "Add to Wishlist"
+                                        : "Added to wishlish"}
+                                </span>
+                            </div>
+                            <button
+                                onClick={() => {
+                                    setFormOpen((prev) => !prev);
+                                }}
+                            >
+                                Make Enquiry
+                            </button>
+                            {formOpen && <EnquiryForm id={id} />}
+                        </div>
+                        <div className="property__details">
+                            <h3>Property Details</h3>
+                            <ul>{convertObject(product)}</ul>
+                        </div>
+                    </>
+                )}
+            </div>
+        </>
     );
 };
 

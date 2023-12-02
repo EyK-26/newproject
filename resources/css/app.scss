@@ -107,28 +107,49 @@ body {
                 .product_view__container {
                     display: flex;
                     padding: 2em;
-
-                    ul {
-                        list-style: none;
+                    .property__details {
+                        padding-left: 5em;
+                        ul {
+                            list-style: none;
+                            padding: 0;
+                        }
                     }
+
                     img {
                         width: 40em;
                         border-radius: 1.4em;
                     }
-                    .image__container--main {
-                        .controls {
-                            @include justify;
-                            .arrowLeft,
-                            .arrowRight {
-                                width: 3em;
-                                cursor: pointer;
+                    .controls__main {
+                        @include column;
+                        justify-content: space-around;
+                        align-items: center;
+                        .wishlist__container {
+                            width: 50%;
+                            @include column;
+                            align-items: center;
+                        }
+                        .image__container--main {
+                            .controls {
+                                @include justify;
+                                .arrowLeft,
+                                .arrowRight {
+                                    width: 3em;
+                                    cursor: pointer;
+                                }
                             }
                         }
-                    }
-                    .wishlist__container {
-                        cursor: pointer;
-                        .property__added {
-                            background-color: red;
+                        .wishlist__container {
+                            cursor: pointer;
+                            .property__added {
+                                fill: red;
+                            }
+                        }
+
+                        .enquiry-form__container {
+                            @include column;
+                            .form-group {
+                                margin-bottom: 2em;
+                            }
                         }
                     }
                 }
