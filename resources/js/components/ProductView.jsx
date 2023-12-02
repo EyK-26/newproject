@@ -18,14 +18,12 @@ const ProductView = () => {
                 user_id: state.user.id,
             });
             if (Math.floor(response.status / 100) === 2) {
-                setAdded(true);
+                setAdded((prev) => !prev);
             }
         } catch (error) {
             console.log(err);
         }
     };
-
-    console.log(added);
 
     useEffect(() => {
         (async () => {
@@ -69,7 +67,9 @@ const ProductView = () => {
                         className="wishlist__container"
                         onClick={addToWishlist}
                     >
-                        <FaRegHeart />
+                        <FaRegHeart
+                            className={added ? "property__added" : undefined}
+                        />
                         <span>Add to Wishlist</span>
                     </div>
                 </>

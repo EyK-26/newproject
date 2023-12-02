@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->bigInteger('product_id');
             $table->timestamps();
+            $table->unique(['user_id', 'product_id']);
         });
     }
 

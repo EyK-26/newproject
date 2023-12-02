@@ -127,6 +127,9 @@ body {
                     }
                     .wishlist__container {
                         cursor: pointer;
+                        .property__added {
+                            background-color: red;
+                        }
                     }
                 }
 

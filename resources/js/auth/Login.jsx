@@ -28,7 +28,7 @@ const Login = ({ fetchUserStatus }) => {
     };
 
     useEffect(() => {
-        if (document.querySelector(".reset__success") !== undefined) {
+        if (document.querySelector(".reset__success")) {
             setTimeout(() => {
                 document.querySelector(".reset__success").style.display =
                     "none";
