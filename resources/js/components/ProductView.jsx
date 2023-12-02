@@ -36,19 +36,21 @@ const ProductView = () => {
                 console.log(err);
             }
         })();
-        // (async () => {
-        //     try {
-        //         const response = await axios.post("/api/get-wishlist", {
-        //             product_id: id,
-        //             user_id: state.user.id,
-        //         });
-        //         if (Math.floor(response.status / 100) === 2) {
-        //             setAdded((prev) => !prev);
-        //         }
-        //     } catch (error) {
-        //         console.log(err);
-        //     }
-        // })();
+        (async () => {
+            try {
+                const response = await axios.get("/api/get-wishlist", {
+                    params: {
+                        product_id: id,
+                        user_id: state.user.id,
+                    },
+                });
+                if (Math.floor(response.status / 100) === 2) {
+                    setAdded(response.data);
+                }
+            } catch (error) {
+                console.log(err);
+            }
+        })();
     }, []);
 
     const convertObject = (product) =>

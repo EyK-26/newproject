@@ -13,14 +13,13 @@ class WishController extends Controller
             ->where('user_id', $request->user_id)
             ->where('product_id', $request->product_id)
             ->first();
-            
+
         if (!$this->check($request->user_id, $request->product_id)) {
-            $added_product->truncate();
+            $added_product->delete();
             return ['message' => 'removed from wishlist'];
         } else {
             $wish = new Wish();
-            $wish->user_id = $request->user_id;
-            $wish->product_id = $request->product_id;
+            $wish->fill(['user_id' => $request->user_id, 'product_id' => $request->product_id]);
             $wish->save();
             return ['message' => 'added to wishlist'];
         }
@@ -33,5 +32,10 @@ class WishController extends Controller
             ->where('product_id', $product_id)
             ->first();
         return empty($added_product);
+    }
+
+    public function is_added(Request $request): bool
+    {
+        return !$this->check($request->user_id, $request->product_id);
     }
 }
