@@ -11,9 +11,9 @@ const ProductView = () => {
     const { state } = useContext(UserContext);
     const [added, setAdded] = useState(false);
 
-    const addToWishlist = async () => {
+    const toggleWishlist = async () => {
         try {
-            const response = await axios.post("/api/add-to-wishlist", {
+            const response = await axios.post("/api/toggle-wishlist", {
                 product_id: id,
                 user_id: state.user.id,
             });
@@ -36,6 +36,19 @@ const ProductView = () => {
                 console.log(err);
             }
         })();
+        // (async () => {
+        //     try {
+        //         const response = await axios.post("/api/get-wishlist", {
+        //             product_id: id,
+        //             user_id: state.user.id,
+        //         });
+        //         if (Math.floor(response.status / 100) === 2) {
+        //             setAdded((prev) => !prev);
+        //         }
+        //     } catch (error) {
+        //         console.log(err);
+        //     }
+        // })();
     }, []);
 
     const convertObject = (product) =>
@@ -65,7 +78,7 @@ const ProductView = () => {
                     <ul>{convertObject(product)}</ul>
                     <div
                         className="wishlist__container"
-                        onClick={addToWishlist}
+                        onClick={toggleWishlist}
                     >
                         <FaRegHeart
                             className={added ? "property__added" : undefined}

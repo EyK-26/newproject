@@ -10,4 +10,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/forgot-password', [AuthentificationController::class, 'send']);
-Route::post('/add-to-wishlist', [WishController::class, 'store']);
+Route::get('/get-wishlist', [WishController::class, 'check']);
+Route::post('/toggle-wishlist', [WishController::class, 'store']);
