@@ -28,7 +28,10 @@ const EnquiryForm = ({ id }) => {
             });
             if (Math.floor(response.status / 100) === 2) {
                 setMessage(response.data.message);
-                setFormData({ name: "", email: "", message: "" });
+                setFormData((prev) => ({
+                    ...prev,
+                    message: "",
+                }));
             }
         } catch (error) {
             console.log(error);
@@ -59,6 +62,9 @@ const EnquiryForm = ({ id }) => {
                             value={formData.email}
                             disabled
                         />
+                        <small>
+                            *your name and email address cannot be changed
+                        </small>
                     </div>
                     <div className="form-group">
                         <label htmlFor="message">Message: </label>
