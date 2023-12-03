@@ -3,6 +3,11 @@
     flex-direction: column;
 }
 
+@mixin align {
+    display: flex;
+    align-items: center;
+}
+
 @mixin flex-between {
     display: flex;
     justify-content: space-between;
@@ -156,21 +161,22 @@ body {
 
                 .selection_container {
                     @include justify;
-                    align-items: center;
+                    width: 100%;
+                    overflow: auto;
                     .selected_product {
+                        min-width: 50%;
+                        max-width: 60%;
                         padding: 0.3em;
                         margin: 1em;
-                        border: 0.1em solid gray;
+                        border: 0.2em solid gray;
                         border-radius: 1em;
-                        height: 40em;
+
                         .image__container {
-                            display: flex;
-                            align-items: center;
+                            @include align;
                             width: 100%;
                             .arrowLeft,
                             .arrowRight {
-                                width: 2em;
-                                height: 150%;
+                                width: 100%;
                                 cursor: pointer;
                             }
                             img {

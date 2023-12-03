@@ -9,5 +9,7 @@ Route::get('/password-reset/{email}/{token}/{datetime}', [PasswordResetControlle
 Route::put('/password-reset/action', [PasswordResetController::class, 'update'])
     ->name('password.update');
 
+Route::get('/enquiry/{id}', [EnquiryController::class, 'show_enquiry']);
+
 Route::view('/{path?}', 'home')
     ->where('path', '.*');

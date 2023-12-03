@@ -50,7 +50,7 @@ const EnquiryForm = ({ id }) => {
                             type="text"
                             id="name"
                             name="name"
-                            value={formData.name}
+                            defaultValue={formData.name}
                             disabled
                         />
 
@@ -59,7 +59,7 @@ const EnquiryForm = ({ id }) => {
                             type="email"
                             id="email"
                             name="email"
-                            value={formData.email}
+                            defaultValue={formData.email}
                             disabled
                         />
                         <small>
