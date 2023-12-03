@@ -22,7 +22,6 @@ class EnquiryController extends Controller
     private function notify(int $user_id, string $message, int $product_id): void
     {
         $user = User::findOrFail($user_id);
-        dd($user);
         $user->notify(new NotificationEnquiry($user, $message, $product_id));
     }
 

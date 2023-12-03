@@ -8,7 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Notifications\Notification;
 
 class NotificationEnquiry extends Notification
 {
