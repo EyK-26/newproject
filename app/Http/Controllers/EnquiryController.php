@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Enquiry;
 use App\Models\User;
 use App\Notifications\NotificationEnquiry;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class EnquiryController extends Controller
@@ -25,8 +26,12 @@ class EnquiryController extends Controller
         $user->notify(new NotificationEnquiry($user, $message, $product_id));
     }
 
-    protected function show_enquiry(string $id)
+    public function show_enquiry(string $product_id, string $user_id): View
     {
-        $enquiry = Enquiry::findORFail($id);
+        $enquiry = Enquiry::query()
+            ->where('user_id', $user_id)
+            ->where('product_id', $product_id)
+            ->first();
+        return view('admin.enquiry', compact('enquiry'));
     }
 }

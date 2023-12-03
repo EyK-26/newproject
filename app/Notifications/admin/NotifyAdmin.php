@@ -4,6 +4,7 @@ namespace App\Notifications\admin;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -14,7 +15,7 @@ class NotifyAdmin extends Notification
     protected $product_id;
 
 
-    public function __construct($user, $product_id)
+    public function __construct(Model $user, int $product_id)
     {
         $this->user = $user;
         $this->product_id = $product_id;
@@ -30,6 +31,7 @@ class NotifyAdmin extends Notification
     {
         return (new MailMessage)
             ->line("Dear {$notifiable->name}")
+            ->line("{$this->user->name} made an enquiry about {$this->product_id}")
             ->action(
                 'Click to see the property',
                 url("/prod_view/{$this->product_id}")
