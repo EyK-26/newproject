@@ -13,6 +13,7 @@ class AnswerController extends Controller
     public function store(Request $request): RedirectResponse
     {
         if (Auth::check()) {
+            $this->validate($request, ['text' => 'required']);
             $user = Auth::user();
             $enquiry = $request->input('enquiry');
             $text = $request->input('text');
