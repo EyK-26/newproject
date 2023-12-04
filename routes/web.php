@@ -11,6 +11,7 @@ Route::put('/password-reset/action', [PasswordResetController::class, 'update'])
     ->name('password.update');
 
 Route::get('/enquiry/{product_id}/{user_id}', [EnquiryController::class, 'show_enquiry'])
+   
     ->whereNumber(['product_id', 'user_id'])
     ->name('enquiry.show');
 

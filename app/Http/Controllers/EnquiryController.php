@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Notifications\NotificationEnquiry;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EnquiryController extends Controller
 {
@@ -28,10 +29,11 @@ class EnquiryController extends Controller
 
     public function show_enquiry(string $product_id, string $user_id): View
     {
+        $user = Auth::user();
         $enquiry = Enquiry::query()
             ->where('user_id', $user_id)
             ->where('product_id', $product_id)
             ->first();
-        return view('admin.enquiry', compact('enquiry'));
+        return view('admin.enquiry', compact('enquiry', 'user'));
     }
 }

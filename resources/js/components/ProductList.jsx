@@ -63,7 +63,8 @@ const ProductList = () => {
         : "No Property available at the moment";
 
     return (
-        <div>
+        <div className="product_list--container">
+            <h2>Click to compare properties.</h2>
             <ul className="product_list">{renderedProducts}</ul>
         </div>
     );
