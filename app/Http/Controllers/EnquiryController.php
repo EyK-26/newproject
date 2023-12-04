@@ -27,13 +27,22 @@ class EnquiryController extends Controller
         $user->notify(new NotificationEnquiry($user, $message, $product_id));
     }
 
-    public function show_enquiry(string $product_id, string $user_id): View
+    public function show(string $product_id, string $user_id): View
     {
         $user = Auth::user();
+        $client = User::findOrFail($user_id);
         $enquiry = Enquiry::query()
             ->where('user_id', $user_id)
             ->where('product_id', $product_id)
             ->first();
-        return view('admin.enquiry', compact('enquiry', 'user'));
+        $enquiry_id = $enquiry->id;
+        return view('admin.enquiry', compact('enquiry', 'product_id', 'client', 'user', 'enquiry_id'));
+    }
+
+    public function answer(string $enquiry_id): View
+    {
+        $user = Auth::user();
+        $enquiry = Enquiry::with('user')->findOrFail($enquiry_id);
+        return view('admin.answer', compact('user', 'enquiry'));
     }
 }

@@ -1,0 +1,48 @@
+body {
+    background-color: rgba(244, 161, 161, 0.56);
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        label {
+            padding: 0.2em;
+        }
+        input {
+            width: 20em;
+            margin-bottom: 1em;
+            padding: 0.5em;
+        }
+        button {
+            padding: 0.5em 1em;
+        }
+    }
+    textarea {
+        resize: none;
+        overflow: auto;
+        margin-bottom: 2em;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 3em;
+    }
+    th,
+    td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .errors {
+        list-style: none;
+        color: red;
+    }
+}

@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Notifications\admin\NotifyAdmin;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Notification as FacadesNotification;
@@ -14,11 +13,11 @@ use Illuminate\Support\Facades\Notification as FacadesNotification;
 class NotificationEnquiry extends Notification
 {
     use Queueable;
-    protected $user;
-    protected $message;
-    protected $product_id;
+    protected ?User $user;
+    protected ?string $message;
+    protected ?int $product_id;
 
-    public function __construct(Model $user, string $message, int $product_id)
+    public function __construct(User $user, string $message, int $product_id)
     {
         $this->user = $user;
         $this->message = $message;

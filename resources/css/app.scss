@@ -66,6 +66,8 @@ body {
 
             .content {
                 padding: 2em;
+
+                .reset_password,
                 .login_form,
                 .register_form {
                     @include column;
@@ -74,6 +76,11 @@ body {
                     form {
                         display: flex;
                         flex-direction: column;
+                        label,
+                        input {
+                            padding: 0.4em;
+                            margin: 0.5em;
+                        }
                     }
                 }
 

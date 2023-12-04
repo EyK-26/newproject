@@ -5,8 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="">
+    @vite('resources/css/admin.scss')
+    @isset($token)
+    <meta name="csrf-token" content="{{ $token }}">
+    @else
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @vite('resources/css/app.scss')
+    @endisset
     @can('has_role', 'admin')
     <title>Real Estate Comparator - Admin</title>
     @else
@@ -15,11 +19,11 @@
 </head>
 
 <body>
-    @if(session('message'))
-    <div class="reset__success">{{ session('message') }}</div>
-    @endif
-    <div id="root"></div>
-    @vite('resources/js/main.jsx')
+    @include('layouts.navbar')
+    <section>
+        @yield('content')
+    </section>
+    @include('layouts.footer')
 </body>
 
 </html>
