@@ -9,10 +9,10 @@ const ProfileMenu = () => {
     return (
         <div className="user_menu">
             <ul className="user_menu__name">
-                <li>{state.user.name}</li>
-                <li>{state.user.email}</li>
+                <li>{state.user?.name}</li>
+                <li>{state.user?.email}</li>
                 <li>
-                    <Link to={`user/${state.user.id}`}>User Settings</Link>
+                    <Link to={`user/${state.user?.id}`}>User Settings</Link>
                 </li>
             </ul>
             <ul className="user_menu__wishlist">

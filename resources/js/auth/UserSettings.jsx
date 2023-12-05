@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import UserContext from "../myApp/context/UserContext";
 
 const UserSettings = () => {
     const { id } = useParams();
     const [userDetails, setUserDetails] = useState(null);
     const { dispatch } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const convertObject = (product) =>
         Object.keys(product).map(
@@ -25,23 +26,33 @@ const UserSettings = () => {
     const fetchUser = async () => {
         try {
             const response = await axios.get("/api/user", { params: { id } });
-            console.log(response.data);
             if (Math.floor(response.status / 100) === 2) {
                 setUserDetails(response.data);
             }
         } catch (error) {
             console.log(error);
-            // dispatch({
-            //     type: "error/set",
-            //     payload: error.response.data.errors,
-            // });
         }
     };
 
     useEffect(() => {
         fetchUser();
     }, []);
-    return <ul>{userDetails && convertObject(userDetails)}</ul>;
+    return (
+        <ul className="user_settings_container">
+            {userDetails && convertObject(userDetails)}
+            <div className="user_settings--controls">
+                <button>Change Name</button>
+                <button
+                    onClick={() => {
+                        navigate("/reset-password");
+                    }}
+                >
+                    Reset Password
+                </button>
+                <button>Delete Account</button>
+            </div>
+        </ul>
+    );
 };
 
 export default UserSettings;

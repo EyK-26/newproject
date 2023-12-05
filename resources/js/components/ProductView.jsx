@@ -83,29 +83,33 @@ const ProductView = () => {
                                 name={product.name}
                                 mainview
                             />
-                            <div
-                                className="wishlist__container"
-                                onClick={toggleWishlist}
-                            >
-                                <FaHeart
-                                    className={
-                                        added ? "property__added" : undefined
-                                    }
-                                />
+                            <div className="controls_wishlist">
+                                <div
+                                    className="wishlist__container"
+                                    onClick={toggleWishlist}
+                                >
+                                    <FaHeart
+                                        className={
+                                            added
+                                                ? "property__added"
+                                                : undefined
+                                        }
+                                    />
 
-                                <span>
-                                    {!added
-                                        ? "Add to Wishlist"
-                                        : "Added to wishlish"}
-                                </span>
+                                    <span>
+                                        {!added
+                                            ? "Add to Wishlist"
+                                            : "Added to wishlish"}
+                                    </span>
+                                </div>
+                                <button
+                                    onClick={() => {
+                                        setFormOpen((prev) => !prev);
+                                    }}
+                                >
+                                    Make Enquiry
+                                </button>
                             </div>
-                            <button
-                                onClick={() => {
-                                    setFormOpen((prev) => !prev);
-                                }}
-                            >
-                                Make Enquiry
-                            </button>
                             {formOpen && <EnquiryForm id={id} />}
                         </div>
                         <div className="property__details">

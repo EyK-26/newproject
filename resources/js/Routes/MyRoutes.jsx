@@ -68,6 +68,10 @@ const MyRoutes = () => {
                             element={<ProductView />}
                         />
                         <Route path="/user/:id" element={<UserSettings />} />
+                        <Route
+                            path="/reset-password"
+                            element={<PasswordReset />}
+                        />
                     </>
                 )}
                 <Route path="*" element={<Unauthorized />} />

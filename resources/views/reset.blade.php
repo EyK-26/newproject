@@ -2,7 +2,6 @@
 @section('content')
 <h1>Reset Password</h1>
 @isset($email)
-@guest
 <form action="{{ route('password.update') }}" method="post">
     @method('put')
     @csrf
@@ -13,9 +12,6 @@
     <input type="password" name="password_confirmation" id="password_confirmation">
     <button type="submit">Reset</button>
 </form>
-@else
-<h1>404 Not Authorized</h1>
-@endguest
 @endisset
 
 <ul class="success">

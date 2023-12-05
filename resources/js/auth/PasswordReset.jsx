@@ -56,7 +56,8 @@ const PasswordReset = () => {
                 <span key={i}>{el}</span>
             ))}
             <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">Please insert your Email.</label>
+                <small>You will receive a password reset link shortly.</small>
                 <input type="email" onChange={handleChange} />
                 <input type="submit" value="Submit" />
             </form>

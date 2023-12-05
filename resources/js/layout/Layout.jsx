@@ -9,14 +9,14 @@ const Layout = () => {
     const { state } = useContext(UserContext);
 
     return (
-        <div className="layout">
+        <>
             <Header />
             {state.profileMenu && <ProfileMenu />}
             <div className="content">
                 <Outlet />
             </div>
             <Footer />
-        </div>
+        </>
     );
 };
 
