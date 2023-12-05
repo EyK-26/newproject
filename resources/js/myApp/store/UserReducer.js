@@ -15,6 +15,11 @@ const UserReducer = (state, action) => {
                 ...state,
                 error: action.payload,
             };
+        case "profileMenu/toggle":
+            return {
+                ...state,
+                profileMenu: action.payload,
+            };
         default:
             return state;
     }

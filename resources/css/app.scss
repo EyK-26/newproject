@@ -55,18 +55,46 @@ body {
             justify-content: space-between;
             .header {
                 @include flex-between;
+                align-items: center;
+                background-color: gray;
+                padding: 0.3em;
                 position: sticky;
                 top: 0;
+                .navbar {
+                    @include flex-between;
+                    align-items: center;
+                    width: 6em;
+                    .profile__logo {
+                        height: 2em;
+                        width: 2em;
+                    }
+                }
+            }
+
+            .user_menu {
+                background-color: white;
+                position: absolute;
+                right: 0.5em;
+                top: 3em;
+                width: 25%;
+                ul {
+                    list-style: none;
+                    padding: 0 1em;
+                    &:nth-child(odd) {
+                        background-color: gray;
+                    }
+                }
             }
 
             footer {
                 position: sticky;
+                background-color: gray;
+                padding: 0.2em;
                 bottom: 0;
             }
 
             .content {
-                padding: 2em;
-
+                padding: 1em;
                 .reset_password,
                 .login_form,
                 .register_form {
@@ -160,6 +188,9 @@ body {
 
                         .enquiry-form__container {
                             @include column;
+                            background-color: aliceblue;
+                            padding: 0.5em;
+                            border-radius: 1em;
                             .form-group {
                                 margin-bottom: 2em;
                                 @include column;

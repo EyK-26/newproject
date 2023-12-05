@@ -3,7 +3,7 @@ import UserContext from "../myApp/context/UserContext";
 import axios from "axios";
 
 const EnquiryForm = ({ id }) => {
-    const { state } = useContext(UserContext);
+    const { state, dispatch } = useContext(UserContext);
     const [message, setMessage] = useState("");
     const [formData, setFormData] = useState({
         name: state.user.name,
@@ -34,12 +34,18 @@ const EnquiryForm = ({ id }) => {
                 }));
             }
         } catch (error) {
-            console.log(error);
+            dispatch({
+                type: "error/set",
+                payload: error.response.data.message,
+            });
         }
     };
 
     return (
         <>
+            {state.error?.includes("SQLSTATE[23000]") && (
+                <span>You have already sent an enquiry for this property.</span>
+            )}
             {message && <span>{message}</span>}
             <div className="enquiry-form__container">
                 <h3>Contact Form</h3>

@@ -10,6 +10,7 @@ import Unauthorized from "../auth/Unauthorized";
 import Home from "../components/Home";
 import PasswordReset from "../auth/PasswordReset";
 import ProductView from "../components/ProductView";
+import UserSettings from "../auth/UserSettings";
 
 const MyRoutes = () => {
     const { state, dispatch } = useContext(Context);
@@ -66,6 +67,7 @@ const MyRoutes = () => {
                             path="/prod_view/:id"
                             element={<ProductView />}
                         />
+                        <Route path="/user/:id" element={<UserSettings />} />
                     </>
                 )}
                 <Route path="*" element={<Unauthorized />} />

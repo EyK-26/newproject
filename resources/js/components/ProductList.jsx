@@ -64,7 +64,10 @@ const ProductList = () => {
 
     return (
         <div className="product_list--container">
-            <h2>Click to compare properties.</h2>
+            <h2>
+                Click to compare properties. Login to see details and add to
+                wishlist & send message to admins.
+            </h2>
             <ul className="product_list">{renderedProducts}</ul>
         </div>
     );
