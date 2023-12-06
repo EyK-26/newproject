@@ -12,6 +12,7 @@ import PasswordReset from "../auth/password-reset/PasswordReset";
 import ProductView from "../components/ProductView";
 import UserSettings from "../auth/UserSettings";
 import DeleteAccount from "../auth/DeleteAccount";
+import ChangeUserName from "../auth/ChangeUserName";
 
 const MyRoutes = () => {
     const { state, dispatch } = useContext(Context);
@@ -87,6 +88,14 @@ const MyRoutes = () => {
                             path="/account-delete"
                             element={
                                 <DeleteAccount
+                                    fetchUserStatus={fetchUserStatus}
+                                />
+                            }
+                        />
+                        <Route
+                            path="/change-username"
+                            element={
+                                <ChangeUserName
                                     fetchUserStatus={fetchUserStatus}
                                 />
                             }

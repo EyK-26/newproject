@@ -1,12 +1,10 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import UserContext from "../myApp/context/UserContext";
 
 const UserSettings = () => {
     const { id } = useParams();
     const [userDetails, setUserDetails] = useState(null);
-    const { dispatch } = useContext(UserContext);
     const navigate = useNavigate();
 
     const convertObject = (product) =>
@@ -41,7 +39,13 @@ const UserSettings = () => {
         <ul className="user_settings_container">
             {userDetails && convertObject(userDetails)}
             <div className="user_settings--controls">
-                <button>Change Name</button>
+                <button
+                    onClick={() => {
+                        navigate("/change-username");
+                    }}
+                >
+                    Change Name
+                </button>
                 <button
                     onClick={() => {
                         navigate("/reset-password");
