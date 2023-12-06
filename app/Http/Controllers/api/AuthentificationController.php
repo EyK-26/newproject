@@ -20,4 +20,15 @@ class AuthentificationController extends Controller
             return ['message' => 'Email Not Found'];
         }
     }
+
+    public function reset(Request $request): array
+    {
+        $user = User::where('email', $request->input('email'))->first() ?? null;
+        if ($user) {
+            Notification::send($user, new ResetPassword($user));
+            return ['message' => 'Email sent'];
+        } else {
+            return ['message' => 'Email Not Found'];
+        }
+    }
 }

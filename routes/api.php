@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\AuthentificationController;
+use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishController;
@@ -12,6 +13,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/forgot-password', [AuthentificationController::class, 'send']);
+Route::put('/password-reset/action', [PasswordResetController::class, 'update'])
+    ->name('password.update');
+Route::put('/manual-reset/action', [PasswordResetController::class, 'manual_update']);
 Route::get('/get-wishlist', [WishController::class, 'is_added']);
 Route::put('/users/update/{user}', [UserController::class, 'update'])->whereNumber('user');
 Route::delete('/users/delete/{user}', [UserController::class, 'destroy'])->whereNumber('user');

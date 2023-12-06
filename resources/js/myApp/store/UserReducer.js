@@ -15,10 +15,10 @@ const UserReducer = (state, action) => {
                 ...state,
                 error: action.payload,
             };
-        case "profileMenu/toggle":
+        case "passwordResetMessages/add":
             return {
                 ...state,
-                profileMenu: action.payload,
+                passwordResetMessages: action.payload,
             };
         default:
             return state;

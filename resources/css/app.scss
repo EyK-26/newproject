@@ -53,9 +53,17 @@ body {
             background-color: #555;
             padding: 0.2em 0.5em;
             color: white;
+            width: fit-content;
+            align-self: center;
             &:hover {
-                transform: scale(1.1);
+                transform: scale(1.02);
             }
+        }
+        ul > li {
+            list-style: none;
+        }
+        div > li {
+            list-style: none;
         }
         @include column();
         justify-content: space-between;
@@ -63,16 +71,26 @@ body {
             @include flex-between;
             align-items: center;
             background-color: gray;
-            padding: 0.3em;
             position: sticky;
             top: 0;
+            a {
+                padding: 0.5em;
+                color: #f1f1f1;
+            }
             .navbar {
                 @include flex-between;
                 align-items: center;
-                width: 6em;
-                .profile__logo {
-                    height: 2em;
-                    width: 2em;
+                .menu_container {
+                    .profile__logo {
+                        margin-left: 1.5em;
+                        padding: 0.3em 0.5em 0;
+                        height: 2.3em;
+                        width: 2.3em;
+                    }
+                }
+                a {
+                    padding: 0.5em;
+                    color: #f1f1f1;
                 }
             }
         }
@@ -81,24 +99,31 @@ body {
             background-color: gray;
             position: absolute;
             right: 0em;
-            top: 2.6em;
-            width: 25%;
+            top: 2.9em;
+            width: 30%;
             ul {
-                list-style: none;
                 margin: 0;
-                padding: 0.2em 0.5em;
+                padding: 0.4em 0.7em;
                 background-color: rgb(184, 182, 182);
-                &:nth-child(odd) {
+                &:nth-child(even) {
                     background-color: rgb(100, 101, 102);
                 }
                 a {
                     color: white;
+                }
+                &.user_menu__name {
+                    @include flex-between();
+                    .user_menu__name--first {
+                        @include flex-between();
+                        width: 20%;
+                    }
                 }
             }
         }
 
         footer {
             @include align;
+            justify-content: center;
             bottom: 0;
             color: black;
             background-color: gray;
@@ -164,7 +189,6 @@ body {
                                 @include column;
                                 height: fit-content;
                                 cursor: pointer;
-                                list-style: none;
                                 margin: 0.5em 1em;
                                 padding: 0.3em;
                                 border-radius: 1em;
@@ -192,7 +216,6 @@ body {
                 .property__details {
                     padding-left: 3em;
                     ul {
-                        list-style: none;
                         padding: 0;
                         li {
                             background-color: #9191c2;
@@ -256,10 +279,12 @@ body {
             }
 
             .selection_container {
-                @include justify;
+                display: flex;
+                align-items: flex-start;
                 overflow: auto;
+                margin-bottom: 2em;
                 .selected_product {
-                    height: fit-content;
+                    height: 30em;
                     min-width: 40%;
                     max-width: 50%;
                     padding: 0.3em;

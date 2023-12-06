@@ -9,7 +9,7 @@ const App = () => {
         theme: "light",
         user: null,
         error: null,
-        profileMenu: false,
+        passwordResetMessages: [],
     });
 
     return (

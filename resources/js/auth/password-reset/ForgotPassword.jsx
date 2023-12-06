@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
-import UserContext from "../myApp/context/UserContext";
+import UserContext from "../../myApp/context/UserContext";
 import { useNavigate } from "react-router-dom";
 
-const PasswordReset = () => {
+const ForgotPassword = () => {
     const [email, setEmail] = useState("");
     const [sending, setSending] = useState(null);
     const [message, setMessage] = useState("");
@@ -65,4 +65,4 @@ const PasswordReset = () => {
     );
 };
 
-export default PasswordReset;
+export default ForgotPassword;

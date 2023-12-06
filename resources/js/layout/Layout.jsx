@@ -3,7 +3,6 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import UserContext from "../myApp/context/UserContext";
-import ProfileMenu from "../components/ProfileMenu";
 
 const Layout = () => {
     const { state } = useContext(UserContext);
@@ -11,7 +10,6 @@ const Layout = () => {
     return (
         <>
             <Header />
-            {state.profileMenu && <ProfileMenu />}
             <div className="content">
                 <Outlet />
             </div>

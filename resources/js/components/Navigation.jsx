@@ -7,10 +7,10 @@ import Profile from "./Profile";
 const Navigation = () => {
     const { state } = useContext(UserContext);
     return (
-        <div className="navbar">
+        <nav className="navbar">
             {state.user ? <Logout /> : <Link to="/login">Login</Link>}
             {state.user && <Profile />}
-        </div>
+        </nav>
     );
 };
 

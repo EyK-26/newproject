@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import axios from "axios";
 import UserContext from "../myApp/context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const Logout = () => {
     const { dispatch } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -13,6 +15,7 @@ const Logout = () => {
                 type: "user/set",
                 payload: null,
             });
+            navigate("/");
         }
     };
 

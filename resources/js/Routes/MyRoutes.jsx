@@ -8,7 +8,7 @@ import Context from "../myApp/context/UserContext";
 import axios from "axios";
 import Unauthorized from "../auth/Unauthorized";
 import Home from "../components/Home";
-import PasswordReset from "../auth/PasswordReset";
+import PasswordReset from "../auth/password-reset/PasswordReset";
 import ProductView from "../components/ProductView";
 import UserSettings from "../auth/UserSettings";
 
