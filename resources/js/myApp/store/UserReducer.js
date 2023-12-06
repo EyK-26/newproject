@@ -15,6 +15,11 @@ const UserReducer = (state, action) => {
                 ...state,
                 messages: action.payload,
             };
+        case "messages/unset":
+            return {
+                ...state,
+                messages: [],
+            };
         default:
             return state;
     }

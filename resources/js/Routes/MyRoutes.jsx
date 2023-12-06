@@ -38,6 +38,16 @@ const MyRoutes = () => {
         if (state.user === null) fetchUserStatus();
     }, [state.user]);
 
+    useEffect(() => {
+        if (state.messages.length > 0) {
+            setTimeout(() => {
+                dispatch({
+                    type: "messages/unset",
+                });
+            }, 5000);
+        }
+    }, [state.messages]);
+
     return (
         <Routes>
             <Route path="/" element={<Layout />}>
