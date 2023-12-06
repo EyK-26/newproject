@@ -19,17 +19,19 @@ const ManualReset = () => {
             );
             if (Math.floor(response.status / 100) === 2) {
                 dispatch({
-                    type: "passwordResetMessages/add",
+                    type: "messages/set",
                     payload: [response.data.message],
                 });
             }
         } catch (error) {
             const { password, password_confirmation } =
-                error.response.data.errors;
-            dispatch({
-                type: "passwordResetMessages/add",
-                payload: [password, password_confirmation],
-            });
+                error.response.data.errors || undefined;
+            if (password || password_confirmation) {
+                dispatch({
+                    type: "messages/set",
+                    payload: [password, password_confirmation],
+                });
+            }
         }
     };
 
@@ -61,9 +63,9 @@ const ManualReset = () => {
                 />
                 <button type="submit">Reset</button>
             </form>
-            {state.passwordResetMessages && (
-                <ul>
-                    {state.passwordResetMessages.map((el, idx) => (
+            {state.messages && (
+                <ul className="messages">
+                    {state.messages.map((el, idx) => (
                         <li key={idx}>{el}</li>
                     ))}
                 </ul>

@@ -49,7 +49,13 @@ const UserSettings = () => {
                 >
                     Reset Password
                 </button>
-                <button>Delete Account</button>
+                <button
+                    onClick={() => {
+                        navigate("/account-delete");
+                    }}
+                >
+                    Delete Account
+                </button>
             </div>
         </ul>
     );

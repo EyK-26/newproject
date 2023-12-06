@@ -4,8 +4,11 @@ import UserContext from "../myApp/context/UserContext";
 import PropertyReducer from "../myApp/store/PropertyReducer";
 import ProductList from "./ProductList";
 import SelectedProductList from "./SelectedProductList";
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
+    const location = useLocation();
+    const { userDeleted } = location.state || false;
     const [propertyContextValue, setPropertyContextValue] = useReducer(
         PropertyReducer,
         {
@@ -46,6 +49,7 @@ const Home = () => {
 
     return (
         <div className="home__content">
+            {userDeleted && <span>User deleted successfully!</span>}
             <PropertyContext.Provider
                 value={{
                     state: propertyContextValue,

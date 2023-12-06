@@ -23,7 +23,7 @@ html {
 }
 
 body {
-    background-color: rgba(228, 223, 223, 0.692);
+    background-color: rgba(219, 231, 240, 0.76);
     margin: 0;
 
     ::-webkit-scrollbar {
@@ -41,23 +41,14 @@ body {
     .reset__success {
         width: 100%;
         text-align: center;
-        background-color: green;
+        background-color: rgb(5, 131, 5);
     }
     #root {
+        @include column();
+        justify-content: space-between;
         a {
             text-decoration: none;
             color: #555;
-        }
-        button,
-        input[type="submit"] {
-            background-color: #555;
-            padding: 0.2em 0.5em;
-            color: white;
-            width: fit-content;
-            align-self: center;
-            &:hover {
-                transform: scale(1.02);
-            }
         }
         ul > li {
             list-style: none;
@@ -65,8 +56,40 @@ body {
         div > li {
             list-style: none;
         }
-        @include column();
-        justify-content: space-between;
+        textarea,
+        input {
+            padding: 0.5em;
+            border: none;
+            border-radius: 0.5em;
+            background-color: #606061;
+            box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
+            color: #f1f1f1;
+            resize: none;
+        }
+        button,
+        input[type="submit"] {
+            background-color: #555;
+            padding: 0.3em 0.6em;
+            color: white;
+            width: fit-content;
+            align-self: center;
+            &:hover {
+                transform: scale(1.02);
+            }
+        }
+        label {
+            padding: 0.3em 0;
+        }
+        img {
+            margin-bottom: 0.3em;
+        }
+        span {
+            color: rgb(112, 74, 3);
+        }
+        .messages > li {
+            color: rgb(112, 74, 3);
+            padding: 0;
+        }
         .header {
             @include flex-between;
             align-items: center;
@@ -115,7 +138,9 @@ body {
                     @include flex-between();
                     .user_menu__name--first {
                         @include flex-between();
-                        width: 20%;
+                        align-items: center;
+                        width: 40%;
+                        font-size: smaller;
                     }
                 }
             }
@@ -142,13 +167,14 @@ body {
                 @include column;
                 width: 40%;
                 margin: auto;
+                padding-top: 5em;
                 form {
                     display: flex;
                     flex-direction: column;
                     label,
                     input {
                         padding: 0.4em;
-                        margin: 0.5em;
+                        margin: 0.7em;
                     }
                 }
                 small {
@@ -158,7 +184,7 @@ body {
 
             .user_settings_container {
                 list-style: none;
-                padding: 0;
+                padding-top: 5em;
                 @include column;
                 li {
                     align-self: center;
@@ -192,13 +218,18 @@ body {
                                 margin: 0.5em 1em;
                                 padding: 0.3em;
                                 border-radius: 1em;
-                                background-color: #d6c5c5;
+                                box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
+                                background-color: #c5c6d6;
                                 &.selected {
-                                    border: 0.3em solid green;
+                                    border: 0.3em solid rgb(0, 128, 128);
+                                    box-shadow: 0 3px 6px
+                                        rgba(41, 41, 53, 0.808);
                                 }
                                 img {
                                     width: 12em;
                                     border-radius: 1em;
+                                    box-shadow: 0 3px 6px
+                                        rgba(41, 41, 53, 0.808);
                                 }
                                 .name__container {
                                     width: 50%;
@@ -218,7 +249,7 @@ body {
                     ul {
                         padding: 0;
                         li {
-                            background-color: #9191c2;
+                            background-color: #91a1c2;
                             padding: 0.14em 0.4em;
                             &:nth-child(odd) {
                                 background-color: #9fabb6;
@@ -230,6 +261,7 @@ body {
                 img {
                     width: 40em;
                     border-radius: 1.4em;
+                    box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
                 }
                 .controls__main {
                     @include column;
@@ -258,7 +290,7 @@ body {
                             width: fit-content;
                             cursor: pointer;
                             .property__added {
-                                fill: red;
+                                fill: rgb(0, 4, 255);
                             }
                         }
                     }
@@ -269,6 +301,7 @@ body {
                         padding: 0.5em;
                         margin: 2em;
                         border-radius: 1em;
+                        box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
                         width: 100%;
                         .form-group {
                             margin-bottom: 2em;
@@ -284,15 +317,15 @@ body {
                 overflow: auto;
                 margin-bottom: 2em;
                 .selected_product {
-                    height: 30em;
+                    height: fit-content;
                     min-width: 40%;
                     max-width: 50%;
                     padding: 0.3em;
                     margin: 1em;
                     border: 0.2em solid gray;
-                    background-color: #d6c5c5;
+                    background-color: #c5cbd6;
                     border-radius: 1em;
-
+                    box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
                     .image__container {
                         @include align;
                         justify-content: center;
@@ -305,6 +338,7 @@ body {
                         img {
                             width: 78%;
                             border-radius: 1em;
+                            box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
                         }
                     }
 
@@ -326,6 +360,22 @@ body {
                                     margin-right: 1em;
                                 }
                             }
+                        }
+                    }
+                }
+            }
+            .delete_account {
+                padding-top: 5em;
+                width: 60%;
+                margin: 0 auto;
+                form {
+                    @include column();
+                    .confirmation {
+                        padding-top: 1em;
+                        @include flex-between();
+                        align-items: center;
+                        .confirmation_action {
+                            @include align();
                         }
                     }
                 }

@@ -8,7 +8,7 @@ const App = () => {
     const [userContextValue, setUserContextValue] = useReducer(UserReducer, {
         theme: "light",
         user: null,
-        error: null,
+        messages: [],
         passwordResetMessages: [],
     });
 

@@ -58,7 +58,7 @@ const ForgotPassword = () => {
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Please insert your Email.</label>
                 <small>You will receive a password reset link shortly.</small>
-                <input type="email" onChange={handleChange} />
+                <input type="email" onChange={handleChange} id="email" />
                 <input type="submit" value="Submit" />
             </form>
         </div>

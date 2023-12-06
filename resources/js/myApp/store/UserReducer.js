@@ -10,15 +10,10 @@ const UserReducer = (state, action) => {
                 ...state,
                 user: action.payload,
             };
-        case "error/set":
+        case "messages/set":
             return {
                 ...state,
-                error: action.payload,
-            };
-        case "passwordResetMessages/add":
-            return {
-                ...state,
-                passwordResetMessages: action.payload,
+                messages: action.payload,
             };
         default:
             return state;

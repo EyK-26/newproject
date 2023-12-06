@@ -22,9 +22,10 @@ const Register = ({ fetchUserStatus }) => {
                 navigate("/", { state: { userRegistered: true } });
             }
         } catch (error) {
+            const { email, name, password } = error.response.data.errors;
             dispatch({
-                type: "error/set",
-                payload: error.response.data.errors,
+                type: "messages/set",
+                payload: [email, name, password],
             });
         }
     };
@@ -75,15 +76,13 @@ const Register = ({ fetchUserStatus }) => {
                 />
                 <input type="submit" value="Register" />
             </form>
-            {state.error?.name?.map((el, i) => (
-                <span key={i}>{el}</span>
-            ))}
-            {state.error?.email?.map((el, i) => (
-                <span key={i}>{el}</span>
-            ))}
-            {state.error?.password?.map((el, i) => (
-                <span key={i}>{el}</span>
-            ))}
+            {state.messages && (
+                <ul className="messages">
+                    {state.messages.map((el, idx) => (
+                        <li key={idx}>{el}</li>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 };

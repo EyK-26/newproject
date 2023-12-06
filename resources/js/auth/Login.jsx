@@ -20,10 +20,13 @@ const Login = ({ fetchUserStatus }) => {
                 navigate("/", { state: { userLoggedIn: true } });
             }
         } catch (error) {
-            dispatch({
-                type: "error/set",
-                payload: error.response.data.errors,
-            });
+            const { password, email } = error.response.data.errors || undefined;
+            if (password || email) {
+                dispatch({
+                    type: "messages/set",
+                    payload: [password, email],
+                });
+            }
         }
     };
 
@@ -77,6 +80,13 @@ const Login = ({ fetchUserStatus }) => {
                 You don't have an account?{" "}
                 <Link to="/register">Register Now</Link>
             </span>
+            {state.messages && (
+                <ul className="messages">
+                    {state.messages.map((el, idx) => (
+                        <li key={idx}>{el}</li>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 };

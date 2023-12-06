@@ -15,6 +15,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/forgot-password', [AuthentificationController::class, 'send']);
 Route::put('/password-reset/action', [PasswordResetController::class, 'update'])
     ->name('password.update');
+Route::post('/user-delete',  [UserController::class, 'destroy']);
 Route::put('/manual-reset/action', [PasswordResetController::class, 'manual_update']);
 Route::get('/get-wishlist', [WishController::class, 'is_added']);
 Route::put('/users/update/{user}', [UserController::class, 'update'])->whereNumber('user');
