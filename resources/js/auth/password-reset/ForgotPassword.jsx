@@ -41,18 +41,6 @@ const ForgotPassword = () => {
 
     return (
         <div className="reset_password">
-            {sending === null ? (
-                <span className="spanMessage">{state.spanMessage}</span>
-            ) : sending ? (
-                <span>Please wait...</span>
-            ) : (
-                <>
-                    <span className="spanMessage">{state.spanMessage}</span>
-                    <button onClick={() => navigate("/")}>
-                        back to main page
-                    </button>
-                </>
-            )}
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Please insert your Email.</label>
                 <small>You will receive a password reset link shortly.</small>
@@ -66,6 +54,18 @@ const ForgotPassword = () => {
                 />
                 <input type="submit" value="Submit" />
             </form>
+            {sending === null ? (
+                <span>{state.spanMessage}</span>
+            ) : sending ? (
+                <span>Please wait...</span>
+            ) : (
+                <>
+                    <span>{state.spanMessage}</span>
+                    <button onClick={() => navigate("/")}>
+                        back to main page
+                    </button>
+                </>
+            )}
         </div>
     );
 };

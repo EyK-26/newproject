@@ -88,11 +88,13 @@ body {
         @include column;
         list-style: none;
         color: red;
+        padding-left: 0;
     }
 
     .success {
         @include column;
         list-style: none;
         color: green;
+        padding-left: 0;
     }
 }

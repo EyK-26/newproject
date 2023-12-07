@@ -51,9 +51,7 @@ const ChangeUserName = ({ fetchUserStatus }) => {
                 </div>
                 <input type="submit" value="Confirm" />
             </form>
-            {state.spanMessage && (
-                <span className="spanMessage">{state.spanMessage}</span>
-            )}
+            {state.spanMessage && <span>{state.spanMessage}</span>}
         </div>
     );
 };

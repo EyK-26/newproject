@@ -4,13 +4,14 @@ import UserContext from "../myApp/context/UserContext";
 import PropertyReducer from "../myApp/store/PropertyReducer";
 import ProductList from "./ProductList";
 import SelectedProductList from "./SelectedProductList";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Home = () => {
-    const location = useLocation();
+    const { state: locationState, pathname, history } = useLocation();
+    const navigate = useNavigate();
     const { state, dispatch } = useContext(UserContext);
     const { userDeleted, userRegistered, userLoggedIn, userLoggedOut } =
-        location.state || false;
+        locationState || false;
     const [propertyContextValue, setPropertyContextValue] = useReducer(
         PropertyReducer,
         {
@@ -50,7 +51,7 @@ const Home = () => {
     );
 
     useEffect(() => {
-        if (location.state) {
+        if (locationState) {
             dispatch({
                 type: "spanMessage/set",
                 payload:
@@ -59,13 +60,14 @@ const Home = () => {
                     userLoggedOut ||
                     userDeleted,
             });
+            navigate(pathname, { state: null });
         }
-    }, [location.state]);
+    }, [locationState]);
 
     return (
         <div className="home__content">
             {state.spanMessage && (
-                <span className="spanMessage">{state.spanMessage}</span>
+                <span className="span_message">{state.spanMessage}</span>
             )}
             <PropertyContext.Provider
                 value={{

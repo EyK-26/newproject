@@ -49,7 +49,7 @@ const EnquiryForm = ({ id }) => {
                 <span>You have already sent an enquiry for this property.</span>
             )}
             {state.spanMessage && (
-                <span className="spanMessage">{state.spanMessage}</span>
+                <span className="span_message">{state.spanMessage}</span>
             )}
             <div className="enquiry-form__container">
                 <h3>Contact Form</h3>

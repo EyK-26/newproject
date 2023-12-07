@@ -71,9 +71,7 @@ const DeleteAccount = ({ fetchUserStatus }) => {
                     <input type="submit" value="Delete Account" />
                 </div>
             </form>
-            {state.spanMessage && (
-                <span className="spanMessage">{state.spanMessage}</span>
-            )}
+            {state.spanMessage && <span>{state.spanMessage}</span>}
         </div>
     );
 };
