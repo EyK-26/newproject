@@ -174,7 +174,7 @@ body {
                     label,
                     input {
                         padding: 0.4em;
-                        margin: 0.7em;
+                        margin: 0.4em;
                     }
                 }
                 small {
@@ -194,6 +194,26 @@ body {
                     align-self: center;
                     button {
                         margin: 1em;
+                    }
+                }
+            }
+
+            .name_change {
+                padding-top: 5em;
+                @include column;
+                align-items: center;
+                .name_change--current {
+                    padding: 2em;
+                }
+                form {
+                    width: 20%;
+                    @include flex-between();
+                    align-items: center;
+                    input {
+                        margin: 1em;
+                    }
+                    input[type="submit"] {
+                        align-self: flex-end;
                     }
                 }
             }

@@ -7,7 +7,6 @@ const ForgotPassword = () => {
     const [email, setEmail] = useState("");
     const [sending, setSending] = useState(null);
     const [message, setMessage] = useState("");
-    const { state, dispatch } = useContext(UserContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -23,19 +22,11 @@ const ForgotPassword = () => {
                     setSending(false);
                 }
             } catch (error) {
-                dispatch({
-                    type: "error/set",
-                    payload: error.response.data.errors,
-                });
-                navigate("/login");
+                setMessage("Email wasn't sent. Please try again.");
             }
         } else {
             setMessage("Please fill the email field.");
         }
-    };
-
-    const handleChange = (e) => {
-        setEmail(e.target.value);
     };
 
     return (
@@ -52,13 +43,17 @@ const ForgotPassword = () => {
                     </button>
                 </>
             )}
-            {state.error?.email?.map((el, i) => (
-                <span key={i}>{el}</span>
-            ))}
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Please insert your Email.</label>
                 <small>You will receive a password reset link shortly.</small>
-                <input type="email" onChange={handleChange} id="email" />
+                <input
+                    type="email"
+                    onChange={(e) => {
+                        setEmail(e.target.value);
+                    }}
+                    id="email"
+                    value={email}
+                />
                 <input type="submit" value="Submit" />
             </form>
         </div>

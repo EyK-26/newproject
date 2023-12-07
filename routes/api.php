@@ -15,10 +15,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/forgot-password', [AuthentificationController::class, 'send']);
 Route::put('/password-reset/action', [PasswordResetController::class, 'update'])
     ->name('password.update');
-Route::post('/user-delete',  [UserController::class, 'destroy']);
 Route::put('/manual-reset/action', [PasswordResetController::class, 'manual_update']);
+
+Route::delete('/user-delete',  [UserController::class, 'destroy']);
+Route::put('/change-username', [UserController::class, 'update'])->whereNumber('user');
+
 Route::get('/get-wishlist', [WishController::class, 'is_added']);
-Route::put('/users/update/{user}', [UserController::class, 'update'])->whereNumber('user');
-Route::delete('/users/delete/{user}', [UserController::class, 'destroy'])->whereNumber('user');
 Route::post('/toggle-wishlist', [WishController::class, 'store']);
+
 Route::post('/enquiry', [EnquiryController::class, 'store']);

@@ -14,22 +14,25 @@ class UserController extends Controller
         return ['name' => $user->name, 'email' => $user->email, 'member_since' => $user->created_at];
     }
 
-    public function update(Request $request, string $id): array
+    public function update(Request $request,): array
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($request->input('id'));
         if ($user->name === $request->input('name')) {
             return ['message' => 'Inserted name is the same as the current name'];
+        } else {
+            $user->name = $request->input('name');
+            $user->save();
+            return ['message' => 'User name has ben updated.'];
         }
-        $user->name = $request->input('name');
-        $user->save();
-        return ['message' => 'User name has ben updated.'];
     }
 
     public function destroy(Request $request): array
     {
-        $user = User::findOrFail($request->input('id'));
-        Auth::logout();
-        $user->delete();
-        return ['message' => 'Your Account has been deleted'];
+        if (Auth::user()->id === $request->input('id')) {
+            $user = User::findOrFail($request->input('id'));
+            Auth::logout();
+            $user->delete();
+            return ['message' => 'Your Account has been deleted'];
+        }
     }
 }

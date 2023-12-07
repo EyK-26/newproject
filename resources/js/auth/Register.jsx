@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../myApp/context/UserContext";
+import Messages from "../components/Messages";
 
 const Register = ({ fetchUserStatus }) => {
     const [values, setValues] = useState({
@@ -76,13 +77,7 @@ const Register = ({ fetchUserStatus }) => {
                 />
                 <input type="submit" value="Register" />
             </form>
-            {state.messages && (
-                <ul className="messages">
-                    {state.messages.map((el, idx) => (
-                        <li key={idx}>{el}</li>
-                    ))}
-                </ul>
-            )}
+            <Messages />
         </div>
     );
 };

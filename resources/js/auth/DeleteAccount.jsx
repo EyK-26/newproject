@@ -14,17 +14,16 @@ const DeleteAccount = ({ fetchUserStatus }) => {
         if (confirmed) {
             setMessage("deleting account...");
             try {
-                const response = await axios.post("/api/user-delete", {
-                    id: state.user.id,
+                const response = await axios.delete("/api/user-delete", {
+                    params: {id: state.user.id},
                 });
                 if (Math.floor(response.status / 100) === 2) {
                     fetchUserStatus();
                     navigate("/", { state: { userDeleted: true } });
                 }
             } catch (error) {
-                throw new Error(
-                    `${error}. Please refresh the page and try again`
-                );
+                setMessage("couldn't delete, please try again.");
+                console.error(error);
             }
         } else {
             setMessage("please agree in order to delete your account.");
@@ -51,6 +50,7 @@ const DeleteAccount = ({ fetchUserStatus }) => {
                                 name="confirm"
                                 id="confirm"
                                 defaultChecked={confirmed}
+                                value={confirmed}
                                 onChange={() => setConfirmed((prev) => !prev)}
                             />
                         </label>

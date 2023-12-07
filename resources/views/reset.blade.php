@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('content')
 <h1>Reset Password</h1>
-@auth
+@guest
 @isset($email)
 <form action="{{ route('password.update') }}" method="post">
     @method('put')
@@ -16,7 +16,7 @@
 @endisset
 @else
 <h1>404, not authorized</h1>
-@endauth
+@endguest
 <ul class="success">
     @if(session('message'))
     <li>{{ session('message') }}</li>

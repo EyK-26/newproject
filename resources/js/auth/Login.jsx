@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../myApp/context/UserContext";
+import Messages from "../components/Messages";
 
 const Login = ({ fetchUserStatus }) => {
     const [values, setValues] = useState({
@@ -67,12 +68,6 @@ const Login = ({ fetchUserStatus }) => {
                 />
                 <input type="submit" value="Login" />
             </form>
-            {state.error?.email?.map((el, i) => (
-                <span key={i}>{el}</span>
-            ))}
-            {state.error?.password?.map((el, i) => (
-                <span key={i}>{el}</span>
-            ))}
             <span>
                 <Link to="/forgot-password">Forgot Password</Link>
             </span>
@@ -80,13 +75,7 @@ const Login = ({ fetchUserStatus }) => {
                 You don't have an account?{" "}
                 <Link to="/register">Register Now</Link>
             </span>
-            {state.messages && (
-                <ul className="messages">
-                    {state.messages.map((el, idx) => (
-                        <li key={idx}>{el}</li>
-                    ))}
-                </ul>
-            )}
+            <Messages />
         </div>
     );
 };

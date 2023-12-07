@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import UserContext from "../../myApp/context/UserContext";
 import axios from "axios";
+import Messages from "../../components/Messages";
 
 const ManualReset = () => {
     const { state, dispatch } = useContext(UserContext);
@@ -51,6 +52,7 @@ const ManualReset = () => {
                     name="password"
                     id="password"
                     onChange={handleChange}
+                    value={values.password}
                 />
                 <label htmlFor="password_confirmation">
                     Confirm new password
@@ -60,16 +62,11 @@ const ManualReset = () => {
                     name="password_confirmation"
                     id="password_confirmation"
                     onChange={handleChange}
+                    value={values.password_confirmation}
                 />
                 <button type="submit">Reset</button>
             </form>
-            {state.messages && (
-                <ul className="messages">
-                    {state.messages.map((el, idx) => (
-                        <li key={idx}>{el}</li>
-                    ))}
-                </ul>
-            )}
+            <Messages />
         </div>
     );
 };
