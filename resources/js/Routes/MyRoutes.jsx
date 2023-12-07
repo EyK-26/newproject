@@ -36,18 +36,24 @@ const MyRoutes = () => {
     };
 
     useEffect(() => {
-        if (state.user === null) fetchUserStatus();
-    }, [state.user]);
-
-    useEffect(() => {
+        if (state.user === null) {
+            fetchUserStatus();
+        }
         if (state.messages.length > 0) {
             setTimeout(() => {
                 dispatch({
                     type: "messages/unset",
                 });
-            }, 5000);
+            }, 4000);
         }
-    }, [state.messages]);
+        if (state.spanMessage) {
+            setTimeout(() => {
+                dispatch({
+                    type: "spanMessage/unset",
+                });
+            }, 4000);
+        }
+    }, [state.user, state.messages, state.spanMessage]);
 
     return (
         <Routes>

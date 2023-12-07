@@ -41,19 +41,20 @@ body {
     .reset__success {
         width: 100%;
         text-align: center;
-        background-color: rgb(5, 131, 5);
+        background-color: rgba(5, 131, 79, 0.781);
+        padding: 1em;
     }
     #root {
         @include column();
         justify-content: space-between;
         a {
-            text-decoration: none;
+            text-decoration: underline;
             color: #555;
         }
-        ul > li {
-            list-style: none;
+        ul {
+            padding-left: 0;
         }
-        div > li {
+        li {
             list-style: none;
         }
         textarea,
@@ -88,6 +89,8 @@ body {
         }
         .messages > li {
             color: rgb(112, 74, 3);
+            margin: 0.3em 0;
+            font-size: 1.2rem;
             padding: 0;
         }
         .header {
@@ -136,10 +139,11 @@ body {
                 }
                 &.user_menu__name {
                     @include flex-between();
+                    align-items: center;
                     .user_menu__name--first {
-                        @include flex-between();
-                        align-items: center;
-                        width: 40%;
+                        @include column();
+
+                        width: fit-content;
                         font-size: smaller;
                     }
                 }
@@ -160,7 +164,12 @@ body {
         }
 
         .content {
-            padding: 1em;
+            padding: 3%;
+            .spanMessage {
+                color: orange;
+                margin: 0.8em 0;
+                font-size: 1.2rem;
+            }
             .reset_password,
             .login_form,
             .register_form {

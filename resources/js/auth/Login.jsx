@@ -18,7 +18,9 @@ const Login = ({ fetchUserStatus }) => {
             const response = await axios.post("/login", values);
             if (Math.floor(response.status / 100) === 2) {
                 fetchUserStatus();
-                navigate("/", { state: { userLoggedIn: true } });
+                navigate("/", {
+                    state: { userLoggedIn: `Login Successful` },
+                });
             }
         } catch (error) {
             const { password, email } = error.response.data.errors || undefined;

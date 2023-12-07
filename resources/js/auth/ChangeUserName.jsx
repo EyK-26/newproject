@@ -4,8 +4,7 @@ import UserContext from "../myApp/context/UserContext";
 
 const ChangeUserName = ({ fetchUserStatus }) => {
     const [name, setName] = useState("");
-    const [message, setMessage] = useState("");
-    const { state } = useContext(UserContext);
+    const { state, dispatch } = useContext(UserContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,12 +15,17 @@ const ChangeUserName = ({ fetchUserStatus }) => {
             });
             if (Math.floor(response.status / 100) === 2) {
                 fetchUserStatus();
-                setMessage(response.data.message);
+                dispatch({
+                    type: "spanMessage/set",
+                    payload: response.data.message,
+                });
                 setName("");
             }
         } catch (error) {
-            setMessage("couldn't update, please try again.");
-            console.error(error);
+            dispatch({
+                type: "spanMessage/set",
+                payload: "Couldn't update, please try again.",
+            });
         }
     };
 
@@ -47,7 +51,9 @@ const ChangeUserName = ({ fetchUserStatus }) => {
                 </div>
                 <input type="submit" value="Confirm" />
             </form>
-            {message && <span>{message}</span>}
+            {state.spanMessage && (
+                <span className="spanMessage">{state.spanMessage}</span>
+            )}
         </div>
     );
 };

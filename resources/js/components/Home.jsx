@@ -1,4 +1,4 @@
-import React, { useContext, useReducer } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
 import PropertyContext from "../myApp/context/PropertyContext";
 import UserContext from "../myApp/context/UserContext";
 import PropertyReducer from "../myApp/store/PropertyReducer";
@@ -8,7 +8,9 @@ import { useLocation } from "react-router-dom";
 
 const Home = () => {
     const location = useLocation();
-    const { userDeleted } = location.state || false;
+    const { state, dispatch } = useContext(UserContext);
+    const { userDeleted, userRegistered, userLoggedIn, userLoggedOut } =
+        location.state || false;
     const [propertyContextValue, setPropertyContextValue] = useReducer(
         PropertyReducer,
         {
@@ -47,9 +49,24 @@ const Home = () => {
         }
     );
 
+    useEffect(() => {
+        if (location.state) {
+            dispatch({
+                type: "spanMessage/set",
+                payload:
+                    userRegistered ||
+                    userLoggedIn ||
+                    userLoggedOut ||
+                    userDeleted,
+            });
+        }
+    }, [location.state]);
+
     return (
         <div className="home__content">
-            {userDeleted && <span>User deleted successfully!</span>}
+            {state.spanMessage && (
+                <span className="spanMessage">{state.spanMessage}</span>
+            )}
             <PropertyContext.Provider
                 value={{
                     state: propertyContextValue,

@@ -4,29 +4,42 @@ import { useNavigate } from "react-router-dom";
 import UserContext from "../myApp/context/UserContext";
 
 const DeleteAccount = ({ fetchUserStatus }) => {
-    const { state } = useContext(UserContext);
-    const [message, setMessage] = useState("");
+    const { state, dispatch } = useContext(UserContext);
     const [confirmed, setConfirmed] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (confirmed) {
-            setMessage("deleting account...");
+            dispatch({
+                type: "spanMessage/set",
+                payload: "deleting account...",
+            });
             try {
                 const response = await axios.delete("/api/user-delete", {
-                    params: {id: state.user.id},
+                    params: { id: state.user.id },
                 });
                 if (Math.floor(response.status / 100) === 2) {
+                    dispatch({
+                        type: "spanMessage/set",
+                        payload: "Account Deleted.",
+                    });
                     fetchUserStatus();
-                    navigate("/", { state: { userDeleted: true } });
+                    navigate("/", {
+                        state: { userDeleted: response.data.message },
+                    });
                 }
             } catch (error) {
-                setMessage("couldn't delete, please try again.");
-                console.error(error);
+                dispatch({
+                    type: "spanMessage/set",
+                    payload: "Couldn't delete, please try again.",
+                });
             }
         } else {
-            setMessage("please agree in order to delete your account.");
+            dispatch({
+                type: "spanMessage/set",
+                payload: "Please agree in order to delete your account.",
+            });
         }
     };
 
@@ -58,7 +71,9 @@ const DeleteAccount = ({ fetchUserStatus }) => {
                     <input type="submit" value="Delete Account" />
                 </div>
             </form>
-            {message && <span>{message}</span>}
+            {state.spanMessage && (
+                <span className="spanMessage">{state.spanMessage}</span>
+            )}
         </div>
     );
 };

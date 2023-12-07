@@ -9,7 +9,7 @@ const App = () => {
         theme: "light",
         user: null,
         messages: [],
-        passwordResetMessages: [],
+        spanMessage: "",
     });
 
     return (

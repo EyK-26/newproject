@@ -23,6 +23,11 @@ const ManualReset = () => {
                     type: "messages/set",
                     payload: [response.data.message],
                 });
+                setValues((prev) => ({
+                    ...prev,
+                    password: "",
+                    password_confirmation: "",
+                }));
             }
         } catch (error) {
             const { password, password_confirmation } =

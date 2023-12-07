@@ -20,6 +20,16 @@ const UserReducer = (state, action) => {
                 ...state,
                 messages: [],
             };
+        case "spanMessage/set":
+            return {
+                ...state,
+                spanMessage: action.payload,
+            };
+        case "spanMessage/unset":
+            return {
+                ...state,
+                spanMessage: "",
+            };
         default:
             return state;
     }

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");
     const [sending, setSending] = useState(null);
-    const [message, setMessage] = useState("");
+    const { state, dispatch } = useContext(UserContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -18,26 +18,36 @@ const ForgotPassword = () => {
                     email,
                 });
                 if (Math.floor(response.status / 100) === 2) {
-                    setMessage(response.data.message);
                     setSending(false);
+                    dispatch({
+                        type: "spanMessage/set",
+                        payload: response.data.message,
+                    });
+                    setEmail("");
                 }
             } catch (error) {
-                setMessage("Email wasn't sent. Please try again.");
+                dispatch({
+                    type: "spanMessage/set",
+                    payload: "Email wasn't sent. Please try again.",
+                });
             }
         } else {
-            setMessage("Please fill the email field.");
+            dispatch({
+                type: "spanMessage/set",
+                payload: "Please fill the email field.",
+            });
         }
     };
 
     return (
         <div className="reset_password">
             {sending === null ? (
-                <span>{message}</span>
+                <span className="spanMessage">{state.spanMessage}</span>
             ) : sending ? (
                 <span>Please wait...</span>
             ) : (
                 <>
-                    <span>{message}</span>
+                    <span className="spanMessage">{state.spanMessage}</span>
                     <button onClick={() => navigate("/")}>
                         back to main page
                     </button>

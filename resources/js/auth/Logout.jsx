@@ -15,7 +15,11 @@ const Logout = () => {
                 type: "user/set",
                 payload: null,
             });
-            navigate("/");
+            navigate("/", {
+                state: {
+                    userLoggedOut: `Logout Successful`,
+                },
+            });
         }
     };
 

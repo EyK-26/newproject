@@ -20,7 +20,9 @@ const Register = ({ fetchUserStatus }) => {
             const response = await axios.post("/register", values);
             if (Math.floor(response.status / 100) === 2) {
                 fetchUserStatus();
-                navigate("/", { state: { userRegistered: true } });
+                navigate("/", {
+                    state: { userRegistered: `Registration Successful` },
+                });
             }
         } catch (error) {
             const { email, name, password } = error.response.data.errors;

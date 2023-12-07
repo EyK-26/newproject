@@ -4,7 +4,6 @@ import axios from "axios";
 
 const EnquiryForm = ({ id }) => {
     const { state, dispatch } = useContext(UserContext);
-    const [message, setMessage] = useState("");
     const [formData, setFormData] = useState({
         name: state.user.name,
         email: state.user.email,
@@ -27,7 +26,10 @@ const EnquiryForm = ({ id }) => {
                 message: formData.message,
             });
             if (Math.floor(response.status / 100) === 2) {
-                setMessage(response.data.message);
+                dispatch({
+                    type: "spanMessage/set",
+                    payload: response.data.message,
+                });
                 setFormData((prev) => ({
                     ...prev,
                     message: "",
@@ -46,7 +48,9 @@ const EnquiryForm = ({ id }) => {
             {state.error?.includes("SQLSTATE[23000]") && (
                 <span>You have already sent an enquiry for this property.</span>
             )}
-            {message && <span>{message}</span>}
+            {state.spanMessage && (
+                <span className="spanMessage">{state.spanMessage}</span>
+            )}
             <div className="enquiry-form__container">
                 <h3>Contact Form</h3>
                 <form onSubmit={handleSubmit}>

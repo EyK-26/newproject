@@ -5,7 +5,7 @@
 
 @if($user->can('admin') && isset($enquiry))
 <h1>See Enquiry Details</h1>
-<textarea cols="40" rows="20" resize="none">{{ $enquiry->message }}</textarea>
+<textarea cols="40" rows="20" resize="none" disabled id="enquiry">{{ $enquiry->message }}</textarea>
 
 @isset($client)
 @isset($product_id)

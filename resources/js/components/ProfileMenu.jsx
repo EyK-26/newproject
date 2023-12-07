@@ -12,7 +12,7 @@ const ProfileMenu = () => {
             <ul className="user_menu__name">
                 <div className="user_menu__name--first">
                     <li>{state.user?.name}</li>
-                    <li>{state.user?.email}</li>
+                    <li> {state.user?.email}</li>
                 </div>
                 <li>
                     <Link to={`user/${state.user?.id}`}>User Settings</Link>
