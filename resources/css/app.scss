@@ -193,7 +193,23 @@ body {
 
         .content {
             padding: 4% 2%;
-
+            .wishlist_container {
+                @include column();
+                align-items: center;
+                .wishlist_product {
+                    @include column();
+                    padding: 1em;
+                    margin: 1em;
+                    background-color: #91a1c2;
+                    box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
+                    border-radius: 0.5em;
+                    li,
+                    a,
+                    img {
+                        padding: 0.4em;
+                    }
+                }
+            }
             .span_message {
                 color: rgba(57, 180, 9, 0.932);
                 text-shadow: 0 1px 2px rgba(41, 41, 53, 0.425);
@@ -204,7 +220,6 @@ body {
                 font-size: 1.35rem;
                 font-weight: 900;
             }
-
             .reset_password,
             .login_form,
             .register_form {
