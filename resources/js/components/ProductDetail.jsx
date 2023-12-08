@@ -5,8 +5,6 @@ import ImageToggler from "./ImageToggler";
 
 export const ProductDetail = ({ prod }) => {
     const { state } = useContext(PropertyContext);
-    const styleGreen = { backgroundColor: "green" };
-    const styleRed = { backgroundColor: "red" };
 
     return (
         <>
@@ -18,10 +16,10 @@ export const ProductDetail = ({ prod }) => {
                     <div>{prod.name}</div>
                     <ul className="product_details">
                         <li
-                            style={
-                                prod.prize_czk == state.lowestPrice()
-                                    ? styleGreen
-                                    : styleRed
+                            className={
+                                parseInt(prod.prize_czk) === state.lowestPrice()
+                                    ? "advantage"
+                                    : "disadvantage"
                             }
                         >
                             <div>Price</div>
@@ -32,10 +30,11 @@ export const ProductDetail = ({ prod }) => {
                             <div>{prod.locality}</div>
                         </li>
                         <li
-                            style={
-                                prod.building_area == state.highestFloorArea()
-                                    ? styleGreen
-                                    : styleRed
+                            className={
+                                parseInt(prod.building_area) ===
+                                state.highestFloorArea()
+                                    ? "advantage"
+                                    : "disadvantage"
                             }
                         >
                             <div>Floor area</div>
@@ -44,10 +43,11 @@ export const ProductDetail = ({ prod }) => {
                             </div>
                         </li>
                         <li
-                            style={
-                                prod.land_area == state.highestLandArea()
-                                    ? styleGreen
-                                    : styleRed
+                            className={
+                                parseInt(prod.land_area) ===
+                                state.highestLandArea()
+                                    ? "advantage"
+                                    : "disadvantage"
                             }
                         >
                             <div>Land area</div>
