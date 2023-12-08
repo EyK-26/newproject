@@ -30,6 +30,11 @@ const UserReducer = (state, action) => {
                 ...state,
                 spanMessage: "",
             };
+        case "addedProducts/set":
+            return {
+                ...state,
+                addedProducts: [...state.addedProducts, action.payload],
+            };
         default:
             return state;
     }

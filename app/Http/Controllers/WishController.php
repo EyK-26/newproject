@@ -34,10 +34,23 @@ class WishController extends Controller
         return empty($added_product);
     }
 
-    public function show(Request $request)
+    private function flatten(array $products): array
     {
-        $wishlist_products = Wish::where('user_id', $request->id)->select('product_id')->get();
-        if ($wishlist_products) return $wishlist_products;
+        $new_array = array();
+        array_walk_recursive($products, function ($array) use (&$new_array) {
+            $new_array[] = $array;
+        });
+        return $new_array;
+    }
+
+    public function show(Request $request): array
+    {
+        $wishlist_products = Wish::where('user_id', $request->id)->select('product_id')->get()->toArray();
+        if ($wishlist_products) {
+            return $this->flatten($wishlist_products);
+        } else {
+            return ['message' => 'Your wishlist is empty.'];
+        }
     }
 
     public function is_added(Request $request): bool

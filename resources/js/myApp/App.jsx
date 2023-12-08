@@ -9,6 +9,7 @@ const App = () => {
         theme: "light",
         user: null,
         messages: [],
+        addedProducts: [],
         spanMessage: "",
     });
 
