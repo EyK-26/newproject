@@ -9,41 +9,63 @@ const WishList = () => {
 
     useEffect(() => {
         (async () => {
+            dispatch({
+                type: "spanMessage/set",
+                payload: "Loading list...",
+            });
             try {
-                const response = await axios.get("/api/get-wishlist-all", {
+                const outerResponse = await axios.get("/api/get-wishlist-all", {
                     params: {
                         id,
                     },
                 });
-                if (Math.floor(response.status / 100) === 2) {
-                    response.data.forEach(async (prod_id) => {
+                if (Math.floor(outerResponse.status / 100) === 2) {
+                    let counter = 0;
+                    outerResponse.data.forEach(async (prod_id) => {
                         try {
-                            const response = await axios.get(
+                            const innerResponse = await axios.get(
                                 `https://estate-comparison.codeboot.cz/detail.php?id=${prod_id}`
                             );
-                            console.log(response.data);
                             dispatch({
                                 type: "addedProducts/set",
-                                payload: response.data,
+                                payload: innerResponse.data,
                             });
+                            counter++;
                         } catch (error) {
-                            console.log(error);
+                            dispatch({
+                                type: "addedProducts/set",
+                                payload: "an error produced, please try again",
+                            });
+                        }
+                        if (counter === outerResponse.data.length) {
+                            console.log("run");
+                            dispatch({
+                                type: "spanMessage/unset",
+                            });
                         }
                     });
                 }
             } catch (error) {
-                console.log(error);
+                dispatch({
+                    type: "addedProducts/set",
+                    payload: "an error produced, please try again",
+                });
             }
         })();
     }, []);
 
     return (
-        <ul className="wishlist_products">
-            {state.addedProducts.length > 0 &&
-                state.addedProducts.map((prod) => (
-                    <li key={prod.id}>{prod.name}</li>
-                ))}
-        </ul>
+        <div className="wishlist_container">
+            {state.spanMessage && (
+                <span className="span_message">{state.spanMessage}</span>
+            )}
+            <ul className="wishlist_products">
+                {state.addedProducts.length > 0 &&
+                    state.addedProducts.map((prod) => (
+                        <li key={prod.id}>{prod.name}</li>
+                    ))}
+            </ul>
+        </div>
     );
 };
 
