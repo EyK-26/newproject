@@ -25,11 +25,14 @@ const Register = ({ fetchUserStatus }) => {
                 });
             }
         } catch (error) {
-            const { email, name, password } = error.response.data.errors;
-            dispatch({
-                type: "messages/set",
-                payload: [email, name, password],
-            });
+            const { email, name, password } =
+                error.response.data.errors || false;
+            if (email || name || password) {
+                dispatch({
+                    type: "messages/set",
+                    payload: [email, name, password],
+                });
+            }
         }
     };
 

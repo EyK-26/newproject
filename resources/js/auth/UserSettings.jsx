@@ -35,6 +35,7 @@ const UserSettings = () => {
     useEffect(() => {
         fetchUser();
     }, []);
+    
     return (
         <ul className="user_settings_container">
             {userDetails && convertObject(userDetails)}

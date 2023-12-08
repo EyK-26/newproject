@@ -23,7 +23,7 @@ const Login = ({ fetchUserStatus }) => {
                 });
             }
         } catch (error) {
-            const { password, email } = error.response.data.errors || undefined;
+            const { password, email } = error.response.data.errors || false;
             if (password || email) {
                 dispatch({
                     type: "messages/set",

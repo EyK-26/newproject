@@ -21,31 +21,27 @@ const Home = () => {
             selectedProducts: [],
             error: "",
             lowestPrice: function () {
-                if (this.selectedProducts.length > 0) {
-                    return Math.min(
-                        ...this.selectedProducts.map((obj) => obj.prize_czk)
-                    );
-                } else {
-                    return 0;
-                }
+                return this.selectedProducts.length > 0
+                    ? Math.min(
+                          ...this.selectedProducts.map((obj) => obj.prize_czk)
+                      )
+                    : 0;
             },
             highestFloorArea: function () {
-                if (this.selectedProducts.length > 0) {
-                    return Math.max(
-                        ...this.selectedProducts.map((obj) => obj.building_area)
-                    );
-                } else {
-                    return 0;
-                }
+                return this.selectedProducts.length > 0
+                    ? Math.max(
+                          ...this.selectedProducts.map(
+                              (obj) => obj.building_area
+                          )
+                      )
+                    : 0;
             },
             highestLandArea: function () {
-                if (this.selectedProducts.length > 0) {
-                    return Math.max(
-                        ...this.selectedProducts.map((obj) => obj.land_area)
-                    );
-                } else {
-                    return 0;
-                }
+                return this.selectedProducts.length > 0
+                    ? Math.max(
+                          ...this.selectedProducts.map((obj) => obj.land_area)
+                      )
+                    : 0;
             },
         }
     );

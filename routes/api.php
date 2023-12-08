@@ -21,6 +21,7 @@ Route::delete('/user-delete',  [UserController::class, 'destroy']);
 Route::put('/change-username', [UserController::class, 'update'])->whereNumber('user');
 
 Route::get('/get-wishlist', [WishController::class, 'is_added']);
+Route::get('/get-wishlist-all', [WishController::class, 'show']);
 Route::post('/toggle-wishlist', [WishController::class, 'store']);
 
 Route::post('/enquiry', [EnquiryController::class, 'store']);

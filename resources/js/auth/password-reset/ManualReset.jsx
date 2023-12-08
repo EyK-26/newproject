@@ -31,7 +31,7 @@ const ManualReset = () => {
             }
         } catch (error) {
             const { password, password_confirmation } =
-                error.response.data.errors || undefined;
+                error.response.data.errors || false;
             if (password || password_confirmation) {
                 dispatch({
                     type: "messages/set",

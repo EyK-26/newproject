@@ -13,6 +13,8 @@ import ProductView from "../components/ProductView";
 import UserSettings from "../auth/UserSettings";
 import DeleteAccount from "../auth/DeleteAccount";
 import ChangeUserName from "../auth/ChangeUserName";
+import WishList from "../components/WishList";
+import Enquiries from "../components/Enquiries";
 
 const MyRoutes = () => {
     const { state, dispatch } = useContext(Context);
@@ -44,14 +46,14 @@ const MyRoutes = () => {
                 dispatch({
                     type: "messages/unset",
                 });
-            }, 4000);
+            }, 6000);
         }
         if (state.spanMessage) {
             setTimeout(() => {
                 dispatch({
                     type: "spanMessage/unset",
                 });
-            }, 4000);
+            }, 6000);
         }
     }, [state.user, state.messages, state.spanMessage]);
 
@@ -106,6 +108,8 @@ const MyRoutes = () => {
                                 />
                             }
                         />
+                        <Route path="/wishlist/:id" element={<WishList />} />
+                        <Route path="/enquiries/:id" element={<Enquiries />} />
                     </>
                 )}
                 <Route path="*" element={<Unauthorized />} />

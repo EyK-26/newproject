@@ -20,12 +20,14 @@ const ProfileMenu = () => {
             </ul>
             <ul className="user_menu__wishlist">
                 <li>
-                    <WishList />
+                    <Link to={`wishlist/${state.user?.id}`}>Your wishlist</Link>
                 </li>
             </ul>
             <ul className="user_menu__enquiries">
                 <li>
-                    <Enquiries />
+                    <Link to={`enquiries/${state.user?.id}`}>
+                        Your enquiries
+                    </Link>
                 </li>
             </ul>
         </div>

@@ -34,6 +34,12 @@ class WishController extends Controller
         return empty($added_product);
     }
 
+    public function show(Request $request)
+    {
+        $wishlist_products = Wish::where('user_id', $request->id)->select('product_id')->get();
+        if ($wishlist_products) return $wishlist_products;
+    }
+
     public function is_added(Request $request): bool
     {
         return !$this->check($request->user_id, $request->product_id);
