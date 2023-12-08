@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import UserContext from "../myApp/context/UserContext";
 
 const WishList = () => {
@@ -22,26 +22,32 @@ const WishList = () => {
                 if (Math.floor(outerResponse.status / 100) === 2) {
                     let counter = 0;
                     outerResponse.data.forEach(async (prod_id) => {
-                        try {
-                            const innerResponse = await axios.get(
-                                `https://estate-comparison.codeboot.cz/detail.php?id=${prod_id}`
-                            );
-                            dispatch({
-                                type: "addedProducts/set",
-                                payload: innerResponse.data,
-                            });
-                            counter++;
-                        } catch (error) {
-                            dispatch({
-                                type: "addedProducts/set",
-                                payload: "an error produced, please try again",
-                            });
-                        }
-                        if (counter === outerResponse.data.length) {
-                            console.log("run");
-                            dispatch({
-                                type: "spanMessage/unset",
-                            });
+                        if (
+                            !state.addedProducts.find(
+                                (prod) => prod.id === prod_id
+                            )
+                        ) {
+                            try {
+                                const innerResponse = await axios.get(
+                                    `https://estate-comparison.codeboot.cz/detail.php?id=${prod_id}`
+                                );
+                                dispatch({
+                                    type: "addedProducts/set",
+                                    payload: innerResponse.data,
+                                });
+                                counter++;
+                            } catch (error) {
+                                dispatch({
+                                    type: "addedProducts/set",
+                                    payload:
+                                        "an error produced, please try again",
+                                });
+                            }
+                            if (counter === outerResponse.data.length) {
+                                dispatch({
+                                    type: "spanMessage/unset",
+                                });
+                            }
                         }
                     });
                 }
@@ -62,7 +68,13 @@ const WishList = () => {
             <ul className="wishlist_products">
                 {state.addedProducts.length > 0 &&
                     state.addedProducts.map((prod) => (
-                        <li key={prod.id}>{prod.name}</li>
+                        <div className="wishlist_product" key={prod.id}>
+                            <li>{prod.name}</li>
+                            <img src={prod.images[0]} alt={prod.name} />
+                            <Link to={`/prod_view/${prod.id}`}>
+                                See Property
+                            </Link>
+                        </div>
                     ))}
             </ul>
         </div>
