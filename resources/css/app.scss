@@ -18,6 +18,15 @@
     justify-content: center;
 }
 
+@mixin input_and_button {
+    border: none;
+    border-radius: 0.5em;
+    background-color: #606061;
+    box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
+    color: #f1f1f1;
+    padding: 0.4em 0.7em;
+}
+
 html {
     box-sizing: border-box;
 }
@@ -38,78 +47,88 @@ body {
     ::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
+
     .reset__success {
         width: 100%;
         text-align: center;
         background-color: rgba(5, 131, 79, 0.781);
         padding: 1em;
     }
+
     #root {
         @include column();
         justify-content: space-between;
+
         a {
             text-decoration: underline;
             color: #555;
         }
+
         ul {
             padding-left: 0;
         }
+
         li {
             list-style: none;
         }
+
         h1,
         h2 {
             color: #606061;
         }
+
         textarea,
-        input {
-            padding: 0.5em;
-            border: none;
-            border-radius: 0.5em;
-            background-color: #606061;
-            box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
-            color: #f1f1f1;
+        input:not([type="submit"]) {
+            @include input_and_button();
             resize: none;
         }
+
         button,
         input[type="submit"] {
-            background-color: #555;
-            padding: 0.3em 0.6em;
-            color: white;
+            @include input_and_button();
+            margin: 0.7em;
             width: fit-content;
             align-self: center;
             &:hover {
                 transform: scale(1.02);
             }
         }
+
         label {
             padding: 0.3em 0;
         }
+
         img {
             margin-bottom: 0.3em;
         }
+
         span {
             color: rgb(112, 74, 3);
         }
+
         .messages > li {
             color: rgb(112, 74, 3);
             margin: 0.3em 0;
             font-size: 1.2rem;
             padding: 0;
         }
+
         .header {
             @include flex-between;
             align-items: center;
             background-color: gray;
             position: sticky;
             top: 0;
+
             a {
                 padding: 0.7em;
                 color: #f1f1f1;
             }
+
             .navbar {
                 @include flex-between;
                 align-items: center;
+
                 .menu_container {
                     .profile__logo {
                         margin-left: 1.5em;
@@ -118,6 +137,7 @@ body {
                         width: 2.3em;
                     }
                 }
+
                 a {
                     padding: 0.7em;
                     color: #f1f1f1;
@@ -131,22 +151,26 @@ body {
             right: 0em;
             top: 2.9em;
             width: 30%;
+
             ul {
                 margin: 0;
                 padding: 0.4em 0.7em;
                 background-color: rgb(184, 182, 182);
+
                 &:nth-child(even) {
                     background-color: rgb(100, 101, 102);
                 }
+
                 a {
                     color: white;
                 }
+
                 &.user_menu__name {
                     @include flex-between();
                     align-items: center;
+
                     .user_menu__name--first {
                         @include column();
-
                         width: fit-content;
                         font-size: smaller;
                     }
@@ -169,31 +193,36 @@ body {
 
         .content {
             padding: 4% 2%;
+
             .span_message {
-                color: rgb(180, 72, 9);
+                color: rgba(57, 180, 9, 0.932);
                 text-shadow: 0 1px 2px rgba(41, 41, 53, 0.425);
                 position: absolute;
-                top: 2.7em;
+                top: 2.8em;
                 width: 100%;
                 text-align: center;
-                font-size: 1.3rem;
+                font-size: 1.35rem;
+                font-weight: 900;
             }
+
             .reset_password,
             .login_form,
             .register_form {
-                @include column;
+                @include column();
                 width: 40%;
                 margin: auto;
-                padding-top: 5em;
+
                 form {
                     display: flex;
                     flex-direction: column;
+
                     label,
-                    input {
+                    input:not([type="submit"]) {
                         padding: 0.4em;
                         margin: 0.4em;
                     }
                 }
+
                 small {
                     text-align: center;
                 }
@@ -202,13 +231,16 @@ body {
             .user_settings_container {
                 list-style: none;
                 padding-top: 5em;
-                @include column;
+                @include column();
+
                 li {
                     align-self: center;
                     padding: 0.6em;
                 }
+
                 .user_settings--controls {
                     align-self: center;
+
                     button {
                         margin: 1em;
                     }
@@ -217,18 +249,22 @@ body {
 
             .name_change {
                 padding-top: 5em;
-                @include column;
+                @include column();
                 align-items: center;
+
                 .name_change--current {
                     padding: 2em;
                 }
+
                 form {
                     width: 20%;
                     @include flex-between();
                     align-items: center;
+
                     input {
                         margin: 1em;
                     }
+
                     input[type="submit"] {
                         align-self: flex-end;
                     }
@@ -236,20 +272,24 @@ body {
             }
 
             .home__content {
-                @include column;
+                @include column();
+
                 .products__content {
-                    @include column;
+                    @include column();
                     width: 80%;
                     margin: auto;
+
                     .product_list--container {
                         @include column();
+
                         ul.product_list {
                             display: flex;
                             overflow: auto;
                             padding: 0;
                             height: min-content;
+
                             li.product {
-                                @include column;
+                                @include column();
                                 height: fit-content;
                                 cursor: pointer;
                                 margin: 0.5em 1em;
@@ -257,20 +297,23 @@ body {
                                 border-radius: 1em;
                                 box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
                                 background-color: #c5c6d6;
+
                                 &.selected {
                                     border: 0.3em solid rgb(0, 128, 128);
                                     box-shadow: 0 3px 6px
                                         rgba(41, 41, 53, 0.808);
                                 }
+
                                 img {
                                     width: 12em;
                                     border-radius: 1em;
                                     box-shadow: 0 3px 6px
                                         rgba(41, 41, 53, 0.808);
                                 }
+
                                 .name__container {
                                     width: 50%;
-                                    @include column;
+                                    @include column();
                                 }
                             }
                         }
@@ -281,13 +324,17 @@ body {
             .product_view__container {
                 display: flex;
                 padding: 2em;
+
                 .property__details {
                     padding-left: 3em;
+
                     ul {
                         padding: 0;
+
                         li {
                             background-color: #91a1c2;
                             padding: 0.14em 0.4em;
+
                             &:nth-child(odd) {
                                 background-color: #9fabb6;
                             }
@@ -300,18 +347,22 @@ body {
                     border-radius: 1.4em;
                     box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
                 }
+
                 .controls__main {
-                    @include column;
+                    @include column();
                     justify-content: space-around;
                     align-items: center;
+
                     .wishlist__container {
                         width: 50%;
-                        @include column;
+                        @include column();
                         align-items: center;
                     }
+
                     .image__container--main {
                         .controls {
-                            @include justify;
+                            @include justify();
+
                             .arrowLeft,
                             .arrowRight {
                                 width: 3em;
@@ -319,13 +370,16 @@ body {
                             }
                         }
                     }
+
                     .controls_wishlist {
-                        @include flex-between;
+                        @include flex-between();
                         width: 100%;
+
                         .wishlist__container {
                             align-self: flex-start;
                             width: fit-content;
                             cursor: pointer;
+
                             .property__added {
                                 fill: rgb(0, 4, 255);
                             }
@@ -333,16 +387,17 @@ body {
                     }
 
                     .enquiry-form__container {
-                        @include column;
+                        @include column();
                         background-color: rgb(166, 186, 204);
                         padding: 0.5em;
                         margin: 2em;
                         border-radius: 1em;
                         box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
                         width: 100%;
+
                         .form-group {
                             margin-bottom: 2em;
-                            @include column;
+                            @include column();
                         }
                     }
                 }
@@ -353,6 +408,7 @@ body {
                 align-items: flex-start;
                 overflow: auto;
                 margin-bottom: 2em;
+
                 .selected_product {
                     height: fit-content;
                     min-width: 40%;
@@ -363,15 +419,18 @@ body {
                     background-color: #c5cbd6;
                     border-radius: 1em;
                     box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
+
                     .image__container {
-                        @include align;
+                        @include align();
                         justify-content: center;
                         width: 100%;
+
                         .arrowLeft,
                         .arrowRight {
                             width: 3em;
                             cursor: pointer;
                         }
+
                         img {
                             width: 78%;
                             border-radius: 1em;
@@ -383,25 +442,31 @@ body {
                         font-size: 0.9em;
                         list-style: none;
                         padding-left: 0;
-                        @include column;
+
+                        @include column();
                         justify-content: space-between;
+
                         li {
-                            @include flex-between;
+                            @include flex-between();
                             align-items: center;
                             margin-bottom: 0.5em;
                             padding: 0.2em;
+
                             &.product__company {
                                 width: 100%;
                                 justify-content: flex-start;
                                 align-items: center;
+
                                 img {
                                     width: 2em;
                                     margin-right: 1em;
                                 }
                             }
+
                             &.advantage {
                                 background-color: rgba(0, 128, 0, 0.5);
                             }
+
                             &.disadvantage {
                                 background-color: rgba(255, 0, 0, 0.5);
                             }
@@ -409,16 +474,20 @@ body {
                     }
                 }
             }
+
             .delete_account {
                 padding-top: 5em;
                 width: 60%;
                 margin: 0 auto;
+
                 form {
                     @include column();
+
                     .confirmation {
                         padding-top: 1em;
                         @include flex-between();
                         align-items: center;
+
                         .confirmation_action {
                             @include align();
                         }
