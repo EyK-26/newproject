@@ -7,7 +7,7 @@
 <h1>Answer User</h1>
 <form action="{{ route('answers.store') }}" method="post">
     @csrf
-    <input type="hidden" name="enquiry" value={{ $enquiry }}>
+    <input type="hidden" name="enquiry_id" value={{ $enquiry->id }}>
     <textarea name="text" id="text" cols="80" rows="20" placeholder="enter your answer here"></textarea>
     <button type="submit">Send</button>
 </form>

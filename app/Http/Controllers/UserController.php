@@ -26,7 +26,6 @@ class UserController extends Controller
     public function update(Request $request,): array
     {
         try {
-
             $user = User::findOrFail($request->input('id'));
             if ($user->name === $request->input('name')) {
                 return ['message' => 'Inserted name is the same as the current name'];

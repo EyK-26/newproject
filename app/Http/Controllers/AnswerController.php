@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer as ModelsAnswer;
+use App\Models\Enquiry;
 use App\Models\User;
 use App\Notifications\Answer;
 use Illuminate\Http\RedirectResponse;
@@ -14,14 +15,11 @@ class AnswerController extends Controller
     public function store(Request $request): RedirectResponse
     {
         if (Auth::check() && Auth::user()->role === 'admin') {
-            $this->validate($request, ['text' => 'required']);
-            $user = Auth::user();
-            $enquiry = $request->input('enquiry');
-            $text = $request->input('text');
-            $decoded_enquriy = json_decode($enquiry);
-            $client = User::find($decoded_enquriy->user->id);
-            $this->store_model($user->id,  $client->id, $decoded_enquriy->id, $decoded_enquriy->product_id, $text);
-            $client->notify(new Answer($user, $text, $decoded_enquriy, $decoded_enquriy->created_at));
+            $this->validateAnswer($request);
+            $enquiry_id = $request->input('enquiry_id');
+            $enquiry = Enquiry::findOrFail($enquiry_id);
+            $this->store_model(Auth::user()->id, $enquiry->user_id, $enquiry->id, $enquiry->product_id, $request->input('text'));
+            $enquiry->user->notify(new Answer(Auth::user(), $request->input('text'), $enquiry, $enquiry->created_at));
             return redirect()->back()->with('message', 'Your answer has been sent.');
         }
     }
@@ -32,5 +30,13 @@ class AnswerController extends Controller
         $answer->fill(['user_id' => $user_id, 'client_id' => $client_id, 'enquiry_id' => $enquiry_id, 'product_id' => $product_id]);
         $answer->message = $text;
         $answer->save();
+    }
+
+    private function validateAnswer(Request $request): void
+    {
+        $this->validate($request, [
+            'enquiry_id' => 'required|exists:enquiries,id',
+            'text' => 'required',
+        ]);
     }
 }

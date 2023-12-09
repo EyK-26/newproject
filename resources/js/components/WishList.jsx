@@ -18,9 +18,10 @@ const WishList = () => {
                     id,
                 },
             });
+            console.log(typeof outerResponse.data);
             if (
                 Math.floor(outerResponse.status / 100) === 2 &&
-                typeof outerResponse.data === "array"
+                !outerResponse.data.message
             ) {
                 let counter = 0;
                 outerResponse.data.forEach(async (prod_id) => {
@@ -49,10 +50,7 @@ const WishList = () => {
                         }
                     }
                 });
-            } else if (
-                typeof outerResponse.data === "object" &&
-                outerResponse.data.message
-            ) {
+            } else if (outerResponse.data.message) {
                 dispatch({
                     type: "spanMessage/set",
                     payload: outerResponse.data.message,

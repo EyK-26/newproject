@@ -2,22 +2,18 @@
     display: flex;
     flex-direction: column;
 }
-
 @mixin align {
     display: flex;
     align-items: center;
 }
-
 @mixin flex-between {
     display: flex;
     justify-content: space-between;
 }
-
 @mixin justify {
     display: flex;
     justify-content: center;
 }
-
 @mixin input_and_button {
     border: none;
     border-radius: 0.5em;
@@ -26,15 +22,12 @@
     color: #f1f1f1;
     padding: 0.4em 0.7em;
 }
-
 html {
     box-sizing: border-box;
 }
-
 body {
     background-color: rgba(219, 231, 240, 0.76);
     margin: 0;
-
     ::-webkit-scrollbar {
         height: 0.3em;
     }
@@ -47,44 +40,36 @@ body {
     ::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
-
     .reset__success {
         width: 100%;
         text-align: center;
         background-color: rgba(5, 131, 79, 0.781);
         padding: 1em;
     }
-
     #root {
         @include column();
         justify-content: space-between;
-
         a {
             text-decoration: underline;
             color: #555;
         }
-
         ul {
             padding-left: 0;
         }
-
         li {
             list-style: none;
         }
-
         h1,
         h2,
         h3 {
             color: #606061;
             margin: 0;
         }
-
         textarea,
         input:not([type="submit"]) {
             @include input_and_button();
             resize: none;
         }
-
         button,
         input[type="submit"] {
             @include input_and_button();
@@ -95,26 +80,21 @@ body {
                 transform: scale(1.02);
             }
         }
-
         label {
             padding: 0.3em 0;
         }
-
         img {
             margin-bottom: 0.3em;
         }
-
         span {
             color: rgb(112, 74, 3);
         }
-
         .messages > li {
             color: rgb(112, 74, 3);
             margin: 0.3em 0;
             font-size: 1.2rem;
             padding: 0;
         }
-
         .header {
             @include flex-between;
             align-items: center;
@@ -126,7 +106,6 @@ body {
                 padding: 0.7em;
                 color: #f1f1f1;
             }
-
             .navbar {
                 @include flex-between;
                 align-items: center;
@@ -139,21 +118,18 @@ body {
                         width: 2.3em;
                     }
                 }
-
                 a {
                     padding: 0.7em;
                     color: #f1f1f1;
                 }
             }
         }
-
         .user_menu {
             background-color: gray;
             position: absolute;
             right: 0em;
             top: 2.9em;
             width: 30%;
-
             ul {
                 margin: 0;
                 padding: 0.4em 0.7em;
@@ -166,7 +142,6 @@ body {
                 a {
                     color: white;
                 }
-
                 &.user_menu__name {
                     @include flex-between();
                     align-items: center;
@@ -179,7 +154,6 @@ body {
                 }
             }
         }
-
         footer {
             @include align;
             justify-content: center;
@@ -192,7 +166,6 @@ body {
             font-size: small;
             width: 100%;
         }
-
         .content {
             padding: 3% 2%;
             .wishlist_container {
@@ -228,7 +201,6 @@ body {
                 @include column();
                 width: 40%;
                 margin: auto;
-
                 form {
                     display: flex;
                     flex-direction: column;
@@ -239,31 +211,25 @@ body {
                         margin: 0.4em;
                     }
                 }
-
                 small {
                     text-align: center;
                 }
             }
-
             .user_settings_container {
                 list-style: none;
                 padding-top: 5em;
                 @include column();
-
                 li {
                     align-self: center;
                     padding: 0.6em;
                 }
-
                 .user_settings--controls {
                     align-self: center;
-
                     button {
                         margin: 1em;
                     }
                 }
             }
-
             .name_change {
                 padding-top: 5em;
                 @include column();
@@ -272,7 +238,6 @@ body {
                 .name_change--current {
                     padding: 2em;
                 }
-
                 form {
                     width: 20%;
                     @include flex-between();
@@ -281,30 +246,24 @@ body {
                     input {
                         margin: 1em;
                     }
-
                     input[type="submit"] {
                         align-self: flex-end;
                     }
                 }
             }
-
             .home__content {
                 @include column();
-
                 .products__content {
                     @include column();
                     width: 80%;
                     margin: auto;
-
                     .product_list--container {
                         @include column();
-
                         ul.product_list {
                             display: flex;
                             overflow: auto;
                             padding: 0;
                             height: min-content;
-
                             li.product {
                                 @include column();
                                 height: fit-content;
@@ -314,20 +273,17 @@ body {
                                 border-radius: 1em;
                                 box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
                                 background-color: #c5c6d6;
-
                                 &.selected {
                                     border: 0.3em solid rgb(0, 128, 128);
                                     box-shadow: 0 3px 6px
                                         rgba(41, 41, 53, 0.808);
                                 }
-
                                 img {
                                     width: 12em;
                                     border-radius: 1em;
                                     box-shadow: 0 3px 6px
                                         rgba(41, 41, 53, 0.808);
                                 }
-
                                 .name__container {
                                     width: 50%;
                                     @include column();
@@ -337,17 +293,13 @@ body {
                     }
                 }
             }
-
             .product_view__container {
                 display: flex;
                 padding: 1em;
-
                 .property__details {
                     padding-left: 3em;
-
                     ul {
                         padding: 0;
-
                         li {
                             background-color: #91a1c2;
                             padding: 0.14em 0.4em;
@@ -358,28 +310,23 @@ body {
                         }
                     }
                 }
-
                 img {
                     width: 40em;
                     border-radius: 1.4em;
                     box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
                 }
-
                 .controls__main {
                     @include column();
-                    justify-content: space-around;
                     align-items: center;
-
                     .wishlist__container {
                         width: 50%;
                         @include column();
                         align-items: center;
                     }
-
                     .image__container--main {
+                        margin-bottom: 1.2em;
                         .controls {
                             @include justify();
-
                             .arrowLeft,
                             .arrowRight {
                                 width: 3em;
@@ -387,22 +334,18 @@ body {
                             }
                         }
                     }
-
                     .controls_wishlist {
                         @include flex-between();
                         width: 100%;
-
                         .wishlist__container {
                             align-self: flex-start;
                             width: fit-content;
                             cursor: pointer;
-
                             .property__added {
                                 fill: rgb(0, 4, 255);
                             }
                         }
                     }
-
                     .enquiry-form__container {
                         @include column();
                         background-color: rgb(166, 186, 204);
@@ -419,13 +362,11 @@ body {
                     }
                 }
             }
-
             .selection_container {
                 display: flex;
                 align-items: flex-start;
                 overflow: auto;
                 margin-bottom: 2em;
-
                 .selected_product {
                     height: fit-content;
                     min-width: 40%;
@@ -436,54 +377,44 @@ body {
                     background-color: #c5cbd6;
                     border-radius: 1em;
                     box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
-
                     .image__container {
                         @include align();
                         justify-content: center;
                         width: 100%;
-
                         .arrowLeft,
                         .arrowRight {
                             width: 3em;
                             cursor: pointer;
                         }
-
                         img {
                             width: 78%;
                             border-radius: 1em;
                             box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
                         }
                     }
-
                     .product_details {
                         font-size: 0.9em;
                         list-style: none;
                         padding-left: 0;
-
                         @include column();
                         justify-content: space-between;
-
                         li {
                             @include flex-between();
                             align-items: center;
                             margin-bottom: 0.5em;
                             padding: 0.2em;
-
                             &.product__company {
                                 width: 100%;
                                 justify-content: flex-start;
                                 align-items: center;
-
                                 img {
                                     width: 2em;
                                     margin-right: 1em;
                                 }
                             }
-
                             &.advantage {
                                 background-color: rgba(0, 128, 0, 0.5);
                             }
-
                             &.disadvantage {
                                 background-color: rgba(255, 0, 0, 0.5);
                             }
@@ -491,12 +422,10 @@ body {
                     }
                 }
             }
-
             .delete_account {
                 padding-top: 5em;
                 width: 60%;
                 margin: 0 auto;
-
                 form {
                     @include column();
 
