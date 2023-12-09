@@ -60,7 +60,11 @@ const ProductView = () => {
         Object.keys(product).map((attribute, index) => {
             if (typeof product[attribute] !== "object") {
                 return (
-                    attribute !== "company_logo" && (
+                    attribute !== "company_logo" &&
+                    attribute !== "id" &&
+                    attribute !== "lat" &&
+                    attribute !== "lon" &&
+                    attribute !== "name_extracted" && (
                         <li key={index}>
                             {attribute}: {product[attribute] || "unknown"}
                         </li>
@@ -73,6 +77,9 @@ const ProductView = () => {
 
     return (
         <>
+            {state.spanMessage && (
+                <span className="span_message">{state.spanMessage}</span>
+            )}
             <button onClick={() => navigate(-1)}>Back</button>
             <div className="product_view__container">
                 {product && (
@@ -110,7 +117,12 @@ const ProductView = () => {
                                     Make Enquiry
                                 </button>
                             </div>
-                            {formOpen && <EnquiryForm id={id} />}
+                            {formOpen && (
+                                <EnquiryForm
+                                    id={id}
+                                    setFormOpen={setFormOpen}
+                                />
+                            )}
                         </div>
                         <div className="property__details">
                             <h3>Property Details</h3>

@@ -33,7 +33,9 @@ const UserReducer = (state, action) => {
         case "addedProducts/set":
             return {
                 ...state,
-                addedProducts: [...state.addedProducts, action.payload],
+                addedProducts: Array.from(
+                    new Set([...state.addedProducts, action.payload])
+                ),
             };
         default:
             return state;

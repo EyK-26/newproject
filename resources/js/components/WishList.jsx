@@ -7,57 +7,56 @@ const WishList = () => {
     const { id } = useParams();
     const { state, dispatch } = useContext(UserContext);
 
-    useEffect(() => {
-        (async () => {
-            dispatch({
-                type: "spanMessage/set",
-                payload: "Loading list...",
+    const fetchProperty = async () => {
+        dispatch({
+            type: "spanMessage/set",
+            payload: "Loading list...",
+        });
+        try {
+            const outerResponse = await axios.get("/api/get-wishlist-all", {
+                params: {
+                    id,
+                },
             });
-            try {
-                const outerResponse = await axios.get("/api/get-wishlist-all", {
-                    params: {
-                        id,
-                    },
-                });
-                if (Math.floor(outerResponse.status / 100) === 2) {
-                    let counter = 0;
-                    outerResponse.data.forEach(async (prod_id) => {
-                        if (
-                            !state.addedProducts.find(
-                                (prod) => prod.id === prod_id
-                            )
-                        ) {
-                            try {
-                                const innerResponse = await axios.get(
-                                    `https://estate-comparison.codeboot.cz/detail.php?id=${prod_id}`
-                                );
-                                dispatch({
-                                    type: "addedProducts/set",
-                                    payload: innerResponse.data,
-                                });
-                                counter++;
-                            } catch (error) {
-                                dispatch({
-                                    type: "addedProducts/set",
-                                    payload:
-                                        "an error produced, please try again",
-                                });
-                            }
+            if (Math.floor(outerResponse.status / 100) === 2) {
+                let counter = 0;
+                outerResponse.data.forEach(async (prod_id) => {
+                    if (
+                        !state.addedProducts.find((prod) => prod.id === prod_id)
+                    ) {
+                        try {
+                            const innerResponse = await axios.get(
+                                `https://estate-comparison.codeboot.cz/detail.php?id=${prod_id}`
+                            );
+                            dispatch({
+                                type: "addedProducts/set",
+                                payload: innerResponse.data,
+                            });
+                            counter++;
                             if (counter === outerResponse.data.length) {
                                 dispatch({
                                     type: "spanMessage/unset",
                                 });
                             }
+                        } catch (error) {
+                            dispatch({
+                                type: "addedProducts/set",
+                                payload: "an error produced, please try again",
+                            });
                         }
-                    });
-                }
-            } catch (error) {
-                dispatch({
-                    type: "addedProducts/set",
-                    payload: "an error produced, please try again",
+                    }
                 });
             }
-        })();
+        } catch (error) {
+            dispatch({
+                type: "addedProducts/set",
+                payload: "an error produced, please try again",
+            });
+        }
+    };
+
+    useEffect(() => {
+        fetchProperty();
     }, []);
 
     return (
