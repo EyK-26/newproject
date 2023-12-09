@@ -43,14 +43,18 @@ const EnquiryForm = ({ id, setFormOpen }) => {
                     ? "You have already sent an enquiry about this property"
                     : "An error occured, please try again.",
             });
+            setFormOpen(false);
         }
     };
 
     useEffect(() => {
         if (state.spanMessage) {
-            document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
         } else {
-            document.documentElement.scrollTo({
+            window.scrollTo({
                 top: document.documentElement.scrollHeight,
                 behavior: "smooth",
             });

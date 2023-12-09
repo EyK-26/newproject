@@ -194,7 +194,7 @@ body {
         }
 
         .content {
-            padding: 4% 2%;
+            padding: 3% 2%;
             .wishlist_container {
                 @include column();
                 align-items: center;
@@ -340,7 +340,7 @@ body {
 
             .product_view__container {
                 display: flex;
-                padding: 2em;
+                padding: 1em;
 
                 .property__details {
                     padding-left: 3em;

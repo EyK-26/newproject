@@ -18,7 +18,12 @@ const WishList = () => {
                     id,
                 },
             });
-            if (Math.floor(outerResponse.status / 100) === 2) {
+            console.log(outerResponse.data);
+
+            if (
+                Math.floor(outerResponse.status / 100) === 2 &&
+                typeof outerResponse.data === "array"
+            ) {
                 let counter = 0;
                 outerResponse.data.forEach(async (prod_id) => {
                     if (
@@ -45,6 +50,14 @@ const WishList = () => {
                             });
                         }
                     }
+                });
+            } else if (
+                typeof outerResponse.data === "object" &&
+                outerResponse.data.message
+            ) {
+                dispatch({
+                    type: "spanMessage/set",
+                    payload: outerResponse.data.message,
                 });
             }
         } catch (error) {
