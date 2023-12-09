@@ -18,8 +18,6 @@ const WishList = () => {
                     id,
                 },
             });
-            console.log(outerResponse.data);
-
             if (
                 Math.floor(outerResponse.status / 100) === 2 &&
                 typeof outerResponse.data === "array"

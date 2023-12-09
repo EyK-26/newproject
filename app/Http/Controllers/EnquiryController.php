@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class EnquiryController extends Controller
 {
+    public function index (Request $request) {
+        
+    }
+    
     public function store(Request $request)
     {
         $enquiry = new Enquiry();
