@@ -34,13 +34,15 @@ class NotificationEnquiry extends Notification
     {
         $this->notify_admin();
         return (new MailMessage)
+            ->greeting("Dear {$notifiable->name}")
             ->line("You have made enquiry about the property, id: {$this->product_id}")
             ->action(
                 'Click to see the property you made enquiry of',
                 url("/prod_view/{$this->product_id}")
             )
             ->line("We will come back to you in 3 working days.")
-            ->line('Thank you for using our application!');
+            ->line('Thank you for using our application!')
+            ->salutation('Regards');
     }
 
     private function notify_admin(): void

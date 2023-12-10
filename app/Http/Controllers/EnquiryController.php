@@ -15,8 +15,7 @@ class EnquiryController extends Controller
     public function store(Request $request): array
     {
         $enquiry = new Enquiry();
-        $enquiry->fill(['user_id' => $request->user_id, 'product_id' => $request->product_id]);
-        $enquiry->message = $request->message;
+        $enquiry->fill($request->all());
         $enquiry->save();
         $this->notify($request->user_id, $request->message, $request->product_id);
         return ['message' => 'message sent'];
@@ -36,7 +35,7 @@ class EnquiryController extends Controller
             $enquiry = Enquiry::query()
                 ->where('user_id', $user_id)
                 ->where('product_id', $product_id)
-                ->first();
+                ->firstOrFail();
             $enquiry_id = $enquiry->id;
             return view('admin.enquiry', compact('enquiry', 'product_id', 'client', 'user', 'enquiry_id'));
         } catch (ModelNotFoundException $e) {

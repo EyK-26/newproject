@@ -11,14 +11,20 @@ class Answer extends Model
 
     protected $fillable = [
         'user_id',
-        'client_id',
         'enquiry_id',
-        'product_id'
+        'client_id',
+        'product_id',
+        'message,'
     ];
 
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function enquiry()
+    {
+        return $this->belongsTo(Enquiry::class);
     }
 }

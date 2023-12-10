@@ -26,11 +26,10 @@ class NotifyAdmin extends Notification
         return ['mail', 'database'];
     }
 
-
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line("Dear {$notifiable->name}")
+            ->greeting("Dear {$notifiable->name}")
             ->line("{$this->user->name} made an enquiry about {$this->product_id}")
             ->action(
                 'Click to see the property',
@@ -40,7 +39,8 @@ class NotifyAdmin extends Notification
                 'Click to see the enquiry',
                 url("/enquiry/{$this->product_id}/{$this->user->id}")
             )
-            ->line('Please contact the user in 3 days');
+            ->line('Please contact the user in 3 days')
+            ->salutation('Regards,');
     }
 
     public function toArray(object $notifiable): array
