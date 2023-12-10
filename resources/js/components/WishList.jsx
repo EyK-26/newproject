@@ -1,66 +1,32 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import UserContext from "../myApp/context/UserContext";
 
 const WishList = () => {
-    const { id } = useParams();
     const { state, dispatch } = useContext(UserContext);
 
     const fetchProperty = async () => {
-        dispatch({
-            type: "spanMessage/set",
-            payload: "Loading list...",
-        });
-        try {
-            const outerResponse = await axios.get("/api/get-wishlist-all", {
-                params: {
-                    id,
-                },
-            });
-            if (
-                Math.floor(outerResponse.status / 100) === 2 &&
-                !outerResponse.data.message
-            ) {
-                let counter = 0;
-                outerResponse.data.forEach(async (prod_id) => {
-                    if (
-                        !state.addedProducts.find((prod) => prod.id === prod_id)
-                    ) {
-                        try {
-                            const innerResponse = await axios.get(
-                                `https://estate-comparison.codeboot.cz/detail.php?id=${prod_id}`
-                            );
-                            dispatch({
-                                type: "addedProducts/set",
-                                payload: innerResponse.data,
-                            });
-                            counter++;
-                            if (counter === outerResponse.data.length) {
-                                dispatch({
-                                    type: "spanMessage/unset",
-                                });
-                            }
-                        } catch (error) {
-                            dispatch({
-                                type: "addedProducts/set",
-                                payload: "an error produced, please try again",
-                            });
-                        }
+        state.user.wishes
+            .map((el) => el.product_id)
+            .forEach(async (prod_id) => {
+                if (!state.addedProducts.find((el) => el.id === prod_id)) {
+                    try {
+                        const innerResponse = await axios.get(
+                            `https://estate-comparison.codeboot.cz/detail.php?id=${prod_id}`
+                        );
+                        dispatch({
+                            type: "addedProducts/set",
+                            payload: innerResponse.data,
+                        });
+                    } catch (error) {
+                        dispatch({
+                            type: "spanMessage/set",
+                            payload: "An error occurred, please try again",
+                        });
                     }
-                });
-            } else if (outerResponse.data.message) {
-                dispatch({
-                    type: "spanMessage/set",
-                    payload: outerResponse.data.message,
-                });
-            }
-        } catch (error) {
-            dispatch({
-                type: "addedProducts/set",
-                payload: "an error produced, please try again",
+                }
             });
-        }
     };
 
     useEffect(() => {
@@ -72,14 +38,17 @@ const WishList = () => {
             {state.spanMessage && (
                 <span className="span_message">{state.spanMessage}</span>
             )}
-            {state.addedProducts.length > 0 &&
+            {state.addedProducts.length > 0 ? (
                 state.addedProducts.map((prod) => (
                     <div className="wishlist_product" key={prod.id}>
                         <li>{prod.name}</li>
                         <img src={prod.images[0]} alt={prod.name} />
                         <Link to={`/prod_view/${prod.id}`}>See Property</Link>
                     </div>
-                ))}
+                ))
+            ) : (
+                <h2>Your Wishlist is empty.</h2>
+            )}
         </ul>
     );
 };

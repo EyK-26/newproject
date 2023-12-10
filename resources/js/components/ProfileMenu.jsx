@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useRef } from "react";
 import UserContext from "../myApp/context/UserContext";
-import WishList from "./WishList";
-import Enquiries from "./Enquiries";
 import { Link } from "react-router-dom";
 
 const ProfileMenu = () => {
@@ -26,7 +24,7 @@ const ProfileMenu = () => {
             <ul className="user_menu__enquiries">
                 <li>
                     <Link to={`enquiries/${state.user?.id}`}>
-                        Your enquiries
+                        Your enquiries and Messages
                     </Link>
                 </li>
             </ul>

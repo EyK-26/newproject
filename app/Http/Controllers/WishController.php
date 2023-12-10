@@ -13,7 +13,6 @@ class WishController extends Controller
             ->where('user_id', $request->user_id)
             ->where('product_id', $request->product_id)
             ->first();
-
         if (!$this->check($request->user_id, $request->product_id)) {
             $added_product->delete();
             return ['message' => 'removed from wishlist'];
@@ -34,24 +33,24 @@ class WishController extends Controller
         return empty($added_product);
     }
 
-    private function flatten(array $products): array
-    {
-        $new_array = array();
-        array_walk_recursive($products, function ($array) use (&$new_array) {
-            $new_array[] = $array;
-        });
-        return $new_array;
-    }
+    // private function flatten(array $products): array
+    // {
+    //     $new_array = array();
+    //     array_walk_recursive($products, function ($array) use (&$new_array) {
+    //         $new_array[] = $array;
+    //     });
+    //     return $new_array;
+    // }
 
-    public function show(Request $request): array
-    {
-        $wishlist_products = Wish::where('user_id', $request->id)->select('product_id')->get()->toArray();
-        if ($wishlist_products) {
-            return $this->flatten($wishlist_products);
-        } else {
-            return ['message' => 'Your wishlist is empty.'];
-        }
-    }
+    // public function show(Request $request): array
+    // {
+    //     $wishlist_products = Wish::where('user_id', $request->id)->select('product_id')->get()->toArray();
+    //     if ($wishlist_products) {
+    //         return $this->flatten($wishlist_products);
+    //     } else {
+    //         return ['message' => 'Your wishlist is empty.'];
+    //     }
+    // }
 
     public function is_added(Request $request): bool
     {

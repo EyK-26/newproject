@@ -6,12 +6,19 @@ use App\Models\Enquiry;
 use App\Models\User;
 use App\Notifications\NotificationEnquiry;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class EnquiryController extends Controller
 {
+    public function index(Request $request): Collection
+    {
+        $enquiry = Enquiry::with(['user', 'answers'])->where('user_id', $request->input('id'))->get();
+        if ($enquiry) return $enquiry;
+    }
+
     public function store(Request $request): array
     {
         $enquiry = new Enquiry();
@@ -21,10 +28,14 @@ class EnquiryController extends Controller
         return ['message' => 'message sent'];
     }
 
-    private function notify(int $user_id, string $message, int $product_id): void
+    private function notify(int $user_id, string $message, int $product_id)
     {
-        $user = User::find($user_id);
-        $user->notify(new NotificationEnquiry($user, $message, $product_id));
+        try {
+            $user = User::findOrFail($user_id);
+            $user->notify(new NotificationEnquiry($user, $message, $product_id));
+        } catch (ModelNotFoundException $e) {
+            return ['message' => 'User not found'];
+        }
     }
 
     public function show(string $product_id, string $user_id): View
