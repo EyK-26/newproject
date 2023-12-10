@@ -6,7 +6,7 @@ import { FaHeart } from "react-icons/fa";
 import UserContext from "../myApp/context/UserContext";
 import EnquiryForm from "./EnquiryForm";
 
-const ProductView = () => {
+const ProductView = ({ fetchUserStatus }) => {
     const { id } = useParams();
     const { state } = useContext(UserContext);
     const [product, setProduct] = useState(null);
@@ -22,6 +22,7 @@ const ProductView = () => {
             });
             if (Math.floor(response.status / 100) === 2) {
                 setAdded((prev) => !prev);
+                fetchUserStatus();
             }
         } catch (error) {
             console.log(err);

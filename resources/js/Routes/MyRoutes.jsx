@@ -85,7 +85,11 @@ const MyRoutes = () => {
                         <Route path="/logout" element={<Logout />} />
                         <Route
                             path="/prod_view/:id"
-                            element={<ProductView />}
+                            element={
+                                <ProductView
+                                    fetchUserStatus={fetchUserStatus}
+                                />
+                            }
                         />
                         <Route path="/user/:id" element={<UserSettings />} />
                         <Route
