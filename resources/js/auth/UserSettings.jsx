@@ -35,10 +35,14 @@ const UserSettings = () => {
     useEffect(() => {
         fetchUser();
     }, []);
-    
+
     return (
         <ul className="user_settings_container">
-            {userDetails && convertObject(userDetails)}
+            {userDetails && (
+                <div className="user_settings__details">
+                    {convertObject(userDetails)}
+                </div>
+            )}
             <div className="user_settings--controls">
                 <button
                     onClick={() => {

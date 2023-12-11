@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
@@ -19,16 +21,20 @@ class PasswordResetController extends Controller
             : view('reset', compact('email', 'token'));
     }
 
+    private function hash_check(User $user, string $psw, string $psw_conf): bool
+    {
+        return $psw === $psw_conf && Hash::check($psw, $user->password) ? true : false;
+    }
+
     public function update(Request $request): RedirectResponse
     {
+        $this->validatePassword($request);
         $user = User::where('email', $request->input('email'))->first();
         if (
-            Hash::check($request->input('password'), $user->password)
-            && Hash::check($request->input('password_confirmation'), $user->password)
+            $this->hash_check($user, $request->input('password'), $request->input('password_confirmation'))
         ) {
             return redirect()->back()->with('message', 'The new password is the same as the current password.');
         }
-        $this->validatePassword($request);
         $user->password = Hash::make($request->input('password'));
         $user->save();
         return redirect('/login')->with('message', 'Password updated!');
@@ -36,17 +42,24 @@ class PasswordResetController extends Controller
 
     public function manual_update(Request $request): array
     {
-        $user = User::findOrFail($request->input('id'));
-        if (
-            Hash::check($request->input('password'), $user->password)
-            && Hash::check($request->input('password_confirmation'), $user->password)
-        ) {
-            return ['message' => 'Please insert a different password than your current password.'];
-        }
         $this->validatePassword($request);
-        $user->password = Hash::make($request->input('password'));
-        $user->save();
-        return ['message' => 'Your password has been updated.'];
+        try {
+            $user = User::findOrFail($request->input('id'));
+            if (Auth::user()->id === $user->id) {
+                if (
+                    $this->hash_check($user, $request->input('password'), $request->input('password_confirmation'))
+                ) {
+                    return ['message' => 'Please insert a different password than your current password.'];
+                }
+                $user->password = Hash::make($request->input('password'));
+                $user->update();
+                return ['message' => 'Your password has been updated.'];
+            } else {
+                return ['message' => 'Not authorized'];
+            }
+        } catch (ModelNotFoundException $e) {
+            return ['message' => 'User not found'];
+        }
     }
 
     private function validatePassword(Request $request): void

@@ -24,10 +24,13 @@
 }
 html {
     box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 body {
     background-color: rgba(219, 231, 240, 0.76);
     margin: 0;
+    line-height: 1.2rem;
+    font-size: 1.06rem;
     ::-webkit-scrollbar {
         height: 0.3em;
     }
@@ -67,6 +70,7 @@ body {
         h3 {
             color: #606061;
             margin: 0;
+            line-height: 2.2rem;
         }
         textarea,
         input:not([type="submit"]) {
@@ -200,7 +204,8 @@ body {
                                 box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
                                 display: inline-block;
                                 word-break: break-all;
-                                background-color: #6c6a70;
+                                background-color: #676669;
+                                color: whitesmoke;
                                 border-radius: 0.2em;
                                 padding: 0.5em;
                                 margin: 0.5em;
@@ -234,7 +239,7 @@ body {
                 color: rgba(57, 180, 9, 0.932);
                 text-shadow: 0 1px 2px rgba(41, 41, 53, 0.425);
                 position: absolute;
-                top: 2.2em;
+                top: 2.7em;
                 width: 100%;
                 text-align: center;
                 font-size: 1.35rem;
@@ -265,12 +270,15 @@ body {
                 list-style: none;
                 padding-top: 5em;
                 @include column();
-                li {
-                    align-self: center;
-                    padding: 0.6em;
+                align-items: center;
+                .user_settings__details {
+                    @include input_and_button();
+                    width: 25%;
+                    li {
+                        padding: 0.6em;
+                    }
                 }
                 .user_settings--controls {
-                    align-self: center;
                     button {
                         margin: 1em;
                     }

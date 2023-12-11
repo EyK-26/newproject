@@ -3,7 +3,7 @@ import UserContext from "../../myApp/context/UserContext";
 import axios from "axios";
 import Messages from "../../components/Messages";
 
-const ManualReset = () => {
+const ManualReset = ({ fetchUserStatus }) => {
     const { state, dispatch } = useContext(UserContext);
     const [values, setValues] = useState({
         id: state.user.id,
@@ -28,6 +28,9 @@ const ManualReset = () => {
                     password: "",
                     password_confirmation: "",
                 }));
+                if (response.data.message.includes("updated")) {
+                    fetchUserStatus();
+                }
             }
         } catch (error) {
             const { password, password_confirmation } =

@@ -18,7 +18,6 @@ import Enquiries from "../components/Enquiries";
 
 const MyRoutes = () => {
     const { state, dispatch } = useContext(Context);
-    const navigate = useNavigate();
 
     const fetchUserStatus = async () => {
         try {
@@ -94,7 +93,11 @@ const MyRoutes = () => {
                         <Route path="/user/:id" element={<UserSettings />} />
                         <Route
                             path="/reset-password"
-                            element={<PasswordReset />}
+                            element={
+                                <PasswordReset
+                                    fetchUserStatus={fetchUserStatus}
+                                />
+                            }
                         />
                         <Route
                             path="/account-delete"
