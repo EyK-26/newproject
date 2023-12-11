@@ -12,12 +12,12 @@ const WishList = () => {
             .forEach(async (prod_id) => {
                 if (!state.addedProducts.find((el) => el.id === prod_id)) {
                     try {
-                        const innerResponse = await axios.get(
+                        const response = await axios.get(
                             `https://estate-comparison.codeboot.cz/detail.php?id=${prod_id}`
                         );
                         dispatch({
                             type: "addedProducts/set",
-                            payload: innerResponse.data,
+                            payload: response.data,
                         });
                     } catch (error) {
                         dispatch({
