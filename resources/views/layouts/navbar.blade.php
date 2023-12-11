@@ -1,3 +1,3 @@
 <nav class="navbar">
-    NavBar
+    <a href="/">Home</a>
 </nav>

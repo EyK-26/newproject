@@ -5,7 +5,7 @@
 
 @if($user->can('admin') && isset($enquiry))
 <h1>See Enquiry Details</h1>
-<textarea cols="40" rows="20" resize="none" disabled id="enquiry">{{ $enquiry->message }}</textarea>
+<textarea resize="none" disabled id="enquiry">{{ $enquiry->message }}</textarea>
 
 @isset($client)
 @isset($product_id)
@@ -32,7 +32,7 @@
 @endisset
 
 @isset($enquiry_id)
-<a href={{ route('enquiry.answer', compact('enquiry_id'))}}>Contact User</a>
+<a class="contact_user" href={{ route('enquiry.answer', compact('enquiry_id'))}}>Contact User</a>
 @endisset
 
 @else

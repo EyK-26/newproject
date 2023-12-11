@@ -8,7 +8,7 @@
 <form action="{{ route('answers.store') }}" method="post">
     @csrf
     <input type="hidden" name="enquiry_id" value={{ $enquiry->id }}>
-    <textarea name="message" id="text" cols="80" rows="20" placeholder="enter your answer here"></textarea>
+    <textarea name="message" id="text" placeholder="enter your answer here"></textarea>
     <button type="submit">Send</button>
 </form>
 
@@ -34,13 +34,13 @@
 
 <ul class="success">
     @if(session('message'))
-    <li>{{ session('message') }}</li>
+    <li class="li_message">{{ session('message') }}</li>
     @endif
 </ul>
 <ul class="errors">
     @if (count($errors) > 0)
     @foreach ($errors->all() as $error)
-    <li>{{ $error }}</li>
+    <li class="li_message">{{ $error }}</li>
     @endforeach
     @endif
 </ul>
