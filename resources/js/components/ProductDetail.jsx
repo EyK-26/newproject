@@ -56,11 +56,17 @@ export const ProductDetail = ({ prod }) => {
                             </div>
                         </li>
                         <li className="product__company">
-                            <img
-                                src={prod?.company_logo}
-                                alt={prod?.company_name}
-                            />
-                            <div>{prod?.company_name}</div>
+                            {prod.company_logo && prod.company_name ? (
+                                <>
+                                    <img
+                                        src={prod.company_logo}
+                                        alt={prod.company_name}
+                                    />
+                                    <div>{prod.company_name}</div>
+                                </>
+                            ) : (
+                                <div>No agency info</div>
+                            )}
                         </li>
                     </ul>
                     <Link to={`prod_view/${prod.id}`}>View Property</Link>
