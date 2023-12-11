@@ -42,8 +42,8 @@ class PasswordResetController extends Controller
 
     public function manual_update(Request $request): array
     {
-        $this->validatePassword($request);
         try {
+            $this->validatePassword($request);
             $user = User::findOrFail($request->input('id'));
             if (Auth::user()->id === $user->id) {
                 if (
