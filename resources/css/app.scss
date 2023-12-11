@@ -189,7 +189,8 @@ body {
                             padding: 1em;
                         }
                         .message_answers {
-                            width: 40%;
+                            @include column();
+                            width: fit-content;
                             border-radius: 1em;
                             box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
                             background-color: #888;
@@ -197,11 +198,12 @@ body {
                             margin: 0.5em;
                             .answer {
                                 box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
-                                overflow: auto;
+                                display: inline-block;
+                                word-break: break-all;
                                 background-color: #6c6a70;
                                 border-radius: 0.2em;
                                 padding: 0.5em;
-                                margin: 1.5em;
+                                margin: 0.5em;
                             }
                         }
                     }
@@ -218,9 +220,12 @@ body {
                     box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
                     border-radius: 0.5em;
                     li,
-                    a,
+                    a {
+                        padding: 0.4em;
+                    }
                     img {
                         padding: 0.4em;
+                        border-radius: 0.8em;
                     }
                 }
             }
