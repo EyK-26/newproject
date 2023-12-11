@@ -40,7 +40,7 @@ class PasswordResetController extends Controller
         return redirect('/login')->with('message_success', 'Password updated!');
     }
 
-    public function manual_update(Request $request): array
+    public function manual_update(Request $request): RedirectResponse|array
     {
         try {
             $this->validatePassword($request);
@@ -53,7 +53,8 @@ class PasswordResetController extends Controller
                 }
                 $user->password = Hash::make($request->input('password'));
                 $user->save();
-                return ['message' => 'Your password has been updated.'];
+                Auth::login($user); 
+                return ['message' => 'Password hass been updated.'];
             } else {
                 return ['message' => 'Not authorized'];
             }

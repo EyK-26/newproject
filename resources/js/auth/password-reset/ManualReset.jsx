@@ -28,9 +28,6 @@ const ManualReset = ({ fetchUserStatus }) => {
                     password: "",
                     password_confirmation: "",
                 }));
-                if (response.data.message.includes("updated")) {
-                    fetchUserStatus();
-                }
             }
         } catch (error) {
             const { password, password_confirmation } =

@@ -147,8 +147,7 @@ body {
                     align-items: center;
                     li > a {
                         color: #525252;
-                        font-size: large;
-                        font-weight: 700;
+                        font-weight: 500;
                     }
                     .user_menu__name--first {
                         @include column();
@@ -160,8 +159,7 @@ body {
             .user_menu__wishlist > li > a,
             .user_menu__enquiries > li > a {
                 color: #525252;
-                font-size: large;
-                font-weight: 600;
+                font-weight: 500;
             }
         }
         footer {
