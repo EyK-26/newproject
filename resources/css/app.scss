@@ -101,10 +101,9 @@ body {
         .header {
             @include flex-between;
             align-items: center;
-            background-color: gray;
+            background-color: rgb(139, 139, 139);
             position: sticky;
             top: 0;
-
             a {
                 padding: 0.7em;
                 color: #f1f1f1;
@@ -112,11 +111,10 @@ body {
             .navbar {
                 @include flex-between;
                 align-items: center;
-
                 .menu_container {
+                    background-color: rgb(184, 182, 182);
                     .profile__logo {
-                        margin-left: 1.5em;
-                        padding: 0.3em 0.5em 0;
+                        padding: 0.3em 1.5em 0 1.5em;
                         height: 2.3em;
                         width: 2.3em;
                     }
@@ -128,18 +126,17 @@ body {
             }
         }
         .user_menu {
-            background-color: gray;
+            background-color: rgb(139, 139, 139);
             position: absolute;
             right: 0em;
-            top: 2.9em;
+            top: 2.8em;
             width: 30%;
             ul {
                 margin: 0;
                 padding: 0.4em 0.7em;
-                background-color: rgb(184, 182, 182);
-
+                background-color: rgb(139, 139, 139);
                 &:nth-child(even) {
-                    background-color: rgb(100, 101, 102);
+                    background-color: rgb(94, 93, 93);
                 }
 
                 a {
