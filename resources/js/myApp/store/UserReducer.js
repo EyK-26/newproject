@@ -37,6 +37,13 @@ const UserReducer = (state, action) => {
                     new Set([...state.addedProducts, action.payload])
                 ),
             };
+        case "addedProducts/unset":
+            return {
+                ...state,
+                addedProducts: [...state.addedProducts].filter(
+                    (el) => el.id !== Number(action.payload)
+                ),
+            };
         default:
             return state;
     }

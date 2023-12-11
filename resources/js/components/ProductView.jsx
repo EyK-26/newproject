@@ -8,7 +8,7 @@ import EnquiryForm from "./EnquiryForm";
 
 const ProductView = ({ fetchUserStatus }) => {
     const { id } = useParams();
-    const { state } = useContext(UserContext);
+    const { state, dispatch } = useContext(UserContext);
     const [product, setProduct] = useState(null);
     const [added, setAdded] = useState(false);
     const [formOpen, setFormOpen] = useState(false);
@@ -22,6 +22,12 @@ const ProductView = ({ fetchUserStatus }) => {
             });
             if (Math.floor(response.status / 100) === 2) {
                 setAdded((prev) => !prev);
+                if (response.data.message.includes("removed")) {
+                    dispatch({
+                        type: "addedProducts/unset",
+                        payload: id,
+                    });
+                }
                 fetchUserStatus();
             }
         } catch (error) {

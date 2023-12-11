@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import UserContext from "../myApp/context/UserContext";
-import { Link, useNavigate } from "react-router-dom";
 
 const Messages = () => {
     const { state } = useContext(UserContext);
@@ -12,7 +11,6 @@ const Messages = () => {
                     {state.messages.map((el, idx) => (
                         <li key={idx}>{el}</li>
                     ))}
-                    <Link to="/">back to homepage</Link>
                 </ul>
             )}
         </>
