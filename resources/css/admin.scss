@@ -26,6 +26,9 @@ body {
 
     a {
         text-decoration: none;
+        &:hover {
+            transform: scale(1.2);
+        }
         &.contact_user {
             @include input_and_button;
         }
