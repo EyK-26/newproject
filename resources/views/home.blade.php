@@ -15,8 +15,8 @@
 </head>
 
 <body>
-    @if(session('message'))
-    <div class="reset__success">{{ session('message') }}</div>
+    @if(session('message_success'))
+    <div class="reset_success">{{ session('message_success') }}</div>
     @endif
     <div id="root"></div>
     @vite('resources/js/main.jsx')

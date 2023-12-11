@@ -17,9 +17,12 @@
 @else
 <h1>404, not authorized</h1>
 @endguest
-<ul class="success">
-    @if(session('message'))
-    <li class="li_message">{{ session('message') }}</li>
+<ul class="messages">
+    @if(session('message_success'))
+    <li class="li_message--success">{{ session('message_success') }}</li>
+    @endif
+    @if(session('message_error'))
+    <li class="li_message--error">{{ session('message_error') }}</li>
     @endif
 </ul>
 <ul class="errors">

@@ -33,11 +33,11 @@ class PasswordResetController extends Controller
         if (
             $this->hash_check($user, $request->input('password'), $request->input('password_confirmation'))
         ) {
-            return redirect()->back()->with('message', 'The new password is the same as the current password.');
+            return redirect()->back()->with('message_error', 'The new password is the same as the current password.');
         }
         $user->password = Hash::make($request->input('password'));
         $user->save();
-        return redirect('/login')->with('message', 'Password updated!');
+        return redirect('/login')->with('message_success', 'Password updated!');
     }
 
     public function manual_update(Request $request): array
@@ -52,7 +52,7 @@ class PasswordResetController extends Controller
                     return ['message' => 'Please insert a different password than your current password.'];
                 }
                 $user->password = Hash::make($request->input('password'));
-                $user->update();
+                $user->save();
                 return ['message' => 'Your password has been updated.'];
             } else {
                 return ['message' => 'Not authorized'];

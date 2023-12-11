@@ -34,9 +34,9 @@ const Login = ({ fetchUserStatus }) => {
     };
 
     useEffect(() => {
-        if (document.querySelector(".reset__success")) {
+        if (document.querySelector(".reset_success")) {
             setTimeout(() => {
-                document.querySelector(".reset__success").style.display =
+                document.querySelector(".reset_success").style.display =
                     "none";
             }, 5000);
         }

@@ -102,10 +102,18 @@ body {
 
     .errors > li {
         background-color: rgba(177, 14, 14, 0.664);
+        margin-bottom: 0.5em;
     }
 
-    .success > li {
-        background-color: rgba(14, 139, 14, 0.699);
+    .messages {
+        .li_message--success {
+            background-color: rgba(14, 139, 14, 0.699);
+            margin-bottom: 0.5em;
+        }
+        .li_message--error {
+            background-color: rgba(177, 14, 14, 0.664);
+            margin-bottom: 0.5em;
+        }
     }
 
     .navbar {
