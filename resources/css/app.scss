@@ -138,24 +138,30 @@ body {
             ul {
                 margin: 0;
                 padding: 0.4em 0.7em;
-                background-color: rgb(139, 139, 139);
+                background-color: rgb(184, 182, 182);
                 &:nth-child(even) {
-                    background-color: rgb(94, 93, 93);
-                }
-
-                a {
-                    color: white;
+                    background-color: rgb(139, 139, 139);
                 }
                 &.user_menu__name {
                     @include flex-between();
                     align-items: center;
-
+                    li > a {
+                        color: #525252;
+                        font-size: large;
+                        font-weight: 700;
+                    }
                     .user_menu__name--first {
                         @include column();
                         width: fit-content;
                         font-size: smaller;
                     }
                 }
+            }
+            .user_menu__wishlist > li > a,
+            .user_menu__enquiries > li > a {
+                color: #525252;
+                font-size: large;
+                font-weight: 600;
             }
         }
         footer {
