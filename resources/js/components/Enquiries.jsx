@@ -5,13 +5,15 @@ import UserContext from "../myApp/context/UserContext";
 const Enquiries = () => {
     const { state } = useContext(UserContext);
 
-    const renderedEnquiries = state.user.enquiries.map((e) => (
-        <div className="message_container">
+    const renderedEnquiries = state.user.enquiries.map((e, i) => (
+        <div className="message_container" key={i}>
             <li className="message">{e.message}</li>
             <ul className="message_answers">
                 {e.answers.length > 0 ? (
                     e.answers.map((a) => (
-                        <li className="answer">{a.message}</li>
+                        <li className="answer" key={a.id}>
+                            {a.message}
+                        </li>
                     ))
                 ) : (
                     <li>"No answers yet"</li>
