@@ -300,6 +300,7 @@ body {
                 }
             }
             .home__content {
+                padding-top: 3em;
                 @include column();
                 .products__content {
                     @include column();

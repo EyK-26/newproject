@@ -46,14 +46,14 @@ const MyRoutes = () => {
                 dispatch({
                     type: "messages/unset",
                 });
-            }, 6000);
+            }, 5000);
         }
         if (state.spanMessage) {
             setTimeout(() => {
                 dispatch({
                     type: "spanMessage/unset",
                 });
-            }, 6000);
+            }, 5000);
         }
     }, [state.user, state.messages, state.spanMessage]);
 
