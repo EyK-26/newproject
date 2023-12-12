@@ -178,11 +178,19 @@ body {
             padding: 3% 2%;
             .products_all {
                 @include column();
-                .search_bar {
+                .filters {
                     align-self: center;
-                    display: flex;
+                    @include justify();
+                    align-items: center;
                     label {
                         margin-right: 0.5em;
+                    }
+                    input {
+                        margin-right: 1em;
+                    }
+                    .price_range__container,
+                    .search_bar {
+                        @include align();
                     }
                 }
                 .products_all__container {

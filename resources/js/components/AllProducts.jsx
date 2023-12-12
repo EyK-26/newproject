@@ -1,56 +1,56 @@
 import React, { useContext, useState } from "react";
 import PropertyContext from "../myApp/context/PropertyContext";
 import SearchBar from "./SearchBar";
-import { useNavigate } from "react-router-dom";
+import PriceRange from "./PriceRange";
+import RenderProduct from "./RenderProduct";
 
 const AllProducts = () => {
-    const { state } = useContext(PropertyContext);
+    const { state, dispatch } = useContext(PropertyContext);
     const [iscleared, setIsCleared] = useState(true);
-    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        if (e.target.name === "search_locality") {
+            if (e.target.value !== "") {
+                setIsCleared(false);
+                dispatch({
+                    type: "search/set",
+                    payload: e.target.value,
+                });
+            } else {
+                setIsCleared(true);
+            }
+        } else if (e.target.name === "price_range") {
+            console.log(e.target.value);
+        }
+    };
 
     const renderedProducts =
-        state.products.length > 0
-            ? state.products.map((prod) => (
-                  <li
-                      key={prod.id}
-                      className="product"
-                      onClick={() => navigate(`/prod_view/${prod.id}`)}
-                  >
-                      <img src={prod.images[0]} alt={prod.name_extracted} />
-                      <div className="name__container">
-                          <div className="name_container--spans">
-                              <span>{prod.name_extracted}</span>
-                              <span>{prod.locality}</span>
-                          </div>
-                          <div className="price">{prod.prize_czk} CZK</div>
-                      </div>
-                  </li>
-              ))
-            : "No Property available at the moment";
+        state.products.length > 0 ? (
+            state.products.map((prod) => (
+                <RenderProduct key={prod.id} prod={prod} />
+            ))
+        ) : (
+            <span>No Property available at the moment</span>
+        );
 
     const renderedSearchedProducts =
-        state.searchedProducts.length > 0
-            ? state.searchedProducts.map((prod) => (
-                  <li
-                      key={prod.id}
-                      className="product"
-                      onClick={() => navigate(`/prod_view/${prod.id}`)}
-                  >
-                      <img src={prod.images[0]} alt={prod.name_extracted} />
-                      <div className="name__container">
-                          <div className="name_container--spans">
-                              <span>{prod.name_extracted}</span>
-                              <span>{prod.locality}</span>
-                          </div>
-                          <div className="price">{prod.prize_czk} CZK</div>
-                      </div>
-                  </li>
-              ))
-            : "No Property found";
+        state.searchedProducts.length > 0 ? (
+            state.searchedProducts.map((prod) => (
+                <RenderProduct key={prod.id} prod={prod} />
+            ))
+        ) : (
+            <span>No Property available at the moment</span>
+        );
 
     return (
         <div className="products_all">
-            <SearchBar setIsCleared={setIsCleared} />
+            <div className="filters">
+                <SearchBar
+                    setIsCleared={setIsCleared}
+                    handleChange={handleChange}
+                />
+                <PriceRange handleChange={handleChange} />
+            </div>
             <ul className="products_all__container">
                 {iscleared ? renderedProducts : renderedSearchedProducts}
             </ul>
