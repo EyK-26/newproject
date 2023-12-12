@@ -32,6 +32,16 @@ const PropertyReducer = (state, action) => {
                 ...state,
                 selectedProducts: [...state.selectedProducts, action.payload],
             };
+        case "search/set":
+            return {
+                ...state,
+                searchedProducts: [...state.products].filter((prod) =>
+                    prod.locality
+                        .trim()
+                        .toLowerCase()
+                        .includes(action.payload.trim().toLowerCase())
+                ),
+            };
         default:
             return state;
     }

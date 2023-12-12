@@ -14,6 +14,7 @@ const Layout = () => {
             selectedIds: [],
             selectedProducts: [],
             error: "",
+            searchedProducts: [],
             lowestPrice: function () {
                 return this.selectedProducts.length > 0
                     ? Math.min(

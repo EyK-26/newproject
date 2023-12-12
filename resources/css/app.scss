@@ -178,9 +178,12 @@ body {
             padding: 3% 2%;
             .products_all {
                 @include column();
-                margin: 0 auto;
                 .search_bar {
                     align-self: center;
+                    display: flex;
+                    label {
+                        margin-right: 0.5em;
+                    }
                 }
                 .products_all__container {
                     display: flex;
