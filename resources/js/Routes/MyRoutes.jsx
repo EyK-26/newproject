@@ -4,7 +4,6 @@ import Layout from "../layout/Layout";
 import Register from "../auth/Register";
 import Logout from "../auth/Logout";
 import Login from "../auth/Login";
-import Context from "../myApp/context/UserContext";
 import axios from "axios";
 import Unauthorized from "../auth/Unauthorized";
 import Home from "../components/Home";
@@ -15,9 +14,11 @@ import DeleteAccount from "../auth/DeleteAccount";
 import ChangeUserName from "../auth/ChangeUserName";
 import WishList from "../components/WishList";
 import Enquiries from "../components/Enquiries";
+import AllProducts from "../components/AllProducts";
+import UserContext from "../myApp/context/UserContext";
 
 const MyRoutes = () => {
-    const { state, dispatch } = useContext(Context);
+    const { state, dispatch } = useContext(UserContext);
 
     const fetchUserStatus = async () => {
         try {
@@ -60,6 +61,7 @@ const MyRoutes = () => {
         <Routes>
             <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
+                <Route path="/properties" element={<AllProducts />} />
                 {!state.user ? (
                     <>
                         <Route
