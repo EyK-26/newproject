@@ -479,9 +479,11 @@ body {
                             }
                             &.advantage {
                                 background-color: rgba(0, 128, 0, 0.5);
+                                border-radius: 0.4em;
                             }
                             &.disadvantage {
                                 background-color: rgba(255, 0, 0, 0.5);
+                                border-radius: 0.4em;
                             }
                         }
                     }
@@ -493,12 +495,10 @@ body {
                 margin: 0 auto;
                 form {
                     @include column();
-
                     .confirmation {
                         padding-top: 1em;
                         @include flex-between();
                         align-items: center;
-
                         .confirmation_action {
                             @include align();
                         }
