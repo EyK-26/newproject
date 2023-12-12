@@ -184,6 +184,7 @@ body {
                 }
                 .products_all__container {
                     display: flex;
+                    justify-content: space-evenly;
                     flex-wrap: wrap;
                     .product {
                         @include column();
