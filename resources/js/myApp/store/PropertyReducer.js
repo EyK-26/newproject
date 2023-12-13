@@ -32,16 +32,47 @@ const PropertyReducer = (state, action) => {
                 ...state,
                 selectedProducts: [...state.selectedProducts, action.payload],
             };
-        case "search/set":
-            return {
-                ...state,
-                searchedProducts: [...state.products].filter((prod) =>
-                    prod.locality
-                        .trim()
-                        .toLowerCase()
-                        .includes(action.payload.trim().toLowerCase())
-                ),
-            };
+        case "location/set":
+            if ([...state.searchedProducts].length > 0) {
+                return {
+                    ...state,
+                    searchedProducts: [...state.searchedProducts].filter(
+                        (prod) =>
+                            prod.locality
+                                .trim()
+                                .toLowerCase()
+                                .includes(action.payload.trim().toLowerCase())
+                    ),
+                };
+            } else {
+                return {
+                    ...state,
+                    searchedProducts: [...state.products].filter((prod) =>
+                        prod.locality
+                            .trim()
+                            .toLowerCase()
+                            .includes(action.payload.trim().toLowerCase())
+                    ),
+                };
+            }
+        case "price/set":
+            if ([...state.searchedProducts].length > 0) {
+                return {
+                    ...state,
+                    searchedProducts: [...state.searchedProducts].filter(
+                        (prod) =>
+                            Number(prod.price_czk <= Number(action.payload))
+                    ),
+                };
+            } else {
+                return {
+                    ...state,
+                    searchedProducts: [...state.products].filter((prod) =>
+                        Number(prod.price_czk <= Number(action.payload))
+                    ),
+                };
+            }
+
         default:
             return state;
     }

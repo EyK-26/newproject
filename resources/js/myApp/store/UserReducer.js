@@ -41,7 +41,7 @@ const UserReducer = (state, action) => {
             return {
                 ...state,
                 addedProducts: [...state.addedProducts].filter(
-                    (el) => el.id !== Number(action.payload)
+                    (el) => Number(el.id) !== Number(action.payload)
                 ),
             };
         default:
