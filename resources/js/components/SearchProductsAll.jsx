@@ -49,14 +49,17 @@ const SearchProductsAll = () => {
         }
     };
 
-    const renderedSearchedProducts =
+    const renderedSearchedProducts = !state.searchedProductsLoading ? (
         state.searchedProducts.length > 0 ? (
             state.searchedProducts.map((prod) => (
                 <RenderProduct key={prod.id} prod={prod} />
             ))
         ) : (
             <span>No Property available at the moment</span>
-        );
+        )
+    ) : (
+        <span>Loading Properties...</span>
+    );
 
     return (
         <div className="products_all">

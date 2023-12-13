@@ -36,6 +36,7 @@ const PropertyReducer = (state, action) => {
             return {
                 ...state,
                 searchedProducts: action.payload,
+                searchedProductsLoading: false,
             };
         case "location/set":
             return {
