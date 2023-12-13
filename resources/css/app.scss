@@ -179,16 +179,26 @@ body {
             .products_all {
                 @include column();
                 .filters {
-                    align-self: center;
                     @include justify();
                     align-items: center;
                     label {
                         margin-right: 0.5em;
                     }
                     input {
-                        margin-right: 1em;
+                        margin-right: 1.5em;
                     }
-                    .price_range__container,
+                    .price_range__container {
+                        @include justify();
+                        width: 30%;
+                        input[type="range"] {
+                            background: none;
+                            border: none;
+                            box-shadow: none;
+                            margin: 0;
+                            padding: 0;
+                            width: 100%;
+                        }
+                    }
                     .search_bar {
                         @include align();
                     }
@@ -206,11 +216,11 @@ body {
                         box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
                         cursor: pointer;
                         &:hover {
-                            transform: scale(1.02);
+                            transform: scale(1.03);
                         }
                         img {
                             align-self: center;
-                            width: 27em;
+                            width: 24em;
                             border-radius: 0.3em;
                             box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
                         }

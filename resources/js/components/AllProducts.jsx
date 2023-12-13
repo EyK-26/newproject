@@ -6,6 +6,8 @@ import RenderProduct from "./RenderProduct";
 
 const AllProducts = () => {
     const { state, dispatch } = useContext(PropertyContext);
+    const defaultPrice = 7000000;
+    const [price, setPrice] = useState(defaultPrice);
     const [iscleared, setIsCleared] = useState(true);
 
     const handleChange = (e) => {
@@ -20,7 +22,7 @@ const AllProducts = () => {
                 setIsCleared(true);
             }
         } else if (e.target.name === "price_range") {
-            console.log(e.target.value);
+            setPrice(e.target.value);
         }
     };
 
@@ -49,7 +51,11 @@ const AllProducts = () => {
                     setIsCleared={setIsCleared}
                     handleChange={handleChange}
                 />
-                <PriceRange handleChange={handleChange} />
+                <PriceRange
+                    handleChange={handleChange}
+                    price={price}
+                    defaultPrice={defaultPrice}
+                />
             </div>
             <ul className="products_all__container">
                 {iscleared ? renderedProducts : renderedSearchedProducts}
