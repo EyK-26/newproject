@@ -7,7 +7,7 @@ import axios from "axios";
 
 const SearchProductsAll = () => {
     const { state, dispatch } = useContext(PropertyContext);
-    const defaultPrice = 7000000;
+    const defaultPrice = 5000000;
     const [price, setPrice] = useState(defaultPrice);
     const [searchTerm, setSearchTerm] = useState("");
 
