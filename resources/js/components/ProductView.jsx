@@ -109,7 +109,6 @@ const ProductView = ({ fetchUserStatus }) => {
                                                 : undefined
                                         }
                                     />
-
                                     <span>
                                         {!added
                                             ? "Add to Wishlist"
