@@ -1,6 +1,6 @@
 import React from "react";
 
-const SearchBar = ({ handleChange }) => {
+const SearchBar = ({ handleChange, searchTerm }) => {
     return (
         <div className="search_bar">
             <label htmlFor="search">Search for a locality</label>
@@ -8,6 +8,7 @@ const SearchBar = ({ handleChange }) => {
                 type="text"
                 name="search_locality"
                 id="search"
+                value={searchTerm}
                 onChange={handleChange}
             />
         </div>

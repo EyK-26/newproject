@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Layout from "../layout/Layout";
 import Register from "../auth/Register";
 import Logout from "../auth/Logout";
@@ -14,8 +14,8 @@ import DeleteAccount from "../auth/DeleteAccount";
 import ChangeUserName from "../auth/ChangeUserName";
 import WishList from "../components/WishList";
 import Enquiries from "../components/Enquiries";
-import AllProducts from "../components/AllProducts";
 import UserContext from "../myApp/context/UserContext";
+import SearchProductsAll from "../components/SearchProductsAll";
 
 const MyRoutes = () => {
     const { state, dispatch } = useContext(UserContext);
@@ -61,7 +61,7 @@ const MyRoutes = () => {
         <Routes>
             <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
-                <Route path="/properties" element={<AllProducts />} />
+                <Route path="/properties" element={<SearchProductsAll />} />
                 {!state.user ? (
                     <>
                         <Route
