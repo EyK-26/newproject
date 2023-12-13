@@ -11,7 +11,7 @@ const SearchProductsAll = () => {
     const [price, setPrice] = useState(defaultPrice);
     const [searchTerm, setSearchTerm] = useState("");
 
-    const fetchSearchProducts = useCallback(async () => {
+    const fetchSearchedProducts = useCallback(async () => {
         try {
             const response = await axios.get(
                 "https://estate-comparison.codeboot.cz/list.php"
@@ -29,8 +29,8 @@ const SearchProductsAll = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (state.searchedProducts.length === 0) fetchSearchProducts();
-    }, [fetchSearchProducts]);
+        if (state.searchedProducts.length === 0) fetchSearchedProducts();
+    }, [fetchSearchedProducts]);
 
     const handleChange = (e) => {
         switch (e.target.name) {
