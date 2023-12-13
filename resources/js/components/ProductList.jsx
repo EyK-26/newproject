@@ -37,7 +37,7 @@ const ProductList = () => {
     };
 
     useEffect(() => {
-        if (!state.products.length) fetchProducts();
+        if (state.products.length === 0) fetchProducts();
     }, [fetchProducts]);
 
     const renderedProducts = state.productsLoading

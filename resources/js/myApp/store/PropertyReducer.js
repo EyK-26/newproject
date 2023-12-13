@@ -1,4 +1,5 @@
 const PropertyReducer = (state, action) => {
+    console.log(state, action.type, action.payload);
     switch (action.type) {
         case "products/set":
             return {

@@ -29,23 +29,45 @@ const SearchProductsAll = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (!state.searchedProducts.length) fetchSearchProducts();
+        if (state.searchedProducts.length === 0) fetchSearchProducts();
     }, [fetchSearchProducts]);
 
     const handleChange = (e) => {
-        if (e.target.name === "search_locality") {
-            setSearchTerm(e.target.value);
-            dispatch({
-                type: "location/set",
-                payload: e.target.value,
-            });
-        }
-        if (e.target.name === "price_range") {
-            setPrice(e.target.value);
-            dispatch({
-                type: "price/set",
-                payload: e.target.value,
-            });
+        switch (e.target.name) {
+            case "search_locality":
+                setSearchTerm(e.target.value);
+                if (e.target.value === "") {
+                    console.log("go 1");
+                    dispatch({
+                        type: "searchedProducts/set",
+                        payload: [...state.products],
+                    });
+                } else {
+                    console.log("go 2");
+                    dispatch({
+                        type: "location/set",
+                        payload: e.target.value,
+                    });
+                }
+                break;
+            case "price_range":
+                setPrice(e.target.value);
+                if (Number(e.target.value) === defaultPrice) {
+                    console.log("go 3");
+                    dispatch({
+                        type: "searchedProducts/set",
+                        payload: state.products,
+                    });
+                } else {
+                    console.log("go 4");
+                    dispatch({
+                        type: "price/set",
+                        payload: Number(e.target.value),
+                    });
+                }
+                break;
+            default:
+                break;
         }
     };
 
