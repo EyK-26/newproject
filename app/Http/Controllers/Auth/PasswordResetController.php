@@ -54,7 +54,7 @@ class PasswordResetController extends Controller
                 $user->password = Hash::make($request->input('password'));
                 $user->save();
                 Auth::login($user); 
-                return ['message' => 'Password hass been updated.'];
+                return ['message' => 'Password has been updated.'];
             } else {
                 return ['message' => 'Not authorized'];
             }
