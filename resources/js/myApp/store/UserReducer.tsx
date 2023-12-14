@@ -15,9 +15,10 @@ interface User {
     two_factor_secret: string | null;
     updated_at: string;
 }
+
 export interface UserState {
     theme: string;
-    user: User | null;
+    user: User | null | boolean;
     messages: Array<string>;
     addedProducts: Array<Product>;
     spanMessage: string;
@@ -25,7 +26,7 @@ export interface UserState {
 
 export type UserAction =
     | { type: "theme/set"; payload: string }
-    | { type: "user/set"; payload: User | null }
+    | { type: "user/set"; payload: User | null | boolean }
     | { type: "messages/set"; payload: Array<string> }
     | { type: "messages/unset" }
     | { type: "spanMessage/set"; payload: string }

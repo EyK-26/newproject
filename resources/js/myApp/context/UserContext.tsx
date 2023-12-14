@@ -5,7 +5,17 @@ interface UserContextProps {
     state: UserState;
     dispatch: Dispatch<UserAction>;
 }
+const initialUserContextValue: UserContextProps = {
+    state: {
+        theme: "light",
+        user: null,
+        messages: [],
+        addedProducts: [],
+        spanMessage: "",
+    },
+    dispatch: () => {},
+};
 
-const UserContext = createContext<UserContextProps | null>(null);
+const UserContext = createContext<UserContextProps>(initialUserContextValue);
 
 export default UserContext;
