@@ -37,13 +37,11 @@ const SearchProductsAll = () => {
             case "search_locality":
                 setSearchTerm(e.target.value);
                 if (e.target.value === "") {
-                    console.log("go 1");
                     dispatch({
                         type: "searchedProducts/set",
                         payload: [...state.products],
                     });
                 } else {
-                    console.log("go 2");
                     dispatch({
                         type: "location/set",
                         payload: e.target.value,
@@ -53,13 +51,11 @@ const SearchProductsAll = () => {
             case "price_range":
                 setPrice(e.target.value);
                 if (Number(e.target.value) === defaultPrice) {
-                    console.log("go 3");
                     dispatch({
                         type: "searchedProducts/set",
                         payload: state.products,
                     });
                 } else {
-                    console.log("go 4");
                     dispatch({
                         type: "price/set",
                         payload: Number(e.target.value),

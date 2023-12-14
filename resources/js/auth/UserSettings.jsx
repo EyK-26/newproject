@@ -1,9 +1,11 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import UserContext from "../myApp/context/UserContext";
 
 const UserSettings = () => {
     const { id } = useParams();
+    const { state, dispatch } = useContext(UserContext);
     const [userDetails, setUserDetails] = useState(null);
     const navigate = useNavigate();
 
@@ -28,7 +30,10 @@ const UserSettings = () => {
                 setUserDetails(response.data);
             }
         } catch (error) {
-            console.log(error);
+            dispatch({
+                type: "spanMessage/set",
+                payload: error,
+            });
         }
     };
 
@@ -37,36 +42,41 @@ const UserSettings = () => {
     }, []);
 
     return (
-        <ul className="user_settings_container">
-            {userDetails && (
-                <div className="user_settings__details">
-                    {convertObject(userDetails)}
-                </div>
+        <>
+            {state.spanMessage && (
+                <span className="span_message">{state.spanMessage}</span>
             )}
-            <div className="user_settings--controls">
-                <button
-                    onClick={() => {
-                        navigate("/change-username");
-                    }}
-                >
-                    Change Name
-                </button>
-                <button
-                    onClick={() => {
-                        navigate("/reset-password");
-                    }}
-                >
-                    Reset Password
-                </button>
-                <button
-                    onClick={() => {
-                        navigate("/account-delete");
-                    }}
-                >
-                    Delete Account
-                </button>
-            </div>
-        </ul>
+            <ul className="user_settings_container">
+                {userDetails && (
+                    <div className="user_settings__details">
+                        {convertObject(userDetails)}
+                    </div>
+                )}
+                <div className="user_settings--controls">
+                    <button
+                        onClick={() => {
+                            navigate("/change-username");
+                        }}
+                    >
+                        Change Name
+                    </button>
+                    <button
+                        onClick={() => {
+                            navigate("/reset-password");
+                        }}
+                    >
+                        Reset Password
+                    </button>
+                    <button
+                        onClick={() => {
+                            navigate("/account-delete");
+                        }}
+                    >
+                        Delete Account
+                    </button>
+                </div>
+            </ul>
+        </>
     );
 };
 

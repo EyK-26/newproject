@@ -31,7 +31,10 @@ const ProductView = ({ fetchUserStatus }) => {
                 fetchUserStatus();
             }
         } catch (error) {
-            console.log(error);
+            dispatch({
+                type: "spanMessage/set",
+                payload: error,
+            });
         }
     };
 
@@ -42,8 +45,11 @@ const ProductView = ({ fetchUserStatus }) => {
                     `https://estate-comparison.codeboot.cz/detail.php?id=${id}`
                 );
                 setProduct(response.data);
-            } catch (err) {
-                console.log(err);
+            } catch (error) {
+                dispatch({
+                    type: "spanMessage/set",
+                    payload: error,
+                });
             }
         })();
         (async () => {
@@ -58,7 +64,10 @@ const ProductView = ({ fetchUserStatus }) => {
                     setAdded(response.data);
                 }
             } catch (error) {
-                console.log(error);
+                dispatch({
+                    type: "spanMessage/set",
+                    payload: error,
+                });
             }
         })();
     }, []);
