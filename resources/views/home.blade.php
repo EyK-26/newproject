@@ -19,7 +19,7 @@
     <div class="reset_success">{{ session('message_success') }}</div>
     @endif
     <div id="root"></div>
-    @vite('resources/js/main.jsx')
+    @vite('resources/js/main.tsx')
 </body>
 
 </html>
