@@ -1,19 +1,36 @@
-interface UserState {
+interface Product {
+    id: number;
+}
+
+interface User {
+    created_at: string;
+    email: string;
+    email_verified_at: string | null;
+    enquiries: Array<Object>;
+    id: number;
+    name: string;
+    role: string | null;
+    two_factor_confirmed_at: string | null;
+    two_factor_recovery_codes: string | null;
+    two_factor_secret: string | null;
+    updated_at: string;
+}
+export interface UserState {
     theme: string;
-    user: object | null;
+    user: User | null;
     messages: Array<string>;
-    addedProducts: Array<any>;
+    addedProducts: Array<Product>;
     spanMessage: string;
 }
 
-type UserAction =
+export type UserAction =
     | { type: "theme/set"; payload: string }
-    | { type: "user/set"; payload: object }
+    | { type: "user/set"; payload: User | null }
     | { type: "messages/set"; payload: Array<string> }
     | { type: "messages/unset" }
     | { type: "spanMessage/set"; payload: string }
     | { type: "spanMessage/unset" }
-    | { type: "addedProducts/set"; payload: string }
+    | { type: "addedProducts/set"; payload: Product }
     | { type: "addedProducts/unset"; payload: string };
 
 const UserReducer = (state: UserState, action: UserAction): UserState => {
@@ -57,7 +74,7 @@ const UserReducer = (state: UserState, action: UserAction): UserState => {
             return {
                 ...state,
                 addedProducts: [...state.addedProducts].filter(
-                    (el) => Number(el.id) !== Number(action.payload)
+                    (el) => el.id !== Number(action.payload)
                 ),
             };
         default:

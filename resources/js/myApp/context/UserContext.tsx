@@ -1,5 +1,11 @@
-import { createContext } from "react";
+import { createContext, Dispatch } from "react";
+import { UserState, UserAction } from "../store/UserReducer";
 
-const UserContext = createContext<null>(null);
+interface UserContextProps {
+    state: UserState;
+    dispatch: Dispatch<UserAction>;
+}
+
+const UserContext = createContext<UserContextProps | null>(null);
 
 export default UserContext;
