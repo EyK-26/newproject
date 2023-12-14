@@ -1,4 +1,33 @@
-const PropertyReducer = (state, action) => {
+interface Product {
+    id: number;
+    locality: string;
+    prize_czk: number;
+}
+
+export interface PropertyState {
+    products: Array<Object>;
+    productsLoading: boolean;
+    selectedIds: Array<number>;
+    selectedProducts: Array<Product>;
+    error: string;
+    searchedProducts: Array<Product>;
+    searchedProductsLoading: boolean;
+    lowestPrice: () => number;
+    highestFloorArea: () => number;
+    highestLandArea: () => number;
+}
+
+export type PropertyAction =
+    | { type: "products/set"; payload: Array<Product> }
+    | { type: "error/set"; payload: string[] }
+    | { type: "id/add"; payload: number[] }
+    | { type: "id/remove"; payload: number }
+    | { type: "product/add"; payload: Array<Product> }
+    | { type: "searchedProducts/set"; payload: Array<Product> }
+    | { type: "location/set"; payload: string }
+    | { type: "price/set"; payload: Array<Product> };
+
+const PropertyReducer = (state: PropertyState, action: PropertyAction) => {
     switch (action.type) {
         case "products/set":
             return {
