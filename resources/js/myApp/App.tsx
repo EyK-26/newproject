@@ -4,7 +4,7 @@ import MyRoutes from "../Routes/MyRoutes";
 import UserContext from "./context/UserContext";
 import UserReducer from "./store/UserReducer";
 
-const App = () => {
+const App: React.FC = () => {
     const [userContextValue, setUserContextValue] = useReducer(UserReducer, {
         theme: "light",
         user: null,

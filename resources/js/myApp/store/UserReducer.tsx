@@ -1,4 +1,22 @@
-const UserReducer = (state, action) => {
+interface UserState {
+    theme: string;
+    user: object | null;
+    messages: Array<string>;
+    addedProducts: Array<any>;
+    spanMessage: string;
+}
+
+type UserAction =
+    | { type: "theme/set"; payload: string }
+    | { type: "user/set"; payload: object }
+    | { type: "messages/set"; payload: Array<string> }
+    | { type: "messages/unset" }
+    | { type: "spanMessage/set"; payload: string }
+    | { type: "spanMessage/unset" }
+    | { type: "addedProducts/set"; payload: string }
+    | { type: "addedProducts/unset"; payload: string };
+
+const UserReducer = (state: UserState, action: UserAction): UserState => {
     switch (action.type) {
         case "theme/set":
             return {
@@ -33,9 +51,7 @@ const UserReducer = (state, action) => {
         case "addedProducts/set":
             return {
                 ...state,
-                addedProducts: Array.from(
-                    new Set([...state.addedProducts, action.payload])
-                ),
+                addedProducts: [...state.addedProducts, action.payload],
             };
         case "addedProducts/unset":
             return {
