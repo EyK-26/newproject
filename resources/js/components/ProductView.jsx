@@ -31,7 +31,7 @@ const ProductView = ({ fetchUserStatus }) => {
                 fetchUserStatus();
             }
         } catch (error) {
-            console.log(err);
+            console.log(error);
         }
     };
 
@@ -58,7 +58,7 @@ const ProductView = ({ fetchUserStatus }) => {
                     setAdded(response.data);
                 }
             } catch (error) {
-                console.log(err);
+                console.log(error);
             }
         })();
     }, []);
