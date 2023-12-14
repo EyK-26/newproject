@@ -1,10 +1,10 @@
-import React, { useReducer } from "react";
+import React, { useReducer, FunctionComponent } from "react";
 import { BrowserRouter } from "react-router-dom";
 import MyRoutes from "../Routes/MyRoutes";
 import UserContext from "./context/UserContext";
 import UserReducer from "./store/UserReducer";
 
-const App: React.FC = () => {
+const App: FunctionComponent = () => {
     const [userContextValue, setUserContextValue] = useReducer(UserReducer, {
         theme: "light",
         user: null,
