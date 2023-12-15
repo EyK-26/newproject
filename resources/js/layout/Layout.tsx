@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import PropertyContext from "../myApp/context/PropertyContext";
-import PropertyReducer from "../myApp/store/PropertyReducer";
+import PropertyReducer, { Product } from "../myApp/store/PropertyReducer";
 
 const Layout: FunctionComponent = () => {
     const [propertyContextValue, setPropertyContextValue] = useReducer(
@@ -19,7 +19,9 @@ const Layout: FunctionComponent = () => {
             lowestPrice: function () {
                 return this.selectedProducts.length > 0
                     ? Math.min(
-                          ...this.selectedProducts.map((obj) => obj.prize_czk)
+                          ...this.selectedProducts.map(
+                              (obj: Product) => obj.prize_czk
+                          )
                       )
                     : 0;
             },
@@ -27,7 +29,7 @@ const Layout: FunctionComponent = () => {
                 return this.selectedProducts.length > 0
                     ? Math.max(
                           ...this.selectedProducts.map(
-                              (obj) => obj.building_area
+                              (obj: Product) => obj.building_area
                           )
                       )
                     : 0;
@@ -35,7 +37,9 @@ const Layout: FunctionComponent = () => {
             highestLandArea: function () {
                 return this.selectedProducts.length > 0
                     ? Math.max(
-                          ...this.selectedProducts.map((obj) => obj.land_area)
+                          ...this.selectedProducts.map(
+                              (obj: Product) => obj.land_area
+                          )
                       )
                     : 0;
             },
