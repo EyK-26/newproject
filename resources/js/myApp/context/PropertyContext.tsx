@@ -14,9 +14,15 @@ const initialPropertyContextVal: PropertyContextProps = {
         error: "",
         searchedProducts: [],
         searchedProductsLoading: true,
-        lowestPrice: () => 0,
-        highestFloorArea: () => 0,
-        highestLandArea: () => 0,
+        lowestPrice: function (): number {
+            return 0;
+        },
+        highestFloorArea: function (): number {
+            return 0;
+        },
+        highestLandArea: function (): number {
+            return 0;
+        },
     },
     dispatch: () => {},
 };

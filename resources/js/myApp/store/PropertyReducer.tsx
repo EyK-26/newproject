@@ -1,13 +1,15 @@
-interface Product {
+export interface Product {
     id: number;
     locality: string;
     prize_czk: number;
+    building_area: number;
+    land_area: number;
 }
 
 export interface PropertyState {
-    products: Array<Object>;
+    products: Array<Product>;
     productsLoading: boolean;
-    selectedIds: Array<number>;
+    selectedIds: number[];
     selectedProducts: Array<Product>;
     error: string;
     searchedProducts: Array<Product>;
@@ -19,15 +21,18 @@ export interface PropertyState {
 
 export type PropertyAction =
     | { type: "products/set"; payload: Array<Product> }
-    | { type: "error/set"; payload: string[] }
-    | { type: "id/add"; payload: number[] }
+    | { type: "error/set"; payload: string }
+    | { type: "id/add"; payload: number }
     | { type: "id/remove"; payload: number }
-    | { type: "product/add"; payload: Array<Product> }
+    | { type: "product/add"; payload: Product }
     | { type: "searchedProducts/set"; payload: Array<Product> }
     | { type: "location/set"; payload: string }
     | { type: "price/set"; payload: Array<Product> };
 
-const PropertyReducer = (state: PropertyState, action: PropertyAction) => {
+const PropertyReducer = (
+    state: PropertyState,
+    action: PropertyAction
+): PropertyState => {
     switch (action.type) {
         case "products/set":
             return {
