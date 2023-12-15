@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, FunctionComponent } from "react";
 import { Routes, Route } from "react-router-dom";
 import Layout from "../layout/Layout";
 import Register from "../auth/Register";
@@ -17,7 +17,7 @@ import Enquiries from "../components/Enquiries";
 import UserContext from "../myApp/context/UserContext";
 import SearchProductsAll from "../components/SearchProductsAll";
 
-const MyRoutes = () => {
+const MyRoutes: FunctionComponent = () => {
     const { state, dispatch } = useContext(UserContext);
 
     const fetchUserStatus = async (): Promise<void> => {
