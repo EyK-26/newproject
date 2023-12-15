@@ -1,11 +1,11 @@
-import React, { useReducer } from "react";
+import React, { useReducer, FunctionComponent } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import PropertyContext from "../myApp/context/PropertyContext";
 import PropertyReducer from "../myApp/store/PropertyReducer";
 
-const Layout = () => {
+const Layout: FunctionComponent = () => {
     const [propertyContextValue, setPropertyContextValue] = useReducer(
         PropertyReducer,
         {
