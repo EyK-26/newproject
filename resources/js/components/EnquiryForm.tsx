@@ -18,11 +18,13 @@ interface FormData {
 interface EnquiryFormProps {
     id: number;
     setFormOpen(arg: boolean): void;
+    fetchUserStatus(): void;
 }
 
 const EnquiryForm: FunctionComponent<EnquiryFormProps> = ({
     id,
     setFormOpen,
+    fetchUserStatus,
 }) => {
     const { state, dispatch } = useContext(UserContext);
     if (state.user === null || typeof state.user === "boolean") {
@@ -64,6 +66,7 @@ const EnquiryForm: FunctionComponent<EnquiryFormProps> = ({
                     message: "",
                 }));
                 setFormOpen(false);
+                fetchUserStatus();
             }
         } catch (error: any) {
             dispatch({

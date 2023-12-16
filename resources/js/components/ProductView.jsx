@@ -136,6 +136,7 @@ const ProductView = ({ fetchUserStatus }) => {
                                 <EnquiryForm
                                     id={id}
                                     setFormOpen={setFormOpen}
+                                    fetchUserStatus={fetchUserStatus}
                                 />
                             )}
                         </div>
