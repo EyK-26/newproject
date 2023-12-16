@@ -14,7 +14,7 @@ interface ChangeUserNameProps {
 const ChangeUserName: FunctionComponent<ChangeUserNameProps> = ({
     fetchUserStatus,
 }) => {
-    const [name, setName] = useState("");
+    const [name, setName] = useState<string>("");
     const { state, dispatch } = useContext(UserContext);
 
     const handleSubmit = async (

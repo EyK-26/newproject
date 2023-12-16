@@ -14,9 +14,9 @@ export interface PropertyState {
     error: string;
     searchedProducts: Array<Product>;
     searchedProductsLoading: boolean;
-    lowestPrice: () => number;
-    highestFloorArea: () => number;
-    highestLandArea: () => number;
+    lowestPrice(): number;
+    highestFloorArea(): number;
+    highestLandArea(): number;
 }
 
 export type PropertyAction =

@@ -1,14 +1,27 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, {
+    FormEvent,
+    FunctionComponent,
+    useContext,
+    useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../myApp/context/UserContext";
 
-const DeleteAccount = ({ fetchUserStatus }) => {
+interface ChangeUserNameProps {
+    fetchUserStatus(): void;
+}
+
+const DeleteAccount: FunctionComponent<ChangeUserNameProps> = ({
+    fetchUserStatus,
+}) => {
     const { state, dispatch } = useContext(UserContext);
-    const [confirmed, setConfirmed] = useState(false);
+    const [confirmed, setConfirmed] = useState<boolean>(false);
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (
+        e: FormEvent<HTMLFormElement>
+    ): Promise<void> => {
         e.preventDefault();
         if (confirmed) {
             dispatch({
@@ -17,7 +30,9 @@ const DeleteAccount = ({ fetchUserStatus }) => {
             });
             try {
                 const response = await axios.delete("/api/user-delete", {
-                    params: { id: state.user.id },
+                    params: {
+                        id: typeof state.user === "object" && state.user?.id,
+                    },
                 });
                 if (Math.floor(response.status / 100) === 2) {
                     dispatch({
@@ -49,8 +64,8 @@ const DeleteAccount = ({ fetchUserStatus }) => {
                 <textarea
                     name="conditions"
                     id="conditions"
-                    cols="30"
-                    rows="10"
+                    cols={30}
+                    rows={10}
                     disabled
                     defaultValue="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum autem nihil officia a error quis similique repellat vel modi facere, id sapiente voluptates eaque! Minima nam inventore deleniti accusantium quis."
                 ></textarea>
@@ -63,8 +78,10 @@ const DeleteAccount = ({ fetchUserStatus }) => {
                                 name="confirm"
                                 id="confirm"
                                 defaultChecked={confirmed}
-                                value={confirmed}
-                                onChange={() => setConfirmed((prev) => !prev)}
+                                value={confirmed.toString()}
+                                onChange={(): void =>
+                                    setConfirmed((prev) => !prev)
+                                }
                             />
                         </label>
                     </div>
