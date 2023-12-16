@@ -1,17 +1,21 @@
-import React, { useContext, useState } from "react";
+import React, { ChangeEvent, FormEvent, useContext, useState } from "react";
 import UserContext from "../../myApp/context/UserContext";
 import axios from "axios";
 import Messages from "../../components/Messages";
 
 const ManualReset = ({ fetchUserStatus }) => {
     const { state, dispatch } = useContext(UserContext);
+    const userId =
+        typeof state.user === "object" && state.user !== null
+            ? state.user.id
+            : "";
     const [values, setValues] = useState({
-        id: state.user.id,
+        id: userId,
         password: "",
         password_confirmation: "",
     });
-
-    const handleSubmit = async (e) => {
+    console.log(state.user);
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             const response = await axios.put(
@@ -41,7 +45,7 @@ const ManualReset = ({ fetchUserStatus }) => {
         }
     };
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValues((prev) => ({
             ...prev,
             [e.target.name]: e.target.value,

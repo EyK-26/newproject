@@ -1,15 +1,15 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { FormEvent, useContext, useState } from "react";
 import UserContext from "../../myApp/context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");
-    const [sending, setSending] = useState(null);
+    const [sending, setSending] = useState<boolean | null>(null);
     const { state, dispatch } = useContext(UserContext);
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (/.*@.*/.test(email)) {
             try {

@@ -7,6 +7,7 @@ interface User {
     email: string;
     email_verified_at: string | null;
     enquiries: Array<Object>;
+    wishes: Array<Object>;
     id: number;
     name: string;
     role: string | null;
