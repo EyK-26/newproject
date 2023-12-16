@@ -1,13 +1,18 @@
-import React, { useCallback, useContext, useEffect } from "react";
+import React, {
+    FunctionComponent,
+    useCallback,
+    useContext,
+    useEffect,
+} from "react";
 import axios from "axios";
 import { ProductDetail } from "./ProductDetail";
 import PropertyContext from "../myApp/context/PropertyContext";
 
-const SelectedProductList = () => {
+const SelectedProductList: FunctionComponent = () => {
     const { state, dispatch } = useContext(PropertyContext);
 
-    const fetchSelectedProducts = useCallback(() => {
-        state.selectedIds.forEach(async (id) => {
+    const fetchSelectedProducts = useCallback((): void => {
+        state.selectedIds.forEach(async (id: number): Promise<void> => {
             if (!state.selectedProducts.find((prod) => prod.id === id)) {
                 try {
                     const response = await axios.get(
@@ -17,7 +22,7 @@ const SelectedProductList = () => {
                         type: "product/add",
                         payload: response.data,
                     });
-                } catch (err) {
+                } catch (err: any) {
                     dispatch({
                         type: "error/set",
                         payload: err.response,

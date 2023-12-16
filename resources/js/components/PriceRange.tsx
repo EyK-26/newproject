@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from "react";
+import React, { ChangeEvent, FunctionComponent } from "react";
 
 interface PriceRangeProps {
-    handleChange(): void;
+    handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
     price: number;
     defaultPrice: number;
 }

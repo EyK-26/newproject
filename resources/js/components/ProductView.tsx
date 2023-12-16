@@ -1,36 +1,52 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+    FunctionComponent,
+    ReactNode,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ImageToggler from "./ImageToggler";
 import { FaHeart } from "react-icons/fa";
 import UserContext from "../myApp/context/UserContext";
 import EnquiryForm from "./EnquiryForm";
+import { Product } from "../myApp/store/PropertyReducer";
 
-const ProductView = ({ fetchUserStatus }) => {
+interface ProductViewProps {
+    fetchUserStatus(): void;
+}
+
+const ProductView: FunctionComponent<ProductViewProps> = ({
+    fetchUserStatus,
+}) => {
     const { id } = useParams();
     const { state, dispatch } = useContext(UserContext);
-    const [product, setProduct] = useState(null);
-    const [added, setAdded] = useState(false);
-    const [formOpen, setFormOpen] = useState(false);
-    const navigate = useNavigate(-1);
+    const [product, setProduct] = useState<Product | null>(null);
+    const [added, setAdded] = useState<boolean>(false);
+    const [formOpen, setFormOpen] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const toggleWishlist = async () => {
         try {
             const response = await axios.post("/api/toggle-wishlist", {
                 product_id: id,
-                user_id: state.user.id,
+                user_id:
+                    state.user !== null &&
+                    typeof state.user !== "boolean" &&
+                    state.user.id,
             });
             if (Math.floor(response.status / 100) === 2) {
                 setAdded((prev) => !prev);
                 if (response.data.message.includes("removed")) {
                     dispatch({
                         type: "addedProducts/unset",
-                        payload: id,
+                        payload: Number(id),
                     });
                 }
                 fetchUserStatus();
             }
-        } catch (error) {
+        } catch (error: any) {
             dispatch({
                 type: "spanMessage/set",
                 payload: error,
@@ -45,7 +61,7 @@ const ProductView = ({ fetchUserStatus }) => {
                     `https://estate-comparison.codeboot.cz/detail.php?id=${id}`
                 );
                 setProduct(response.data);
-            } catch (error) {
+            } catch (error: any) {
                 dispatch({
                     type: "spanMessage/set",
                     payload: error,
@@ -57,13 +73,16 @@ const ProductView = ({ fetchUserStatus }) => {
                 const response = await axios.get("/api/get-wishlist", {
                     params: {
                         product_id: id,
-                        user_id: state.user.id,
+                        user_id:
+                            state.user !== null &&
+                            typeof state.user !== "boolean" &&
+                            state.user.id,
                     },
                 });
                 if (Math.floor(response.status / 100) === 2) {
                     setAdded(response.data);
                 }
-            } catch (error) {
+            } catch (error: any) {
                 dispatch({
                     type: "spanMessage/set",
                     payload: error,
@@ -72,9 +91,9 @@ const ProductView = ({ fetchUserStatus }) => {
         })();
     }, []);
 
-    const convertObject = (product) =>
-        Object.keys(product).map((attribute, index) => {
-            if (typeof product[attribute] !== "object") {
+    const convertObject: any = (product: Product) =>
+        Object.keys(product).map((attribute: string, index: number) => {
+            if (typeof product[attribute as keyof Product] !== "object") {
                 return (
                     attribute !== "company_logo" &&
                     attribute !== "id" &&
@@ -82,12 +101,16 @@ const ProductView = ({ fetchUserStatus }) => {
                     attribute !== "lon" &&
                     attribute !== "name_extracted" && (
                         <li key={index}>
-                            {attribute}: {product[attribute] || "unknown"}
+                            {attribute}:{" "}
+                            {product[attribute as keyof Product] || "unknown"}
                         </li>
                     )
                 );
             } else if (attribute !== "images") {
-                return product[attribute] && convertObject(product[attribute]);
+                return (
+                    product[attribute as keyof Product] &&
+                    convertObject(product[attribute as keyof Product])
+                );
             }
         });
 
@@ -96,7 +119,7 @@ const ProductView = ({ fetchUserStatus }) => {
             {state.spanMessage && (
                 <span className="span_message">{state.spanMessage}</span>
             )}
-            <button onClick={() => navigate(-1)}>Back</button>
+            <button onClick={(): void => navigate(-1)}>Back</button>
             <div className="product_view__container">
                 {product && (
                     <>
@@ -125,8 +148,8 @@ const ProductView = ({ fetchUserStatus }) => {
                                     </span>
                                 </div>
                                 <button
-                                    onClick={() => {
-                                        setFormOpen((prev) => !prev);
+                                    onClick={(): void => {
+                                        setFormOpen((prev): boolean => !prev);
                                     }}
                                 >
                                     Make Enquiry
@@ -134,7 +157,7 @@ const ProductView = ({ fetchUserStatus }) => {
                             </div>
                             {formOpen && (
                                 <EnquiryForm
-                                    id={id}
+                                    id={Number(id)}
                                     setFormOpen={setFormOpen}
                                     fetchUserStatus={fetchUserStatus}
                                 />

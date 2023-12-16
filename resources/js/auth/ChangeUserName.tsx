@@ -23,7 +23,10 @@ const ChangeUserName: FunctionComponent<ChangeUserNameProps> = ({
         e.preventDefault();
         try {
             const response = await axios.put("api/change-username", {
-                id: typeof state.user === "object" && state.user?.id,
+                id:
+                    state.user !== null &&
+                    typeof state.user !== "boolean" &&
+                    state.user.id,
                 name: name.trim(),
             });
             if (Math.floor(response.status / 100) === 2) {

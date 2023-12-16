@@ -25,7 +25,9 @@ const UserSettings: FunctionComponent = () => {
                             ? `Member since: ${
                                   product[attribute].split(/T/)[0]
                               }`
-                            : `${attribute}: ${(product as any)[attribute]}`}
+                            : `${attribute}: ${
+                                  product[attribute as keyof User]
+                              }`}
                     </li>
                 )
         );

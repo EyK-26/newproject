@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import ProfileMenu from "./ProfileMenu";
 
-const Profile = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
+const Profile: FunctionComponent = () => {
+    const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
-    const handleHover = () => {
-        setMenuOpen((prev) => !prev);
+    const handleHover = (): void => {
+        setMenuOpen((prev): boolean => !prev);
     };
 
     return (

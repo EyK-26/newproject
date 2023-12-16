@@ -1,6 +1,14 @@
-import React from "react";
+import React, { ChangeEvent, FunctionComponent } from "react";
 
-const SearchBar = ({ handleChange, searchTerm }) => {
+interface SearchBarProps {
+    handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    searchTerm: string;
+}
+
+const SearchBar: FunctionComponent<SearchBarProps> = ({
+    handleChange,
+    searchTerm,
+}) => {
     return (
         <div className="search_bar">
             <label htmlFor="search">Search for a locality</label>

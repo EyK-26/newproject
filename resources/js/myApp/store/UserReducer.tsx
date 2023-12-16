@@ -1,7 +1,12 @@
-interface Product {
-    id: number;
-}
+import { Product } from "./PropertyReducer";
 
+export interface Wish {
+    created_at: string;
+    id: number;
+    product_id: number;
+    updated_at: string;
+    user_id: number;
+}
 export interface Answer {
     id: number;
     message: string;
@@ -17,7 +22,7 @@ export interface User {
     email: string;
     email_verified_at: string | null;
     enquiries: Array<Enquiry>;
-    wishes: Array<Product>;
+    wishes: Array<Wish>;
     id: number;
     name: string;
     role: string | null;
@@ -43,7 +48,7 @@ export type UserAction =
     | { type: "spanMessage/set"; payload: string }
     | { type: "spanMessage/unset" }
     | { type: "addedProducts/set"; payload: Product }
-    | { type: "addedProducts/unset"; payload: string };
+    | { type: "addedProducts/unset"; payload: number };
 
 const UserReducer = (state: UserState, action: UserAction): UserState => {
     switch (action.type) {
@@ -86,7 +91,7 @@ const UserReducer = (state: UserState, action: UserAction): UserState => {
             return {
                 ...state,
                 addedProducts: [...state.addedProducts].filter(
-                    (el) => el.id !== Number(action.payload)
+                    (el) => el.id !== action.payload
                 ),
             };
         default:

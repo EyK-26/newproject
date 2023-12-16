@@ -1,11 +1,16 @@
 import axios from "axios";
-import React, { useCallback, useContext, useEffect } from "react";
+import React, {
+    FunctionComponent,
+    useCallback,
+    useContext,
+    useEffect,
+} from "react";
 import PropertyContext from "../myApp/context/PropertyContext";
 
-const ProductList = () => {
+const ProductList: FunctionComponent = () => {
     const { state, dispatch } = useContext(PropertyContext);
 
-    const fetchProducts = useCallback(async () => {
+    const fetchProducts = useCallback(async (): Promise<void> => {
         try {
             const response = await axios.get(
                 "https://estate-comparison.codeboot.cz/list.php"
@@ -14,7 +19,7 @@ const ProductList = () => {
                 type: "products/set",
                 payload: response.data,
             });
-        } catch (err) {
+        } catch (err: any) {
             dispatch({
                 type: "error/set",
                 payload: err.response,
@@ -22,7 +27,7 @@ const ProductList = () => {
         }
     }, [dispatch]);
 
-    const addToCompare = (id) => {
+    const addToCompare = (id: number) => {
         if (state.selectedIds.indexOf(id) === -1) {
             dispatch({
                 type: "id/add",

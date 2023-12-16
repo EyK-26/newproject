@@ -1,17 +1,24 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, {
+    ChangeEvent,
+    FunctionComponent,
+    useCallback,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 import PropertyContext from "../myApp/context/PropertyContext";
 import SearchBar from "./SearchBar";
 import PriceRange from "./PriceRange";
 import RenderProduct from "./RenderProduct";
 import axios from "axios";
 
-const SearchProductsAll = () => {
+const SearchProductsAll: FunctionComponent = () => {
     const { state, dispatch } = useContext(PropertyContext);
-    const defaultPrice = 5000000;
-    const [price, setPrice] = useState(defaultPrice);
-    const [searchTerm, setSearchTerm] = useState("");
+    const defaultPrice: number = 5000000;
+    const [price, setPrice] = useState<number>(defaultPrice);
+    const [searchTerm, setSearchTerm] = useState<string>("");
 
-    const fetchSearchedProducts = useCallback(async () => {
+    const fetchSearchedProducts = useCallback(async (): Promise<void> => {
         try {
             const response = await axios.get(
                 "https://estate-comparison.codeboot.cz/list.php"
@@ -20,7 +27,7 @@ const SearchProductsAll = () => {
                 type: "searchedProducts/set",
                 payload: response.data,
             });
-        } catch (err) {
+        } catch (err: any) {
             dispatch({
                 type: "error/set",
                 payload: err.response,
@@ -32,7 +39,7 @@ const SearchProductsAll = () => {
         if (state.searchedProducts.length === 0) fetchSearchedProducts();
     }, [fetchSearchedProducts]);
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
         switch (e.target.name) {
             case "search_locality":
                 setSearchTerm(e.target.value);
@@ -49,7 +56,7 @@ const SearchProductsAll = () => {
                 }
                 break;
             case "price_range":
-                setPrice(e.target.value);
+                setPrice(Number(e.target.value));
                 if (Number(e.target.value) === defaultPrice) {
                     dispatch({
                         type: "searchedProducts/set",

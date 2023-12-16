@@ -12,7 +12,10 @@ import Messages from "../../components/Messages";
 const ManualReset: FunctionComponent = () => {
     const { state, dispatch } = useContext(UserContext);
     const [values, setValues] = useState({
-        id: typeof state.user === "object" && state.user?.id,
+        id:
+            state.user !== null &&
+            typeof state.user !== "boolean" &&
+            state.user.id,
         password: "",
         password_confirmation: "",
     });

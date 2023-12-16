@@ -8,6 +8,7 @@ export interface Product {
     name: string;
     company_logo: string;
     company_name: string;
+    name_extracted: string;
 }
 
 export interface PropertyState {
