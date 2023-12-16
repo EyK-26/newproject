@@ -2,12 +2,22 @@ interface Product {
     id: number;
 }
 
+export interface Answer {
+    id: number;
+    message: string;
+}
+export interface Enquiry {
+    id: number;
+    message: string;
+    answers: Array<Answer>;
+}
+
 export interface User {
     created_at: string;
     email: string;
     email_verified_at: string | null;
-    enquiries: Array<Object>;
-    wishes: Array<Object>;
+    enquiries: Array<Enquiry>;
+    wishes: Array<Product>;
     id: number;
     name: string;
     role: string | null;

@@ -1,28 +1,15 @@
-import axios from "axios";
-import React, {
-    FunctionComponent,
-    ReactNode,
-    useContext,
-    useEffect,
-    useState,
-} from "react";
+import React, { FunctionComponent, ReactNode, useContext } from "react";
 import UserContext from "../myApp/context/UserContext";
-
-interface Answer {
-    id: number;
-    message: string;
-}
-
-interface Enquiry {
-    id: number;
-    message: string;
-    answers: Array<Answer>;
-}
+import { Enquiry } from "../myApp/store/UserReducer";
 
 const Enquiries: FunctionComponent = () => {
     const { state } = useContext(UserContext);
 
-    const renderedEnquiries = state.user.enquiries.map(
+    if (typeof state.user === "boolean") {
+        return;
+    }
+
+    const renderedEnquiries = state.user?.enquiries.map(
         (e: Enquiry, i: number): ReactNode => (
             <div className="message_container" key={i}>
                 <li className="message">{e.message}</li>
@@ -42,13 +29,19 @@ const Enquiries: FunctionComponent = () => {
     );
 
     return (
-        <div className="messages_container">
-            {state.user.enquiries.length > 0 ? (
-                <ul className="messages">{renderedEnquiries}</ul>
+        <>
+            {state.user === null ? (
+                <div></div>
             ) : (
-                <h2>No Messages sent.</h2>
+                <div className="messages_container">
+                    {state.user.enquiries.length > 0 ? (
+                        <ul className="messages">{renderedEnquiries}</ul>
+                    ) : (
+                        <h2>No Messages sent.</h2>
+                    )}
+                </div>
             )}
-        </div>
+        </>
     );
 };
 
