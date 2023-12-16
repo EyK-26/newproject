@@ -3,7 +3,7 @@ import UserContext from "../../myApp/context/UserContext";
 import axios from "axios";
 import Messages from "../../components/Messages";
 
-const ManualReset = ({ fetchUserStatus }) => {
+const ManualReset = () => {
     const { state, dispatch } = useContext(UserContext);
     const userId =
         typeof state.user === "object" && state.user !== null
@@ -33,7 +33,7 @@ const ManualReset = ({ fetchUserStatus }) => {
                     password_confirmation: "",
                 }));
             }
-        } catch (error) {
+        } catch (error: any) {
             const { password, password_confirmation } =
                 error.response.data.errors || false;
             if (password || password_confirmation) {
