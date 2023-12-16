@@ -1,18 +1,34 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+    ChangeEvent,
+    FormEvent,
+    FunctionComponent,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../myApp/context/UserContext";
 import Messages from "../components/Messages";
 
-const Login = ({ fetchUserStatus }) => {
-    const [values, setValues] = useState({
+interface Values {
+    email: string;
+    password: string;
+}
+
+interface LoginProps {
+    fetchUserStatus(): void;
+}
+
+const Login: FunctionComponent<LoginProps> = ({ fetchUserStatus }) => {
+    const [values, setValues] = useState<Values>({
         email: "",
         password: "",
     });
     const { state, dispatch } = useContext(UserContext);
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             const response = await axios.post("/login", values);
@@ -22,7 +38,7 @@ const Login = ({ fetchUserStatus }) => {
                     state: { userLoggedIn: `Login Successful` },
                 });
             }
-        } catch (error) {
+        } catch (error: any) {
             const { password, email } = error.response.data.errors || false;
             if (password || email) {
                 dispatch({
@@ -34,15 +50,17 @@ const Login = ({ fetchUserStatus }) => {
     };
 
     useEffect(() => {
-        if (document.querySelector(".reset_success")) {
+        const resetSuccessElement =
+            document.querySelector<HTMLElement>(".reset_success");
+
+        if (resetSuccessElement) {
             setTimeout(() => {
-                document.querySelector(".reset_success").style.display =
-                    "none";
+                resetSuccessElement.style.display = "none";
             }, 5000);
         }
     }, []);
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
         setValues((prev) => ({
             ...prev,
             [e.target.name]: e.target.value,
