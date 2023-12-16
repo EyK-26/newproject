@@ -1,11 +1,28 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, {
+    ChangeEvent,
+    FormEvent,
+    FunctionComponent,
+    useContext,
+    useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../myApp/context/UserContext";
 import Messages from "../components/Messages";
 
-const Register = ({ fetchUserStatus }) => {
-    const [values, setValues] = useState({
+interface Values {
+    email: string;
+    name: string;
+    password: string;
+    password_confirmation: string;
+}
+
+interface RegisterProps {
+    fetchUserStatus(): void;
+}
+
+const Register: FunctionComponent<RegisterProps> = ({ fetchUserStatus }) => {
+    const [values, setValues] = useState<Values>({
         email: "",
         name: "",
         password: "",
@@ -14,7 +31,9 @@ const Register = ({ fetchUserStatus }) => {
     const { state, dispatch } = useContext(UserContext);
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (
+        e: FormEvent<HTMLFormElement>
+    ): Promise<void> => {
         e.preventDefault();
         try {
             const response = await axios.post("/register", values);
@@ -24,7 +43,7 @@ const Register = ({ fetchUserStatus }) => {
                     state: { userRegistered: `Registration Successful` },
                 });
             }
-        } catch (error) {
+        } catch (error: any) {
             const { email, name, password } =
                 error.response.data.errors || false;
             if (email || name || password) {
@@ -36,7 +55,7 @@ const Register = ({ fetchUserStatus }) => {
         }
     };
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
         setValues((prev) => ({
             ...prev,
             [e.target.name]: e.target.value,

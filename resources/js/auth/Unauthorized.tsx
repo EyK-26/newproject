@@ -1,6 +1,6 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 
-const Unauthorized = () => {
+const Unauthorized: FunctionComponent = () => {
     return <span>404 access denied. Please login to view this page.</span>;
 };
 

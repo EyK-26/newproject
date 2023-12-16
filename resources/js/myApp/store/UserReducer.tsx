@@ -2,7 +2,7 @@ interface Product {
     id: number;
 }
 
-interface User {
+export interface User {
     created_at: string;
     email: string;
     email_verified_at: string | null;
