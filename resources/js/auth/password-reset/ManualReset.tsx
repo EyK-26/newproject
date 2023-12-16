@@ -1,16 +1,18 @@
-import React, { ChangeEvent, FormEvent, useContext, useState } from "react";
+import React, {
+    ChangeEvent,
+    FormEvent,
+    useContext,
+    useState,
+    FunctionComponent,
+} from "react";
 import UserContext from "../../myApp/context/UserContext";
 import axios from "axios";
 import Messages from "../../components/Messages";
 
-const ManualReset = () => {
+const ManualReset: FunctionComponent = () => {
     const { state, dispatch } = useContext(UserContext);
-    const userId =
-        typeof state.user === "object" && state.user !== null
-            ? state.user.id
-            : "";
     const [values, setValues] = useState({
-        id: userId,
+        id: state.user?.id,
         password: "",
         password_confirmation: "",
     });

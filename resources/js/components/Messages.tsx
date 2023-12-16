@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, FunctionComponent } from "react";
 import UserContext from "../myApp/context/UserContext";
 
-const Messages = () => {
+const Messages: FunctionComponent = () => {
     const { state } = useContext(UserContext);
 
     return (
