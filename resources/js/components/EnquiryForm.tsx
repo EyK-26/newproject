@@ -1,27 +1,56 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+    ChangeEvent,
+    FormEvent,
+    FunctionComponent,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 import UserContext from "../myApp/context/UserContext";
 import axios from "axios";
 
-const EnquiryForm = ({ id, setFormOpen }) => {
+interface FormData {
+    name: string;
+    email: string;
+    message?: string;
+}
+
+interface EnquiryFormProps {
+    id: number;
+    setFormOpen(arg: boolean): void;
+}
+
+const EnquiryForm: FunctionComponent<EnquiryFormProps> = ({
+    id,
+    setFormOpen,
+}) => {
     const { state, dispatch } = useContext(UserContext);
-    const [formData, setFormData] = useState({
+    if (state.user === null || typeof state.user === "boolean") {
+        return;
+    }
+    const [formData, setFormData] = useState<FormData>({
         name: state.user.name,
         email: state.user.email,
         message: "",
     });
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
         setFormData((prev) => ({
             ...prev,
             [e.target.name]: e.target.value,
         }));
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (
+        e: FormEvent<HTMLFormElement>
+    ): Promise<void> => {
         e.preventDefault();
         try {
             const response = await axios.post("/api/enquiry", {
-                user_id: state.user.id,
+                user_id:
+                    state.user !== null &&
+                    typeof state.user !== "boolean" &&
+                    state.user.id,
                 product_id: id,
                 message: formData.message,
             });
@@ -36,7 +65,7 @@ const EnquiryForm = ({ id, setFormOpen }) => {
                 }));
                 setFormOpen(false);
             }
-        } catch (error) {
+        } catch (error: any) {
             dispatch({
                 type: "spanMessage/set",
                 payload: error.response.data.message.includes("SQLSTATE[23000]")
@@ -93,8 +122,8 @@ const EnquiryForm = ({ id, setFormOpen }) => {
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
-                        rows="5"
-                        cols="45"
+                        rows={5}
+                        cols={45}
                         placeholder="I am interested in this property..."
                         required
                     ></textarea>
