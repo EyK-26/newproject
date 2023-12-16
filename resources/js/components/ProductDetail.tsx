@@ -1,9 +1,16 @@
-import React, { useContext } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import PropertyContext from "../myApp/context/PropertyContext";
 import { Link } from "react-router-dom";
 import ImageToggler from "./ImageToggler";
+import { Product } from "../myApp/store/PropertyReducer";
 
-export const ProductDetail = ({ prod }) => {
+interface ProductDetailProps {
+    prod: Product;
+}
+
+export const ProductDetail: FunctionComponent<ProductDetailProps> = ({
+    prod,
+}) => {
     const { state } = useContext(PropertyContext);
 
     return (
@@ -12,12 +19,16 @@ export const ProductDetail = ({ prod }) => {
                 "Preview not available"
             ) : (
                 <div className="selected_product">
-                    <ImageToggler images={prod.images} name={prod.name} />
+                    <ImageToggler
+                        images={prod.images}
+                        name={prod.name}
+                        mainview={false}
+                    />
                     <div>{prod.name}</div>
                     <ul className="product_details">
                         <li
                             className={
-                                parseInt(prod.prize_czk) === state.lowestPrice()
+                                prod.prize_czk === state.lowestPrice()
                                     ? "advantage"
                                     : "disadvantage"
                             }
@@ -31,8 +42,7 @@ export const ProductDetail = ({ prod }) => {
                         </li>
                         <li
                             className={
-                                parseInt(prod.building_area) ===
-                                state.highestFloorArea()
+                                prod.building_area === state.highestFloorArea()
                                     ? "advantage"
                                     : "disadvantage"
                             }
@@ -44,8 +54,7 @@ export const ProductDetail = ({ prod }) => {
                         </li>
                         <li
                             className={
-                                parseInt(prod.land_area) ===
-                                state.highestLandArea()
+                                prod.land_area === state.highestLandArea()
                                     ? "advantage"
                                     : "disadvantage"
                             }

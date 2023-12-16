@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import Logout from "../auth/Logout";
 import UserContext from "../myApp/context/UserContext";
 import { Link } from "react-router-dom";
 import Profile from "./Profile";
 
-const Navigation = () => {
+const Navigation: FunctionComponent = () => {
     const { state } = useContext(UserContext);
     return (
         <nav className="navbar">

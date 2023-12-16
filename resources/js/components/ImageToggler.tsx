@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 
-const ImageToggler = ({ images, name, mainview }) => {
-    const [imageIndex, setImageIndex] = useState(0);
+interface ImageTogglerProps {
+    images: string[];
+    name: string;
+    mainview: boolean;
+}
+
+const ImageToggler: FunctionComponent<ImageTogglerProps> = ({
+    images,
+    name,
+    mainview,
+}) => {
+    const [imageIndex, setImageIndex] = useState<number>(0);
 
     return !mainview ? (
         <div className="image__container">

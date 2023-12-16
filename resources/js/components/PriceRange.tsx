@@ -1,6 +1,16 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 
-const PriceRange = ({ handleChange, price, defaultPrice }) => {
+interface PriceRangeProps {
+    handleChange(): void;
+    price: number;
+    defaultPrice: number;
+}
+
+const PriceRange: FunctionComponent<PriceRangeProps> = ({
+    handleChange,
+    price,
+    defaultPrice,
+}) => {
     return (
         <div className="price_range__container">
             <label htmlFor="price_range">{`Price Range ${price}/${defaultPrice}`}</label>

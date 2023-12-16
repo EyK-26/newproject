@@ -104,7 +104,7 @@ const ProductView = ({ fetchUserStatus }) => {
                             <ImageToggler
                                 images={product.images}
                                 name={product.name}
-                                mainview
+                                mainview={true}
                             />
                             <div className="controls_wishlist">
                                 <div

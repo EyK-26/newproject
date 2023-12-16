@@ -4,6 +4,10 @@ export interface Product {
     prize_czk: number;
     building_area: number;
     land_area: number;
+    images: string[];
+    name: string;
+    company_logo: string;
+    company_name: string;
 }
 
 export interface PropertyState {
@@ -27,7 +31,7 @@ export type PropertyAction =
     | { type: "product/add"; payload: Product }
     | { type: "searchedProducts/set"; payload: Array<Product> }
     | { type: "location/set"; payload: string }
-    | { type: "price/set"; payload: Array<Product> };
+    | { type: "price/set"; payload: number };
 
 const PropertyReducer = (
     state: PropertyState,
@@ -86,7 +90,7 @@ const PropertyReducer = (
             return {
                 ...state,
                 searchedProducts: [...state.searchedProducts].filter(
-                    (prod) => Number(prod.prize_czk) <= Number(action.payload)
+                    (prod) => prod.prize_czk <= action.payload
                 ),
             };
         default:

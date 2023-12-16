@@ -1,4 +1,9 @@
-import React, { useContext, useEffect, useReducer } from "react";
+import React, {
+    FunctionComponent,
+    useContext,
+    useEffect,
+    useReducer,
+} from "react";
 import PropertyContext from "../myApp/context/PropertyContext";
 import UserContext from "../myApp/context/UserContext";
 import PropertyReducer from "../myApp/store/PropertyReducer";
@@ -6,7 +11,7 @@ import ProductList from "./ProductList";
 import SelectedProductList from "./SelectedProductList";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const Home = () => {
+const Home: FunctionComponent = () => {
     const { state: locationState, pathname } = useLocation();
     const navigate = useNavigate();
     const { state, dispatch } = useContext(UserContext);
