@@ -16,7 +16,7 @@ const Layout: FunctionComponent = () => {
             error: "",
             searchedProducts: [],
             searchedProductsLoading: true,
-            lowestPrice: function () {
+            lowestPrice: function (): number {
                 return this.selectedProducts.length > 0
                     ? Math.min(
                           ...this.selectedProducts.map(
@@ -25,7 +25,7 @@ const Layout: FunctionComponent = () => {
                       )
                     : 0;
             },
-            highestFloorArea: function () {
+            highestFloorArea: function (): number {
                 return this.selectedProducts.length > 0
                     ? Math.max(
                           ...this.selectedProducts.map(
@@ -34,7 +34,7 @@ const Layout: FunctionComponent = () => {
                       )
                     : 0;
             },
-            highestLandArea: function () {
+            highestLandArea: function (): number {
                 return this.selectedProducts.length > 0
                     ? Math.max(
                           ...this.selectedProducts.map(

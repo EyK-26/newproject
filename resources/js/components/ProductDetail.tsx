@@ -28,7 +28,7 @@ export const ProductDetail: FunctionComponent<ProductDetailProps> = ({
                     <ul className="product_details">
                         <li
                             className={
-                                prod.prize_czk === state.lowestPrice()
+                                Number(prod.prize_czk) === state.lowestPrice()
                                     ? "advantage"
                                     : "disadvantage"
                             }
@@ -42,7 +42,8 @@ export const ProductDetail: FunctionComponent<ProductDetailProps> = ({
                         </li>
                         <li
                             className={
-                                prod.building_area === state.highestFloorArea()
+                                Number(prod.building_area) ===
+                                state.highestFloorArea()
                                     ? "advantage"
                                     : "disadvantage"
                             }
@@ -54,7 +55,8 @@ export const ProductDetail: FunctionComponent<ProductDetailProps> = ({
                         </li>
                         <li
                             className={
-                                prod.land_area === state.highestLandArea()
+                                Number(prod.land_area) ===
+                                state.highestLandArea()
                                     ? "advantage"
                                     : "disadvantage"
                             }
