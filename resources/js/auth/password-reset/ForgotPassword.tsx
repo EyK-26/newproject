@@ -1,10 +1,15 @@
 import axios from "axios";
-import React, { FormEvent, useContext, useState } from "react";
+import React, {
+    FormEvent,
+    FunctionComponent,
+    useContext,
+    useState,
+} from "react";
 import UserContext from "../../myApp/context/UserContext";
 import { useNavigate } from "react-router-dom";
 
-const ForgotPassword = () => {
-    const [email, setEmail] = useState("");
+const ForgotPassword: FunctionComponent = () => {
+    const [email, setEmail] = useState<string>("");
     const [sending, setSending] = useState<boolean | null>(null);
     const { state, dispatch } = useContext(UserContext);
     const navigate = useNavigate();
@@ -46,7 +51,7 @@ const ForgotPassword = () => {
                 <small>You will receive a password reset link shortly.</small>
                 <input
                     type="email"
-                    onChange={(e) => {
+                    onChange={(e): void => {
                         setEmail(e.target.value);
                     }}
                     id="email"
@@ -61,7 +66,7 @@ const ForgotPassword = () => {
             ) : (
                 <>
                     <span>{state.spanMessage}</span>
-                    <button onClick={() => navigate("/")}>
+                    <button onClick={(): void => navigate("/")}>
                         back to main page
                     </button>
                 </>

@@ -1,16 +1,29 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, {
+    FormEvent,
+    FunctionComponent,
+    useContext,
+    useState,
+} from "react";
 import UserContext from "../myApp/context/UserContext";
 
-const ChangeUserName = ({ fetchUserStatus }) => {
+interface ChangeUserNameProps {
+    fetchUserStatus: () => {};
+}
+
+const ChangeUserName: FunctionComponent<ChangeUserNameProps> = ({
+    fetchUserStatus,
+}) => {
     const [name, setName] = useState("");
     const { state, dispatch } = useContext(UserContext);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (
+        e: FormEvent<HTMLFormElement>
+    ): Promise<void> => {
         e.preventDefault();
         try {
             const response = await axios.put("api/change-username", {
-                id: state.user.id,
+                id: typeof state.user === "object" && state.user?.id,
                 name: name.trim(),
             });
             if (Math.floor(response.status / 100) === 2) {
@@ -32,8 +45,9 @@ const ChangeUserName = ({ fetchUserStatus }) => {
     return (
         <div className="name_change">
             <div className="name_change--current">
-                <span htmlFor="currentname">
-                    Current Username: {state.user.name}
+                <span>
+                    Current Username:{" "}
+                    {typeof state.user === "object" && state.user?.name}
                 </span>
             </div>
             <form onSubmit={handleSubmit}>
@@ -43,7 +57,7 @@ const ChangeUserName = ({ fetchUserStatus }) => {
                         value={name}
                         type="text"
                         id="newname"
-                        onChange={(e) => {
+                        onChange={(e): void => {
                             setName(e.target.value);
                         }}
                         required

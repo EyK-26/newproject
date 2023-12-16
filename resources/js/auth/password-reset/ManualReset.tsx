@@ -12,12 +12,14 @@ import Messages from "../../components/Messages";
 const ManualReset: FunctionComponent = () => {
     const { state, dispatch } = useContext(UserContext);
     const [values, setValues] = useState({
-        id: state.user?.id,
+        id: typeof state.user === "object" && state.user?.id,
         password: "",
         password_confirmation: "",
     });
-    console.log(state.user);
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+
+    const handleSubmit = async (
+        e: FormEvent<HTMLFormElement>
+    ): Promise<void> => {
         e.preventDefault();
         try {
             const response = await axios.put(
@@ -47,7 +49,7 @@ const ManualReset: FunctionComponent = () => {
         }
     };
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
         setValues((prev) => ({
             ...prev,
             [e.target.name]: e.target.value,

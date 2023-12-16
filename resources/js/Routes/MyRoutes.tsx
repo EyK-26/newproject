@@ -37,7 +37,7 @@ const MyRoutes: FunctionComponent = () => {
         }
     };
 
-    useEffect(() => {
+    useEffect((): void => {
         if (state.user === null) {
             fetchUserStatus();
         }
