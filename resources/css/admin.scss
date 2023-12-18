@@ -45,7 +45,7 @@ body {
 
         input {
             @include input_and_button;
-            width: 20em;
+            width: 100%;
             margin-bottom: 1em;
         }
 
@@ -140,5 +140,11 @@ body {
         position: fixed;
         font-size: small;
         width: 100%;
+    }
+    .create_offer__container {
+        width: 100%;
+        label {
+            display: block;
+        }
     }
 }

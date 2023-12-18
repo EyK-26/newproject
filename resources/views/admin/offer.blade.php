@@ -7,7 +7,7 @@
     <h2>Create New Post</h2>
     <form action="{{ route('offer.store') }}" method="post" enctype="multipart/form-data">
         @csrf
-
+        <input type="hidden" name="user_id" value="{{ $user->id }}">
         <div>
             <label for="title">Title:</label>
             <input type="text" name="title" id="title" required>
