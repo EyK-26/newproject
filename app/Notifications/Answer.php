@@ -18,7 +18,7 @@ class Answer extends Notification
     protected ?string $text;
     protected ?object $initial_enquiry;
 
-    public function __construct(User | Authenticatable | null $from_admin, string $text, object $initial_enquiry)
+    public function __construct(User|Authenticatable $from_admin, string $text, object $initial_enquiry)
     {
         $this->from_admin = $from_admin;
         $this->text = $text;
