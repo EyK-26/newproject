@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class OfferController extends Controller
 {
+    public function index(Request $request)
+    {
+        $offers = Offer::orderBy("created_at", "desc")->paginate(1);
+        return view('', compact(""));
+    }
     public function create(): View
     {
         $user = Auth::user();

@@ -26,6 +26,9 @@ Route::group(['middleware' => 'can:admin'], function () {
 
     Route::post('/offer', [OfferController::class, 'store'])
         ->name('offer.store');
+
+    Route::get('/offers', [OfferController::class, 'index'])
+        ->name('offers.index');
 });
 
 Route::view('/{path?}', 'home')
