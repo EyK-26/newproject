@@ -19,6 +19,9 @@ Route::group(['middleware' => 'can:admin'], function () {
 
     Route::post('/answers', [AnswerController::class, 'store'])
         ->name('answers.store');
+
+    Route::get('/offers', [AnswerController::class, 'index'])
+        ->name('offers.index');
 });
 
 Route::view('/{path?}', 'home')

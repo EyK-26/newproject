@@ -13,10 +13,14 @@ use Illuminate\Support\Facades\Auth;
 
 class EnquiryController extends Controller
 {
-    public function index(Request $request): Collection
+    public function index(Request $request): Collection|View
     {
         $enquiry = Enquiry::with(['user', 'answers'])->where('user_id', $request->input('id'))->get();
-        if ($enquiry) return $enquiry;
+        if (!empty($enquiry)) {
+            return $enquiry;
+        } else {
+            return abort(404);
+        }
     }
 
     public function store(Request $request): array
