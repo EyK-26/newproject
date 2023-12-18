@@ -10,10 +10,15 @@ use Illuminate\Support\Facades\Auth;
 
 class OfferController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): View
     {
-        $offers = Offer::orderBy("created_at", "desc")->paginate(1);
-        return view('', compact(""));
+        $user = Auth::user();
+        if (!empty($user) && $user->role === "admin") {
+            $offers = Offer::orderBy("created_at", "desc")->paginate(1);
+            return view('admin.offers', compact("user", "offers"));
+        } else {
+            return abort(404);
+        }
     }
     public function create(): View
     {
@@ -39,10 +44,10 @@ class OfferController extends Controller
                 }
                 $offer->photo_path = implode(',', $file_paths);
                 $offer->save();
-                return redirect()->back()->with('message', 'New property offer has been added');
+                return redirect('/offers')->with('message', 'New property offer has been added');
             } else {
                 $offer->save();
-                return redirect()->back()->with('message', 'New property offer has been added. 
+                return redirect('/offers')->with('message', 'New property offer has been added. 
             Please consider to add photos a better experience.');
             }
         } else {

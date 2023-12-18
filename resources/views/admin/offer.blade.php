@@ -12,38 +12,23 @@
             <label for="title">Title:</label>
             <input type="text" name="title" id="title" required>
         </div>
-
         <div>
             <label for="locality">Locality:</label>
             <input type="text" name="locality" id="locality" required>
         </div>
-
         <div>
             <label for="description">Description:</label>
             <textarea name="description" id="description" resize="none" required></textarea>
         </div>
-
         <div>
             <label for="photos">Photos:</label>
             <input type="file" name="photos[]" id="photos" multiple accept="image/*">
         </div>
-
         <div>
             <button type="submit">Submit</button>
         </div>
     </form>
-    <ul class="success">
-        @if(session('message'))
-        <li class="li_message">{{ session('message') }}</li>
-        @endif
-    </ul>
-    <ul class="errors">
-        @if (count($errors) > 0)
-        @foreach ($errors->all() as $error)
-        <li class="li_message">{{ $error }}</li>
-        @endforeach
-        @endif
-    </ul>
+    @include('layouts.messages')
 </div>
 
 @else

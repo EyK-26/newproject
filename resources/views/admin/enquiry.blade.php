@@ -7,8 +7,7 @@
 <h1>See Enquiry Details</h1>
 <textarea resize="none" disabled id="enquiry">{{ $enquiry->message }}</textarea>
 
-@isset($client)
-@isset($product_id)
+@isset($client && $product_id)
 <h2>From</h2>
 <table>
     <thead>
@@ -28,7 +27,6 @@
         </tr>
     </tbody>
 </table>
-@endisset
 @endisset
 
 @isset($enquiry_id)

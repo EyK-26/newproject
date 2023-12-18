@@ -2,15 +2,19 @@
 
 html {
     box-sizing: border-box;
+
     ::-webkit-scrollbar {
         height: 0.3em;
     }
+
     ::-webkit-scrollbar-track {
         background: #f1f1f1;
     }
+
     ::-webkit-scrollbar-thumb {
         background: #888;
     }
+
     ::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
@@ -19,16 +23,18 @@ html {
 body {
     @include column;
     background-color: rgba(219, 231, 240, 0.76);
+    align-items: center;
     margin: 0;
     height: 100vh;
-    align-items: center;
     color: #414141;
 
     a {
         text-decoration: none;
+
         &:hover {
             transform: scale(1.2);
         }
+
         &.contact_user {
             @include input_and_button;
         }
@@ -53,6 +59,7 @@ body {
             @include justify;
             @include input_and_button;
             width: fit-content;
+
             &:hover {
                 transform: scale(1.02);
             }
@@ -73,6 +80,7 @@ body {
         border-collapse: collapse;
         width: 100%;
         margin-bottom: 3em;
+
         th,
         td {
             border: 1px solid #1c2b55;
@@ -83,6 +91,7 @@ body {
         th {
             background-color: #659cca;
         }
+
         a {
             color: rgb(61, 61, 61);
             background: none;
@@ -91,6 +100,7 @@ body {
 
     ul {
         padding: 0;
+
         li {
             @include column;
             list-style: none;
@@ -100,7 +110,7 @@ body {
         }
     }
 
-    .errors > li {
+    .errors>li {
         background-color: rgba(177, 14, 14, 0.664);
         margin-bottom: 0.5em;
     }
@@ -110,6 +120,7 @@ body {
             background-color: rgba(14, 139, 14, 0.699);
             margin-bottom: 0.5em;
         }
+
         .li_message--error {
             background-color: rgba(177, 14, 14, 0.664);
             margin-bottom: 0.5em;
@@ -120,8 +131,8 @@ body {
         @include flex-between;
         width: 100%;
         padding: 1em;
-        margin-bottom: 2em;
         background-color: rgba(31, 85, 202, 0.637);
+
         a {
             color: whitesmoke;
             background: none;
@@ -141,10 +152,50 @@ body {
         font-size: small;
         width: 100%;
     }
+
     .create_offer__container {
         width: 100%;
+
         label {
             display: block;
+        }
+    }
+
+    section {
+        @include column();
+        align-items: center;
+
+        .offers_container {
+            width: 50%;
+            @include column();
+
+            .offer {
+                background-color: #304c63b9;
+                color: whitesmoke;
+                padding: 1em;
+                border-radius: 0.5em;
+                box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
+                margin-bottom: 0.5em;
+                @include column();
+
+                p {
+                    word-break: break-all;
+                }
+
+                img {
+                    align-self: center;
+                    width: 100%;
+                    margin: 0.2em;
+                    border-radius: 0.5em;
+                    box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
+                }
+
+
+            }
+
+            svg {
+                width: 1.2em;
+            }
         }
     }
 }
