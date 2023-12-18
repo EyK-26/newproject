@@ -42,7 +42,7 @@ class EnquiryController extends Controller
         }
     }
 
-    public function show(string $product_id, string $user_id): View
+    public function show(string $product_id, string $user_id): View|array
     {
         try {
             $user = Auth::user();

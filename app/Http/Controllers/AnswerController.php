@@ -25,6 +25,8 @@ class AnswerController extends Controller
             } catch (ModelNotFoundException $e) {
                 return ['message' => 'record not found'];
             }
+        } else {
+            return ['message' => '404, not authorized'];
         }
     }
 

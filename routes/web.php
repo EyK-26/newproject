@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\EnquiryController;
+use App\Http\Controllers\OfferController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/password-reset/{email}/{token}/{datetime}', [PasswordResetController::class, 'reset'])
@@ -20,8 +21,11 @@ Route::group(['middleware' => 'can:admin'], function () {
     Route::post('/answers', [AnswerController::class, 'store'])
         ->name('answers.store');
 
-    Route::get('/offers', [AnswerController::class, 'index'])
-        ->name('offers.index');
+    Route::get('/offer', [OfferController::class, 'create'])
+        ->name('offer.create');
+
+    Route::post('/offer', [OfferController::class, 'store'])
+        ->name('offer.store');
 });
 
 Route::view('/{path?}', 'home')
