@@ -29,7 +29,7 @@ const MyRoutes: FunctionComponent = () => {
                     payload: response.data,
                 });
             }
-        } catch (error) {
+        } catch (error: any) {
             dispatch({
                 type: "user/set",
                 payload: false,
