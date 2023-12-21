@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, {
     ChangeEvent,
+    MouseEvent,
     FormEvent,
     FunctionComponent,
     useContext,
@@ -9,6 +10,7 @@ import React, {
 import { useNavigate } from "react-router-dom";
 import UserContext from "../myApp/context/UserContext";
 import Messages from "../components/Messages";
+import { BiSolidShow } from "react-icons/bi";
 
 interface Values {
     email: string;
@@ -21,6 +23,11 @@ interface RegisterProps {
     fetchUserStatus(): void;
 }
 
+interface Password {
+    show_password: boolean;
+    show_password_confirmation: boolean;
+}
+
 const Register: FunctionComponent<RegisterProps> = ({ fetchUserStatus }) => {
     const [values, setValues] = useState<Values>({
         email: "",
@@ -28,6 +35,12 @@ const Register: FunctionComponent<RegisterProps> = ({ fetchUserStatus }) => {
         password: "",
         password_confirmation: "",
     });
+
+    const [showPassword, setShowPassword] = useState<Password>({
+        show_password: false,
+        show_password_confirmation: false,
+    });
+
     const { state, dispatch } = useContext(UserContext);
     const navigate = useNavigate();
 
@@ -62,6 +75,20 @@ const Register: FunctionComponent<RegisterProps> = ({ fetchUserStatus }) => {
         }));
     };
 
+    const togglePassword = (e: MouseEvent<HTMLElement>): void => {
+        if (e.currentTarget.id === "show_password") {
+            setShowPassword((prev) => ({
+                ...prev,
+                show_password: !prev.show_password,
+            }));
+        } else if (e.currentTarget.id === "show_password_confirmation") {
+            setShowPassword((prev) => ({
+                ...prev,
+                show_password_confirmation: !prev.show_password_confirmation,
+            }));
+        }
+    };
+
     return (
         <div className="register_form">
             <form onSubmit={handleSubmit}>
@@ -82,23 +109,47 @@ const Register: FunctionComponent<RegisterProps> = ({ fetchUserStatus }) => {
                     onChange={handleChange}
                 />
                 <label htmlFor="password">Password</label>
-                <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    value={values.password}
-                    onChange={handleChange}
-                />
+                <div className="password__container">
+                    <input
+                        type={showPassword.show_password ? "text" : "password"}
+                        name="password"
+                        id="password"
+                        value={values.password}
+                        onChange={handleChange}
+                    />
+                    <div
+                        id="show_password"
+                        onClick={(e) => {
+                            togglePassword(e);
+                        }}
+                    >
+                        <BiSolidShow />
+                    </div>
+                </div>
                 <label htmlFor="password_confirmation">
                     Password Confirmation
                 </label>
-                <input
-                    type="password"
-                    name="password_confirmation"
-                    id="password_confirmation"
-                    value={values.password_confirmation}
-                    onChange={handleChange}
-                />
+                <div className="password_confirmation__container">
+                    <input
+                        type={
+                            showPassword.show_password_confirmation
+                                ? "text"
+                                : "password"
+                        }
+                        name="password_confirmation"
+                        id="password_confirmation"
+                        value={values.password_confirmation}
+                        onChange={handleChange}
+                    />
+                    <div
+                        id="show_password_confirmation"
+                        onClick={(e) => {
+                            togglePassword(e);
+                        }}
+                    >
+                        <BiSolidShow />
+                    </div>
+                </div>
                 <input type="submit" value="Register" />
             </form>
             <Messages />

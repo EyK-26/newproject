@@ -380,6 +380,24 @@ body {
                 width: 40%;
                 margin: auto;
 
+                .password__container,
+                .password_confirmation__container {
+                    @include align();
+                    justify-content: space-between;
+
+                    #show_password_confirmation,
+                    #show_password {
+                        @include justify();
+                        padding: 0.3em;
+                        cursor: pointer;
+                    }
+
+                    input {
+                        width: 100%;
+                    }
+
+                }
+
                 form {
                     display: flex;
                     flex-direction: column;
