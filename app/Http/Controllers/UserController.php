@@ -43,7 +43,6 @@ class UserController extends Controller
     {
         if (auth()->check() && auth()->user()->id === intval($request->input('id'))) {
             $user = User::find($request->input('id'));
-
             if ($user) {
                 Auth::logout();
                 $user->delete();
