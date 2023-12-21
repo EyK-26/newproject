@@ -2,6 +2,7 @@ import React, {
     ChangeEvent,
     FormEvent,
     FunctionComponent,
+    MouseEvent,
     useContext,
     useEffect,
     useState,
@@ -10,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../myApp/context/UserContext";
 import Messages from "../components/Messages";
+import { BiSolidShow } from "react-icons/bi";
 
 interface Values {
     email: string;
@@ -25,6 +27,7 @@ const Login: FunctionComponent<LoginProps> = ({ fetchUserStatus }) => {
         email: "",
         password: "",
     });
+    const [togglePassword, setTogglePassword] = useState<boolean>(false);
     const { state, dispatch } = useContext(UserContext);
     const navigate = useNavigate();
 
@@ -67,6 +70,10 @@ const Login: FunctionComponent<LoginProps> = ({ fetchUserStatus }) => {
         }));
     };
 
+    const handleToggle = (e: MouseEvent<HTMLElement>): void => {
+        setTogglePassword((prev) => !prev);
+    };
+
     return (
         <div className="login_form">
             <form onSubmit={handleSubmit}>
@@ -79,13 +86,23 @@ const Login: FunctionComponent<LoginProps> = ({ fetchUserStatus }) => {
                     onChange={handleChange}
                 />
                 <label htmlFor="password">Password</label>
-                <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    value={values.password}
-                    onChange={handleChange}
-                />
+                <div className="password__container">
+                    <input
+                        type={togglePassword ? "text" : "password"}
+                        name="password"
+                        id="password"
+                        value={values.password}
+                        onChange={handleChange}
+                    />
+                    <div
+                        id="show_password"
+                        onClick={(e) => {
+                            handleToggle(e);
+                        }}
+                    >
+                        <BiSolidShow />
+                    </div>
+                </div>
                 <input type="submit" value="Login" />
             </form>
             <span>

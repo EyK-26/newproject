@@ -36,7 +36,7 @@ const Register: FunctionComponent<RegisterProps> = ({ fetchUserStatus }) => {
         password_confirmation: "",
     });
 
-    const [showPassword, setShowPassword] = useState<Password>({
+    const [togglePassword, setTogglePassword] = useState<Password>({
         show_password: false,
         show_password_confirmation: false,
     });
@@ -75,17 +75,19 @@ const Register: FunctionComponent<RegisterProps> = ({ fetchUserStatus }) => {
         }));
     };
 
-    const togglePassword = (e: MouseEvent<HTMLElement>): void => {
+    const handleToggle = (e: MouseEvent<HTMLElement>): void => {
         if (e.currentTarget.id === "show_password") {
-            setShowPassword((prev) => ({
+            setTogglePassword((prev) => ({
                 ...prev,
                 show_password: !prev.show_password,
             }));
         } else if (e.currentTarget.id === "show_password_confirmation") {
-            setShowPassword((prev) => ({
+            setTogglePassword((prev) => ({
                 ...prev,
                 show_password_confirmation: !prev.show_password_confirmation,
             }));
+        } else {
+            return;
         }
     };
 
@@ -111,7 +113,9 @@ const Register: FunctionComponent<RegisterProps> = ({ fetchUserStatus }) => {
                 <label htmlFor="password">Password</label>
                 <div className="password__container">
                     <input
-                        type={showPassword.show_password ? "text" : "password"}
+                        type={
+                            togglePassword.show_password ? "text" : "password"
+                        }
                         name="password"
                         id="password"
                         value={values.password}
@@ -120,7 +124,7 @@ const Register: FunctionComponent<RegisterProps> = ({ fetchUserStatus }) => {
                     <div
                         id="show_password"
                         onClick={(e) => {
-                            togglePassword(e);
+                            handleToggle(e);
                         }}
                     >
                         <BiSolidShow />
@@ -132,7 +136,7 @@ const Register: FunctionComponent<RegisterProps> = ({ fetchUserStatus }) => {
                 <div className="password_confirmation__container">
                     <input
                         type={
-                            showPassword.show_password_confirmation
+                            togglePassword.show_password_confirmation
                                 ? "text"
                                 : "password"
                         }
@@ -144,7 +148,7 @@ const Register: FunctionComponent<RegisterProps> = ({ fetchUserStatus }) => {
                     <div
                         id="show_password_confirmation"
                         onClick={(e) => {
-                            togglePassword(e);
+                            handleToggle(e);
                         }}
                     >
                         <BiSolidShow />
