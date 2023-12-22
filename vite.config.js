@@ -6,7 +6,11 @@ export default ({ mode }) => {
     return defineConfig({
         plugins: [
             laravel({
-                input: ["resources/css/app.scss", "resources/js/myApp.jsx"],
+                input: [
+                    "resources/css/app.scss",
+                    "resources/css/admin.scss",
+                    "resources/js/myApp.jsx",
+                ],
                 refresh: true,
             }),
             {

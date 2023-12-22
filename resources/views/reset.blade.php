@@ -7,10 +7,19 @@
     @method('put')
     @csrf
     <input type="hidden" name="email" value="{{ $email }}">
-    <label for="password">New password</label>
-    <input type="password" name="password" id="password">
-    <label for="password_confirmation">Confirm new password</label>
-    <input type="password" name="password_confirmation" id="password_confirmation">
+    <div class="pwd">
+        <label for="password">New password</label>
+        <input type="password" name="password" id="password">
+        <label for="toggle_password">Show Password</label>
+        <input type="checkbox" name="toggle_password" id="toggle_password">
+
+    </div>
+    <div class="pwd_conf">
+        <label for="password_confirmation">Confirm new password</label>
+        <input type="password" name="password_confirmation" id="password_confirmation">
+        <label for="toggle_password_confirmation">Show Password</label>
+        <input type="checkbox" name="toggle_password_confirmation" id="toggle_password_confirmation">
+    </div>
     <button type="submit">Reset</button>
 </form>
 @endisset
