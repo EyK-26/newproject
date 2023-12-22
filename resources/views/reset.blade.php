@@ -12,7 +12,7 @@
             <label for="password">New password</label>
             <input type="password" name="password" id="password">
         </div>
-        <div>
+        <div class="toggle">
             <label for="toggle_password">Show Password</label>
             <input type="checkbox" name="toggle_password" id="toggle_password">
         </div>
@@ -22,7 +22,7 @@
             <label for="password_confirmation">Confirm new password</label>
             <input type="password" name="password_confirmation" id="password_confirmation">
         </div>
-        <div>
+        <div class="toggle">
             <label for="toggle_password_confirmation">Show Password</label>
             <input type="checkbox" name="toggle_password_confirmation" id="toggle_password_confirmation">
         </div>

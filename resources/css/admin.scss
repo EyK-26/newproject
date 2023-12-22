@@ -47,7 +47,13 @@ body {
 
         .pwd,
         .pwd_conf {
-            @include justify();
+            @include align();
+
+            .toggle {
+                margin-left: 1.8em;
+                margin-top: 0.7em;
+                align-self: center;
+            }
         }
 
         label {
@@ -57,6 +63,7 @@ body {
         input:not([type='checkbox']) {
             @include input_and_button;
             width: 100%;
+            margin-top: 0.7em;
             margin-bottom: 1em;
         }
 
