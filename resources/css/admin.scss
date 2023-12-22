@@ -45,11 +45,16 @@ body {
         flex-direction: column;
         justify-content: center;
 
+        .pwd,
+        .pwd_conf {
+            @include justify();
+        }
+
         label {
             padding: 0.2em;
         }
 
-        input {
+        input:not([type='checkbox']) {
             @include input_and_button;
             width: 100%;
             margin-bottom: 1em;
