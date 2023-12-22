@@ -6,9 +6,9 @@
 @if($user->can('admin') && isset($enquiry))
 <h1>See Enquiry Details</h1>
 <textarea resize="none" disabled id="enquiry">{{ $enquiry->message }}</textarea>
-
-@isset($client && $product_id)
+@isset($product_id)
 <h2>From</h2>
+@isset($client)
 <table>
     <thead>
         <tr>
@@ -27,6 +27,7 @@
         </tr>
     </tbody>
 </table>
+@endisset
 @endisset
 
 @isset($enquiry_id)
