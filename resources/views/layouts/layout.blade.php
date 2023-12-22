@@ -35,7 +35,7 @@
         psw.type = psw.type === 'password' ? 'text' : 'password';
     })
     toggle_2.addEventListener('click', () => {
-        const psw_conf = document.getElementById('password');
+        const psw_conf = document.getElementById('password_confirmation');
         psw_conf.type = psw_conf.type === 'password' ? 'text' : 'password';
     })  
 </script>
