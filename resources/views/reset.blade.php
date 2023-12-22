@@ -15,7 +15,6 @@
         <div>
             <label for="toggle_password">Show Password</label>
             <input type="checkbox" name="toggle_password" id="toggle_password">
-
         </div>
     </div>
     <div class="pwd_conf">
