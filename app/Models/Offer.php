@@ -12,7 +12,10 @@ class Offer extends Model
         'user_id',
         'title',
         'locality',
-        'description'
+        'description',
+        'floor_area',
+        'land_area',
+        'price',
     ];
 
     public function user()

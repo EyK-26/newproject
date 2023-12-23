@@ -9,20 +9,32 @@
         @csrf
         <input type="hidden" name="user_id" value="{{ $user->id }}">
         <div>
-            <label for="title">Title:</label>
+            <label for="title">Title</label>
             <input type="text" name="title" id="title" required>
         </div>
         <div>
-            <label for="locality">Locality:</label>
+            <label for="locality">Locality</label>
             <input type="text" name="locality" id="locality" required>
         </div>
         <div>
-            <label for="description">Description:</label>
+            <label for="description">Description</label>
             <textarea name="description" id="description" resize="none" required></textarea>
         </div>
         <div>
-            <label for="photos">Photos:</label>
+            <label for="photos">Photos</label>
             <input type="file" name="photos[]" id="photos" multiple accept="image/*">
+        </div>
+        <div>
+            <label for="floor_area">Floor area (m<sup>2</sup>)</label>
+            <input type="number" name="floor_area" id="floor_area" required>
+        </div>
+        <div>
+            <label for="land_area">Land area (m<sup>2</sup>)</label>
+            <input type="number" name="land_area" id="land_area" required>
+        </div>
+        <div>
+            <label for="price">Price (CZK)</label>
+            <input type="number" name="price" id="price" required>
         </div>
         <div>
             <button type="submit">Submit</button>

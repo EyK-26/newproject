@@ -8,7 +8,9 @@
         @foreach ($offers as $offer)
         <h3>{{ $offer->title }}</h3>
         <p>{{ $offer->description }}</p>
-
+        <p>{{ $offer->floor_area }}</p>
+        <p>{{ $offer->land_area }}</p>
+        <p>{{ $offer->price }}</p>
         @foreach(explode(',', $offer->photo_path) as $photo)
         <img src="{{ asset('uploads/' . $photo) }}" alt="{{ $offer->title }}">
         @endforeach

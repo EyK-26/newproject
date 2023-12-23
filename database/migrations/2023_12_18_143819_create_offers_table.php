@@ -17,6 +17,9 @@ return new class extends Migration
             $table->text('title');
             $table->text('locality');
             $table->longText('description');
+            $table->integer('floor_area');
+            $table->integer('land_area');
+            $table->integer('price');
             $table->string('photo_path')->nullable();
             $table->timestamps();
         });

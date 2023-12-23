@@ -29,15 +29,18 @@
 <script>
     const toggle_1 = document.getElementById('toggle_password');
     const toggle_2 = document.getElementById('toggle_password_confirmation');
-
-    toggle_1.addEventListener('click', () => {
-        const psw = document.getElementById('password');
-        psw.type = psw.type === 'password' ? 'text' : 'password';
-    })
-    toggle_2.addEventListener('click', () => {
-        const psw_conf = document.getElementById('password_confirmation');
-        psw_conf.type = psw_conf.type === 'password' ? 'text' : 'password';
-    })  
+    if (toggle_1) {
+        toggle_1.addEventListener('click', () => {
+            const psw = document.getElementById('password');
+            psw.type = psw.type === 'password' ? 'text' : 'password';
+        })
+    }
+    if (toggle_2) {     
+        toggle_2.addEventListener('click', () => {
+            const psw_conf = document.getElementById('password_confirmation');
+            psw_conf.type = psw_conf.type === 'password' ? 'text' : 'password';
+        })  
+    }
 </script>
 
 </html>
