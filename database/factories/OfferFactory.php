@@ -14,7 +14,7 @@ class OfferFactory extends Factory
         $amount_photo = rand(0, 6);
         $file_paths = [];
         for ($i = 0; $i <= $amount_photo; $i++) {
-            $file_paths[] = fake()->image('public/uploads/photos', 640, 480, null, false, true);
+            $file_paths[] = fake()->image(public_path('uploads'), 640, 480, null, false);
         }
         return implode(', ', $file_paths);
     }

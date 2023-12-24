@@ -39,7 +39,7 @@ class OfferController extends Controller
             $file_paths = [];
             if ($request->hasFile('photos')) {
                 foreach ($request->file('photos') as $photo) {
-                    $path = $photo->storeAs('photos',  $photo->getClientOriginalName(), 'uploads');
+                    $path = $photo->storeAs('uploads',  $photo->getClientOriginalName());
                     $file_paths[] = $path;
                 }
                 $offer->photo_path = implode(', ', $file_paths);
