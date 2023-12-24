@@ -9,17 +9,14 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class OfferFactory extends Factory
 {
-
-    private function generate_image()
+    private function generate_image(): string
     {
         $amount_photo = rand(0, 6);
         $file_paths = [];
         for ($i = 0; $i <= $amount_photo; $i++) {
-            $photo = fake()->image();
-            $path = $photo->storeAs('photos',  $photo->getClientOriginalName(), 'uploads');
-            $file_paths[] = $path;
+            $file_paths[] = fake()->image('public/uploads/photos', 640, 480, null, false, true);
         }
-        return implode(',', $file_paths);
+        return implode(', ', $file_paths);
     }
 
     public function definition(): array
@@ -34,7 +31,7 @@ class OfferFactory extends Factory
             'description' => fake()->paragraph(),
             'floor_area' => $floor_area,
             'land_area' => $land_area,
-            'price' => fake()->price(),
+            'price' => fake()->numberBetween(10000, 10000000),
             'photo_path' => $this->generate_image()
         ];
     }

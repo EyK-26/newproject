@@ -19,8 +19,8 @@ return new class extends Migration
             $table->longText('description');
             $table->integer('floor_area');
             $table->integer('land_area');
-            $table->integer('price');
-            $table->string('photo_path')->nullable();
+            $table->bigInteger('price');
+            $table->longText('photo_path')->nullable();
             $table->timestamps();
         });
     }
