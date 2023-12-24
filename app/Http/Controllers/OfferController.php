@@ -42,7 +42,7 @@ class OfferController extends Controller
                     $path = $photo->storeAs('photos',  $photo->getClientOriginalName(), 'uploads');
                     $file_paths[] = $path;
                 }
-                $offer->photo_path = implode(',', $file_paths);
+                $offer->photo_path = implode(', ', $file_paths);
                 $offer->save();
                 return redirect('/offers')->with('message', 'New property offer has been added');
             } else {

@@ -9,4 +9,7 @@
     <li class="li_message">{{ $error }}</li>
     @endforeach
     @endif
+    @if (session('message_error'))
+    <li class="li_message">{{ session('message_error') }}</li>
+    @endif
 </ul>

@@ -29,23 +29,10 @@
     </div>
     <button type="submit">Reset</button>
 </form>
+@include('layouts.messages')
 @endisset
 @else
 <h1>404, not authorized</h1>
 @endguest
-<ul class="messages">
-    @if(session('message_success'))
-    <li class="li_message--success">{{ session('message_success') }}</li>
-    @endif
-    @if(session('message_error'))
-    <li class="li_message--error">{{ session('message_error') }}</li>
-    @endif
-</ul>
-<ul class="errors">
-    @if (count($errors) > 0)
-    @foreach ($errors->all() as $error)
-    <li class="li_message">{{ $error }}</li>
-    @endforeach
-    @endif
-</ul>
+
 @endsection

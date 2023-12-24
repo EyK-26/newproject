@@ -11,7 +11,7 @@
         <p>{{ $offer->floor_area }}</p>
         <p>{{ $offer->land_area }}</p>
         <p>{{ $offer->price }}</p>
-        @foreach(explode(',', $offer->photo_path) as $photo)
+        @foreach(explode(', ', $offer->photo_path) as $photo)
         <img src="{{ asset('uploads/' . $photo) }}" alt="{{ $offer->title }}">
         @endforeach
 
