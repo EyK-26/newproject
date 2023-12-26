@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, {
     ChangeEvent,
-    MouseEvent,
     FormEvent,
     FunctionComponent,
     useContext,
@@ -10,9 +9,9 @@ import React, {
 import { useNavigate } from "react-router-dom";
 import UserContext from "../myApp/context/UserContext";
 import Messages from "../components/Messages";
-import { BiSolidShow } from "react-icons/bi";
+import PasswordContainer from "./PasswordContainer";
 
-interface Values {
+export interface Values {
     email: string;
     name: string;
     password: string;
@@ -23,11 +22,6 @@ interface RegisterProps {
     fetchUserStatus(): void;
 }
 
-interface Password {
-    show_password: boolean;
-    show_password_confirmation: boolean;
-}
-
 const Register: FunctionComponent<RegisterProps> = ({ fetchUserStatus }) => {
     const [values, setValues] = useState<Values>({
         email: "",
@@ -36,12 +30,7 @@ const Register: FunctionComponent<RegisterProps> = ({ fetchUserStatus }) => {
         password_confirmation: "",
     });
 
-    const [togglePassword, setTogglePassword] = useState<Password>({
-        show_password: false,
-        show_password_confirmation: false,
-    });
-
-    const { state, dispatch } = useContext(UserContext);
+    const { dispatch } = useContext(UserContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (
@@ -75,22 +64,6 @@ const Register: FunctionComponent<RegisterProps> = ({ fetchUserStatus }) => {
         }));
     };
 
-    const handleToggle = (e: MouseEvent<HTMLElement>): void => {
-        if (e.currentTarget.id === "show_password") {
-            setTogglePassword((prev) => ({
-                ...prev,
-                show_password: !prev.show_password,
-            }));
-        } else if (e.currentTarget.id === "show_password_confirmation") {
-            setTogglePassword((prev) => ({
-                ...prev,
-                show_password_confirmation: !prev.show_password_confirmation,
-            }));
-        } else {
-            return;
-        }
-    };
-
     return (
         <div className="register_form">
             <form onSubmit={handleSubmit}>
@@ -110,50 +83,10 @@ const Register: FunctionComponent<RegisterProps> = ({ fetchUserStatus }) => {
                     value={values.email}
                     onChange={handleChange}
                 />
-                <label htmlFor="password">Password</label>
-                <div className="password__container">
-                    <input
-                        type={
-                            togglePassword.show_password ? "text" : "password"
-                        }
-                        name="password"
-                        id="password"
-                        value={values.password}
-                        onChange={handleChange}
-                    />
-                    <div
-                        id="show_password"
-                        onClick={(e) => {
-                            handleToggle(e);
-                        }}
-                    >
-                        <BiSolidShow />
-                    </div>
-                </div>
-                <label htmlFor="password_confirmation">
-                    Password Confirmation
-                </label>
-                <div className="password_confirmation__container">
-                    <input
-                        type={
-                            togglePassword.show_password_confirmation
-                                ? "text"
-                                : "password"
-                        }
-                        name="password_confirmation"
-                        id="password_confirmation"
-                        value={values.password_confirmation}
-                        onChange={handleChange}
-                    />
-                    <div
-                        id="show_password_confirmation"
-                        onClick={(e) => {
-                            handleToggle(e);
-                        }}
-                    >
-                        <BiSolidShow />
-                    </div>
-                </div>
+                <PasswordContainer
+                    values={values}
+                    handleChange={handleChange}
+                />
                 <input type="submit" value="Register" />
             </form>
             <Messages />

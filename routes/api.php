@@ -27,4 +27,4 @@ Route::post('/toggle-wishlist', [WishController::class, 'store']);
 Route::get('/enquiry', [EnquiryController::class, 'index']);
 Route::post('/enquiry', [EnquiryController::class, 'store']);
 
-Route::get('/custom_offers', [OfferController::class, 'custom_offers']);
+Route::get('/custom-offers', [OfferController::class, 'custom_offers']);

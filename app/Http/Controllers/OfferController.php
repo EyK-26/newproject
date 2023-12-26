@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Offer;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,11 +22,11 @@ class OfferController extends Controller
         }
     }
 
-    public function custom_offers(Request $request): array
+    public function custom_offers(Request $request): array | Collection
     {
         $offers = Offer::orderBy("created_at", "desc")->get();
         if (!empty($offers)) {
-            return $offers;
+            return $offers->load('user');
         } else {
             return ['message' => 'no property available'];
         }

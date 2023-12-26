@@ -9,6 +9,9 @@ const initialPropertyContextVal: PropertyContextProps = {
     state: {
         products: [],
         productsLoading: true,
+        customProducts: [],
+        selectedCustomProducts: [],
+        selectedCustomProductIds: [],
         selectedIds: [],
         selectedProducts: [],
         error: "",

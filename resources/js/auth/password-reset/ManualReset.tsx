@@ -8,10 +8,17 @@ import React, {
 import UserContext from "../../myApp/context/UserContext";
 import axios from "axios";
 import Messages from "../../components/Messages";
+import PasswordContainer from "../PasswordContainer";
+
+export interface ManualResetValues {
+    id: boolean | number | string;
+    password: string;
+    password_confirmation: string;
+}
 
 const ManualReset: FunctionComponent = () => {
     const { state, dispatch } = useContext(UserContext);
-    const [values, setValues] = useState({
+    const [values, setValues] = useState<ManualResetValues>({
         id:
             state.user !== null &&
             typeof state.user !== "boolean" &&
@@ -62,23 +69,9 @@ const ManualReset: FunctionComponent = () => {
     return (
         <div className="reset_password">
             <form onSubmit={handleSubmit}>
-                <label htmlFor="password">New password</label>
-                <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    onChange={handleChange}
-                    value={values.password}
-                />
-                <label htmlFor="password_confirmation">
-                    Confirm new password
-                </label>
-                <input
-                    type="password"
-                    name="password_confirmation"
-                    id="password_confirmation"
-                    onChange={handleChange}
-                    value={values.password_confirmation}
+                <PasswordContainer
+                    values={values}
+                    handleChange={handleChange}
                 />
                 <button type="submit">Reset</button>
             </form>

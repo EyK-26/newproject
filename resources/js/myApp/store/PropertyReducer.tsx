@@ -11,7 +11,21 @@ export interface Product {
     name_extracted: string;
 }
 
+export interface CustomProduct {
+    floor_area: number;
+
+    id: number;
+    land_area: number;
+    locality: string;
+    photo_path: string;
+    price: number;
+    title: string;
+}
+
 export interface PropertyState {
+    customProducts: [];
+    selectedCustomProducts: [];
+    selectedCustomProductIds: [];
     products: Array<Product>;
     productsLoading: boolean;
     selectedIds: number[];
