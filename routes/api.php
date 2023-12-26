@@ -3,6 +3,7 @@
 use App\Http\Controllers\api\AuthentificationController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\EnquiryController;
+use App\Http\Controllers\OfferController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishController;
 use Illuminate\Http\Request;
@@ -25,3 +26,5 @@ Route::post('/toggle-wishlist', [WishController::class, 'store']);
 
 Route::get('/enquiry', [EnquiryController::class, 'index']);
 Route::post('/enquiry', [EnquiryController::class, 'store']);
+
+Route::get('/custom_offers', [OfferController::class, 'custom_offers']);

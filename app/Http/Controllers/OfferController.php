@@ -20,6 +20,17 @@ class OfferController extends Controller
             return abort(404);
         }
     }
+
+    public function custom_offers(Request $request): array
+    {
+        $offers = Offer::orderBy("created_at", "desc")->get();
+        if (!empty($offers)) {
+            return $offers;
+        } else {
+            return ['message' => 'no property available'];
+        }
+    }
+
     public function create(): View
     {
         $user = Auth::user();
