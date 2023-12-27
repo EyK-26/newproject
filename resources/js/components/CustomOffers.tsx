@@ -1,10 +1,17 @@
 import axios from "axios";
-import React, { FunctionComponent, useContext, useEffect } from "react";
+import React, {
+    FunctionComponent,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 import PropertyContext from "../myApp/context/PropertyContext";
 import ImageToggler from "./ImageToggler";
+import { render } from "react-dom";
 
 const CustomOffers: FunctionComponent = () => {
     const { state, dispatch } = useContext(PropertyContext);
+    const [page, setPage] = useState<number>(0);
     const fetchCustomOffers = async (): Promise<void> => {
         const response = await axios.get("/api/custom-offers");
         console.log(response.data);
@@ -39,9 +46,24 @@ const CustomOffers: FunctionComponent = () => {
 
     return (
         <div>
-            {renderedProducts}
-            <button>previous</button>
-            <button>next</button>
+            {renderedProducts[page]}
+            <button
+                onClick={() => {
+                    setPage((prev) => prev - 1);
+                }}
+            >
+                previous
+            </button>
+            <button
+                onClick={() => {
+                    setPage((prev) => prev + 1);
+                }}
+            >
+                next
+            </button>
+            <span>
+                page {page + 1} / {renderedProducts.length}
+            </span>
         </div>
     );
 };
