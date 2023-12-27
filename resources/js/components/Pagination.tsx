@@ -13,24 +13,51 @@ const Pagination: FunctionComponent<PaginationProps> = ({ products }) => {
     const content = products.slice(startIndex, endIndex);
 
     return (
-        <div>
+        <>
             {content}
-            <button
-                onClick={(): void => {
-                    setCurrentPage((prev): number => prev - 1);
+            {currentPage > 1 && (
+                <button
+                    onClick={(): void => {
+                        setCurrentPage((prev): number => prev - 1);
+                    }}
+                >
+                    previous
+                </button>
+            )}
+            {currentPage < totalPages && (
+                <button
+                    onClick={(): void => {
+                        setCurrentPage((prev): number => prev + 1);
+                    }}
+                >
+                    next
+                </button>
+            )}
+            <label htmlFor="contentPerPage">Number of Results per Page</label>
+            <select
+                name="contentPerPage"
+                id="contentPerPage"
+                defaultValue={contentPerPage}
+                onChange={(e) => {
+                    setContentPerPage(Number(e.target.value));
                 }}
             >
-                previous
-            </button>
-            <button
-                onClick={(): void => {
-                    setCurrentPage((prev): number => prev + 1);
-                }}
-            >
-                next
-            </button>
+                <option value={3} key="1">
+                    3
+                </option>
+                <option value={5} key="2">
+                    5
+                </option>
+                <option value={10} key="3">
+                    10
+                </option>
+                <option value={20} key="4">
+                    20
+                </option>
+            </select>
+            <hr />
             <span>Results: {`${currentPage} of ${totalPages}`}</span>
-        </div>
+        </>
     );
 };
 

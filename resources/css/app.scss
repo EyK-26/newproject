@@ -160,6 +160,30 @@ body {
             }
         }
 
+        .custom_product {
+            @include justify();
+            align-items: center;
+            width: 100%;
+
+            .custom_product__detail {
+                @include column();
+                justify-content: center;
+
+
+                margin: 1em;
+
+            }
+
+            img {
+                width: 100%;
+                align-self: center;
+            }
+
+            .controls {
+                @include justify();
+            }
+        }
+
         .user_menu {
             background-color: rgb(139, 139, 139);
             position: absolute;

@@ -7,6 +7,8 @@ namespace Database\Seeders;
 use App\Models\Offer;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,7 +17,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
-        Offer::factory(10)->create();
+        Schema::disableForeignKeyConstraints();
+        DB::table("offers")->truncate();
+        DB::table("users")->truncate();
+        Schema::enableForeignKeyConstraints();
+
+        User::factory(30)->create();
+        Offer::factory(65)->create();
     }
 }
