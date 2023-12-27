@@ -13,10 +13,23 @@ const Pagination: FunctionComponent<PaginationProps> = ({ products }) => {
     const content = products.slice(startIndex, endIndex);
 
     return (
-        <div>   
-            {products[]}
-            <button>previous</button>
-            <button>next</button>
+        <div>
+            {content}
+            <button
+                onClick={(): void => {
+                    setCurrentPage((prev): number => prev - 1);
+                }}
+            >
+                previous
+            </button>
+            <button
+                onClick={(): void => {
+                    setCurrentPage((prev): number => prev + 1);
+                }}
+            >
+                next
+            </button>
+            <span>Results: {`${currentPage} of ${totalPages}`}</span>
         </div>
     );
 };
