@@ -1,3 +1,5 @@
+import { User } from "./UserReducer";
+
 export interface Product {
     id: number;
     locality: string;
@@ -13,19 +15,21 @@ export interface Product {
 
 export interface CustomProduct {
     floor_area: number;
-
+    description: string;
     id: number;
     land_area: number;
     locality: string;
     photo_path: string;
     price: number;
     title: string;
+    user_id: number;
+    user: User;
 }
 
 export interface PropertyState {
-    customProducts: [];
-    selectedCustomProducts: [];
-    selectedCustomProductIds: [];
+    customProducts: Array<CustomProduct>;
+    selectedCustomProducts: Array<CustomProduct>;
+    selectedCustomProductIds: number[];
     products: Array<Product>;
     productsLoading: boolean;
     selectedIds: number[];
@@ -46,13 +50,20 @@ export type PropertyAction =
     | { type: "product/add"; payload: Product }
     | { type: "searchedProducts/set"; payload: Array<Product> }
     | { type: "location/set"; payload: string }
-    | { type: "price/set"; payload: number };
+    | { type: "price/set"; payload: number }
+    | { type: "customProducts/set"; payload: Array<CustomProduct> };
 
 const PropertyReducer = (
     state: PropertyState,
     action: PropertyAction
 ): PropertyState => {
     switch (action.type) {
+        case "customProducts/set":
+            return {
+                ...state,
+                customProducts: action.payload,
+                productsLoading: false,
+            };
         case "products/set":
             return {
                 ...state,

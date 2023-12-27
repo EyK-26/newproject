@@ -9,6 +9,9 @@ const Layout: FunctionComponent = () => {
     const [propertyContextValue, setPropertyContextValue] = useReducer(
         PropertyReducer,
         {
+            customProducts: [],
+            selectedCustomProducts: [],
+            selectedCustomProductIds: [],
             products: [],
             productsLoading: true,
             selectedIds: [],

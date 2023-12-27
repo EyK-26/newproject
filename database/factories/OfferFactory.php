@@ -26,7 +26,7 @@ class OfferFactory extends Factory
 
         return [
             'user_id' => fake()->numberBetween(1, 10),
-            'title' => fake()->title(),
+            'title' => fake()->word(),
             'locality' => fake()->city(),
             'description' => fake()->paragraph(),
             'floor_area' => $floor_area,
