@@ -1,11 +1,5 @@
 import axios from "axios";
-import React, {
-    FunctionComponent,
-    useCallback,
-    useContext,
-    useEffect,
-    useState,
-} from "react";
+import React, { FunctionComponent, useContext, useEffect } from "react";
 import PropertyContext from "../myApp/context/PropertyContext";
 import ImageToggler from "./ImageToggler";
 
@@ -35,10 +29,7 @@ const CustomOffers: FunctionComponent = () => {
                 <ImageToggler
                     images={prod.photo_path
                         .split(", ")
-                        .map(
-                            (path) =>
-                                `http://www.realestate.test/uploads/${path}`
-                        )}
+                        .map((path) => `/uploads/${path}`)}
                     name={prod.title}
                     mainview={false}
                 />
