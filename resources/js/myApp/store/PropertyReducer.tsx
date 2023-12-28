@@ -120,13 +120,12 @@ const PropertyReducer = (
         case "customProductLocation/set":
             return {
                 ...state,
-                searchedCustomProducts: [
-                    ...state.searchedCustomProducts,
-                ].filter((prod) =>
-                    prod.locality
-                        .trim()
-                        .toLowerCase()
-                        .includes(action.payload.trim().toLowerCase())
+                searchedCustomProducts: [...state.customProducts].filter(
+                    (prod) =>
+                        prod.locality
+                            .trim()
+                            .toLowerCase()
+                            .includes(action.payload.trim().toLowerCase())
                 ),
             };
         case "price/set":
@@ -139,9 +138,9 @@ const PropertyReducer = (
         case "customProductPrice/set":
             return {
                 ...state,
-                searchedCustomProducts: [
-                    ...state.searchedCustomProducts,
-                ].filter((prod) => prod.price <= action.payload),
+                searchedCustomProducts: [...state.customProducts].filter(
+                    (prod) => prod.price <= action.payload
+                ),
             };
         default:
             return state;
