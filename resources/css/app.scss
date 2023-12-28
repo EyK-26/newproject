@@ -214,11 +214,13 @@ body {
 
                 .price_range__container,
                 .search_bar {
-                    @include align();
+                    @include column();
                     margin: 1em;
 
                     label {
                         margin-right: 0.5em;
+                        min-width: 20em;
+
                     }
                 }
             }
