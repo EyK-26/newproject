@@ -28,30 +28,36 @@ const CustomOffers: FunctionComponent = () => {
                 name={prod.title}
                 mainview={true}
             />
-            <div className="custom_product__detail">
-                <span>Item description: </span>
-                <li>{prod.description}</li>
-            </div>
-            <div className="custom_product__detail">
-                <span>Floor area: </span>
-                <li>{prod.floor_area}</li>
-            </div>
-            <div className="custom_product__detail">
-                <span>Land area: </span>
-                <li>{prod.land_area}</li>
-            </div>
-            <div className="custom_product__detail">
-                <span>Price: </span>
-                <li>{prod.price}</li>
-            </div>
-            <div className="custom_product__detail">
-                <span>Locality: </span>
-                <li>{prod.locality}</li>
+            <div className="custom_product_detail__container">
+                <div className="custom_product_detail">
+                    <span>Item description: </span>
+                    <li>{prod.description}</li>
+                </div>
+                <div className="custom_product_detail">
+                    <span>Floor area: </span>
+                    <li>{prod.floor_area}</li>
+                </div>
+                <div className="custom_product_detail">
+                    <span>Land area: </span>
+                    <li>{prod.land_area}</li>
+                </div>
+                <div className="custom_product_detail">
+                    <span>Price: </span>
+                    <li>{prod.price}</li>
+                </div>
+                <div className="custom_product_detail">
+                    <span>Locality: </span>
+                    <li>{prod.locality}</li>
+                </div>
             </div>
         </ul>
     ));
 
-    return <Pagination products={renderedProducts} />;
+    return (
+        <div className="custom_product__container">
+            <Pagination products={renderedProducts} />
+        </div>
+    );
 };
 
 export default CustomOffers;
