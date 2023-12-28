@@ -28,8 +28,11 @@ export interface CustomProduct {
 
 export interface PropertyState {
     customProducts: Array<CustomProduct>;
+    customProductsLoading: boolean;
     selectedCustomProducts: Array<CustomProduct>;
     selectedCustomProductIds: number[];
+    searchedCustomProducts: Array<CustomProduct>;
+    searchedCustomProductsLoading: boolean;
     products: Array<Product>;
     productsLoading: boolean;
     selectedIds: number[];
@@ -51,7 +54,9 @@ export type PropertyAction =
     | { type: "searchedProducts/set"; payload: Array<Product> }
     | { type: "location/set"; payload: string }
     | { type: "price/set"; payload: number }
-    | { type: "customProducts/set"; payload: Array<CustomProduct> };
+    | { type: "customProducts/set"; payload: Array<CustomProduct> }
+    | { type: "customProductLocation/set"; payload: string }
+    | { type: "customProductPrice/set"; payload: number };
 
 const PropertyReducer = (
     state: PropertyState,
@@ -112,12 +117,31 @@ const PropertyReducer = (
                         .includes(action.payload.trim().toLowerCase())
                 ),
             };
+        case "customProductLocation/set":
+            return {
+                ...state,
+                searchedCustomProducts: [
+                    ...state.searchedCustomProducts,
+                ].filter((prod) =>
+                    prod.locality
+                        .trim()
+                        .toLowerCase()
+                        .includes(action.payload.trim().toLowerCase())
+                ),
+            };
         case "price/set":
             return {
                 ...state,
                 searchedProducts: [...state.searchedProducts].filter(
                     (prod) => prod.prize_czk <= action.payload
                 ),
+            };
+        case "customProductPrice/set":
+            return {
+                ...state,
+                searchedCustomProducts: [
+                    ...state.searchedCustomProducts,
+                ].filter((prod) => prod.price <= action.payload),
             };
         default:
             return state;

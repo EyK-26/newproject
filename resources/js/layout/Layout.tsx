@@ -10,8 +10,11 @@ const Layout: FunctionComponent = () => {
         PropertyReducer,
         {
             customProducts: [],
+            customProductsLoading: true,
             selectedCustomProducts: [],
             selectedCustomProductIds: [],
+            searchedCustomProducts: [],
+            searchedCustomProductsLoading: true,
             products: [],
             productsLoading: true,
             selectedIds: [],

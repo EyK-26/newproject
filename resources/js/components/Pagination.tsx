@@ -63,7 +63,6 @@ const Pagination: FunctionComponent<PaginationProps> = ({ products }) => {
                 <span>Results: {`${currentPage} of ${totalPages}`}</span>
             </div>
             {content.length > 0 ? content : "no property available"}
-            {console.log(content)}
         </>
     );
 };

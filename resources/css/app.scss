@@ -177,6 +177,7 @@ body {
                         margin-right: 0.5em;
                     }
                 }
+
             }
 
             .custom_product {
@@ -205,6 +206,21 @@ body {
 
                 .controls {
                     @include justify();
+                }
+            }
+
+            .filters {
+                @include justify();
+                align-items: center;
+
+                .price_range__container,
+                .search_bar {
+                    @include align();
+                    margin: 1em;
+
+                    label {
+                        margin-right: 0.5em;
+                    }
                 }
             }
         }

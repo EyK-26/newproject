@@ -1,9 +1,9 @@
 import React, { ChangeEvent, FunctionComponent } from "react";
 
-interface SearchBarProps {
+type SearchBarProps = {
     handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
     searchTerm: string;
-}
+};
 
 const SearchBar: FunctionComponent<SearchBarProps> = ({
     handleChange,

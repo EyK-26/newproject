@@ -1,10 +1,10 @@
 import React, { ChangeEvent, FunctionComponent } from "react";
 
-interface PriceRangeProps {
+type PriceRangeProps = {
     handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
     price: number;
     defaultPrice: number;
-}
+};
 
 const PriceRange: FunctionComponent<PriceRangeProps> = ({
     handleChange,

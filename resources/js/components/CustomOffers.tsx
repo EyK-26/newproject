@@ -1,11 +1,23 @@
 import axios from "axios";
-import React, { FunctionComponent, useContext, useEffect } from "react";
+import React, {
+    ChangeEvent,
+    FunctionComponent,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 import PropertyContext from "../myApp/context/PropertyContext";
 import ImageToggler from "./ImageToggler";
 import Pagination from "./Pagination";
+import SearchBar from "./SearchBar";
+import PriceRange from "./PriceRange";
 
 const CustomOffers: FunctionComponent = () => {
     const { state, dispatch } = useContext(PropertyContext);
+    const defaultPrice: number = 10000000;
+    const [price, setPrice] = useState<number>(defaultPrice);
+    const [searchTerm, setSearchTerm] = useState<string>("");
+
     const fetchCustomOffers = async (): Promise<void> => {
         const response = await axios.get("/api/custom-offers");
         console.log(response.data);
@@ -53,8 +65,41 @@ const CustomOffers: FunctionComponent = () => {
         </ul>
     ));
 
+    const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+        switch (e.target.name) {
+            case "search_locality":
+                setSearchTerm(e.target.value);
+                dispatch({
+                    type: "customProductLocation/set",
+                    payload: e.target.value,
+                });
+
+                break;
+            case "price_range":
+                setPrice(Number(e.target.value));
+                dispatch({
+                    type: "customProductPrice/set",
+                    payload: Number(e.target.value),
+                });
+                break;
+            default:
+                break;
+        }
+    };
+
     return (
         <div className="custom_product__container">
+            <div className="filters">
+                <SearchBar
+                    handleChange={handleChange}
+                    searchTerm={searchTerm}
+                />
+                <PriceRange
+                    handleChange={handleChange}
+                    price={price}
+                    defaultPrice={defaultPrice}
+                />
+            </div>
             <Pagination products={renderedProducts} />
         </div>
     );
