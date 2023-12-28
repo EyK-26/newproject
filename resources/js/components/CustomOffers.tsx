@@ -12,12 +12,17 @@ import Pagination from "./Pagination";
 import SearchBar from "./SearchBar";
 import PriceRange from "./PriceRange";
 import OrderElements from "./OrderElements";
+import { FaHeart } from "react-icons/fa";
+import UserContext from "../myApp/context/UserContext";
 
 const CustomOffers: FunctionComponent = () => {
+    const { state: userState, dispatch: userDispatch } =
+        useContext(UserContext);
     const { state, dispatch } = useContext(PropertyContext);
     const defaultPrice: number = 10000000;
     const [price, setPrice] = useState<number>(defaultPrice);
     const [searchTerm, setSearchTerm] = useState<string>("");
+    const [added, setAdded] = useState<boolean>(false);
 
     const fetchCustomOffers = async (): Promise<void> => {
         const response = await axios.get("/api/custom-offers");
@@ -35,6 +40,33 @@ const CustomOffers: FunctionComponent = () => {
         fetchCustomOffers();
     }, []);
 
+    const toggleWishlist = async (id: number) => {
+        try {
+            const response = await axios.post("/api/toggle-wishlist", {
+                product_id: id,
+                user_id:
+                    userState.user !== null &&
+                    typeof userState.user !== "boolean" &&
+                    userState.user.id,
+            });
+            if (Math.floor(response.status / 100) === 2) {
+                setAdded((prev) => !prev);
+                if (response.data.message.includes("removed")) {
+                    userDispatch({
+                        type: "addedProducts/unset",
+                        payload: Number(id),
+                    });
+                }
+                // fetchUserStatus();
+            }
+        } catch (error: any) {
+            userDispatch({
+                type: "spanMessage/set",
+                payload: error,
+            });
+        }
+    };
+
     const renderedProducts: JSX.Element[] = state.searchedCustomProducts.map(
         (prod) => (
             <ul key={prod.id} className="custom_product">
@@ -51,21 +83,37 @@ const CustomOffers: FunctionComponent = () => {
                         <span>Item description: </span>
                         <li>{prod.description}</li>
                     </div>
-                    <div className="custom_product_detail">
-                        <span>Floor area: </span>
-                        <li>{prod.floor_area}</li>
-                    </div>
-                    <div className="custom_product_detail">
-                        <span>Land area: </span>
-                        <li>{prod.land_area}</li>
-                    </div>
-                    <div className="custom_product_detail">
-                        <span>Price: </span>
-                        <li>{prod.price}</li>
-                    </div>
-                    <div className="custom_product_detail">
-                        <span>Locality: </span>
-                        <li>{prod.locality}</li>
+                    <div className="details_controls">
+                        <div>
+                            <div className="custom_product_detail">
+                                <span>Floor area: </span>
+                                <li>{prod.floor_area}</li>
+                            </div>
+                            <div className="custom_product_detail">
+                                <span>Land area: </span>
+                                <li>{prod.land_area}</li>
+                            </div>
+                            <div className="custom_product_detail">
+                                <span>Price: </span>
+                                <li>{prod.price}</li>
+                            </div>
+                            <div className="custom_product_detail">
+                                <span>Locality: </span>
+                                <li>{prod.locality}</li>
+                            </div>
+                        </div>
+                        <div
+                            className="wishlist__container"
+                            onClick={toggleWishlist.bind(null, prod.id)}
+                        >
+                            <FaHeart
+                            // className={added ? "property__added" : undefined}
+                            />
+                            <span>
+                                Add to Wishlist
+                                {/* {!added ? "Add to Wishlist" : "Added to wishlish"} */}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </ul>

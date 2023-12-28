@@ -202,13 +202,31 @@ body {
                     align-self: center;
                 }
 
-                .custom_product_detail__container {
-                    padding: 0 2.2em;
+                .details_controls {
+                    @include align();
+                    justify-content: space-between;
 
-                    .custom_product_detail {
+                    .wishlist__container {
+                        background-color: #9fabb6;
+                        padding: 1em;
+                        border-radius: 0.8em;
+                        box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
                         @include column();
-                        justify-content: center;
-                        margin: 0.5em;
+                        align-items: center;
+
+                        &:hover {
+                            transform: scale(1.03);
+                        }
+                    }
+
+                    .custom_product_detail__container {
+                        padding: 0 2.2em;
+
+                        .custom_product_detail {
+                            @include column();
+                            justify-content: center;
+                            margin: 0.5em;
+                        }
                     }
                 }
 
