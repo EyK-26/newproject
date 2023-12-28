@@ -161,11 +161,11 @@ body {
         }
 
         .custom_product__container {
-            display: flex;
+            @include justify();
             flex-wrap: wrap;
 
             .pagination_controls {
-                width: 100%;
+                width: 90%;
                 @include align();
                 justify-content: space-between;
 
@@ -198,6 +198,9 @@ body {
                     transform: scale(1.03);
                 }
 
+                h4 {
+                    align-self: center;
+                }
 
                 .custom_product_detail__container {
                     padding: 0 2.2em;

@@ -57,7 +57,10 @@ export type PropertyAction =
     | { type: "customProducts/set"; payload: Array<CustomProduct> }
     | { type: "customProductLocation/set"; payload: string }
     | { type: "customProductPrice/set"; payload: number }
-    | { type: "searchedCustomProducts/set"; payload: Array<CustomProduct> };
+    | { type: "searchedCustomProducts/set"; payload: Array<CustomProduct> }
+    | { type: "customProductPriceOrder/set"; payload: string }
+    | { type: "customProductLocalityOrder/set"; payload: string }
+    | { type: "customProductTitleOrder/set"; payload: string };
 
 const PropertyReducer = (
     state: PropertyState,
@@ -147,6 +150,48 @@ const PropertyReducer = (
                 ...state,
                 searchedCustomProducts: [...state.customProducts].filter(
                     (prod) => prod.price <= action.payload
+                ),
+            };
+        case "customProductPriceOrder/set":
+            return {
+                ...state,
+                searchedCustomProducts: [...state.searchedCustomProducts].sort(
+                    (a, b) =>
+                        action.payload !== undefined && action.payload === "asc"
+                            ? a.price > b.price
+                                ? 1
+                                : -1
+                            : a.price > b.price
+                            ? -1
+                            : 1
+                ),
+            };
+        case "customProductLocalityOrder/set":
+            return {
+                ...state,
+                searchedCustomProducts: [...state.searchedCustomProducts].sort(
+                    (a, b) =>
+                        action.payload !== undefined && action.payload === "asc"
+                            ? a.locality > b.locality
+                                ? 1
+                                : -1
+                            : a.locality > b.locality
+                            ? -1
+                            : 1
+                ),
+            };
+        case "customProductTitleOrder/set":
+            return {
+                ...state,
+                searchedCustomProducts: [...state.searchedCustomProducts].sort(
+                    (a, b) =>
+                        action.payload !== undefined && action.payload === "asc"
+                            ? a.title > b.title
+                                ? 1
+                                : -1
+                            : a.title > b.title
+                            ? -1
+                            : 1
                 ),
             };
         default:

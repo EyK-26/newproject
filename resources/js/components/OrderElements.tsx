@@ -1,11 +1,11 @@
 import React, { ChangeEvent, FunctionComponent } from "react";
 
 type OrderElementsProps = {
-    handleOrderChange(e: ChangeEvent<HTMLSelectElement>): void;
+    handleChange(e: ChangeEvent<HTMLSelectElement>): void;
 };
 
 const OrderElements: FunctionComponent<OrderElementsProps> = ({
-    handleOrderChange,
+    handleChange,
 }) => {
     return (
         <div className="order_by_container">
@@ -14,12 +14,15 @@ const OrderElements: FunctionComponent<OrderElementsProps> = ({
                 <select
                     name="order_by_price"
                     id="order_by_price"
-                    onChange={handleOrderChange}
+                    onChange={handleChange}
                 >
-                    <option value="price_asc" key="1">
+                    <option value={undefined} key="1">
+                        select
+                    </option>
+                    <option value={"asc"} key="2">
                         Price (lowest to highest)
                     </option>
-                    <option value="price_desc" key="1">
+                    <option value={"desc"} key="3">
                         Price (highest to lowest)
                     </option>
                 </select>
@@ -30,12 +33,15 @@ const OrderElements: FunctionComponent<OrderElementsProps> = ({
                 <select
                     name="order_by_locality"
                     id="order_by_locality"
-                    onChange={handleOrderChange}
+                    onChange={handleChange}
                 >
-                    <option value="locality_asc" key="2">
+                    <option value={undefined} key="1">
+                        select
+                    </option>
+                    <option value={"asc"} key="2">
                         Locality (A-Z)
                     </option>
-                    <option value="locality_desc" key="2">
+                    <option value={"desc"} key="3">
                         Locality (Z-A)
                     </option>
                 </select>
@@ -46,12 +52,15 @@ const OrderElements: FunctionComponent<OrderElementsProps> = ({
                 <select
                     name="order_by_title"
                     id="order_by_title"
-                    onChange={handleOrderChange}
+                    onChange={handleChange}
                 >
-                    <option value="title_asc" key="3">
+                    <option value={undefined} key="1">
+                        select
+                    </option>
+                    <option value={"asc"} key="2">
                         Title (A-Z)
                     </option>
-                    <option value="title_desc" key="3">
+                    <option value={"desc"} key="3">
                         Title (Z-A)
                     </option>
                 </select>

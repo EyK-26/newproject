@@ -21,7 +21,6 @@ const CustomOffers: FunctionComponent = () => {
 
     const fetchCustomOffers = async (): Promise<void> => {
         const response = await axios.get("/api/custom-offers");
-        console.log(response.data);
         dispatch({
             type: "customProducts/set",
             payload: response.data,
@@ -39,6 +38,7 @@ const CustomOffers: FunctionComponent = () => {
     const renderedProducts: JSX.Element[] = state.searchedCustomProducts.map(
         (prod) => (
             <ul key={prod.id} className="custom_product">
+                <h4>{prod.title}</h4>
                 <ImageToggler
                     images={prod.photo_path
                         .split(", ")
@@ -72,7 +72,9 @@ const CustomOffers: FunctionComponent = () => {
         )
     );
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const handleChange = (
+        e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ): void => {
         switch (e.target.name) {
             case "search_locality":
                 setSearchTerm(e.target.value);
@@ -80,7 +82,6 @@ const CustomOffers: FunctionComponent = () => {
                     type: "customProductLocation/set",
                     payload: e.target.value,
                 });
-
                 break;
             case "price_range":
                 setPrice(Number(e.target.value));
@@ -89,26 +90,22 @@ const CustomOffers: FunctionComponent = () => {
                     payload: Number(e.target.value),
                 });
                 break;
-            default:
-                break;
-        }
-    };
-
-    const handleOrderChange = (e: ChangeEvent<HTMLSelectElement>): void => {
-        switch (e.target.name) {
-            case "search_locality":
-                setSearchTerm(e.target.value);
+            case "order_by_price":
                 dispatch({
-                    type: "customProductLocation/set",
+                    type: "customProductPriceOrder/set",
                     payload: e.target.value,
                 });
-
                 break;
-            case "price_range":
-                setPrice(Number(e.target.value));
+            case "order_by_locality":
                 dispatch({
-                    type: "customProductPrice/set",
-                    payload: Number(e.target.value),
+                    type: "customProductLocalityOrder/set",
+                    payload: e.target.value,
+                });
+                break;
+            case "order_by_title":
+                dispatch({
+                    type: "customProductTitleOrder/set",
+                    payload: e.target.value,
                 });
                 break;
             default:
@@ -128,7 +125,7 @@ const CustomOffers: FunctionComponent = () => {
                     price={price}
                     defaultPrice={defaultPrice}
                 />
-                <OrderElements handleOrderChange={handleOrderChange} />
+                <OrderElements handleChange={handleChange} />
             </div>
             <Pagination products={renderedProducts} />
         </div>

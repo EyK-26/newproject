@@ -13,7 +13,9 @@ const PriceRange: FunctionComponent<PriceRangeProps> = ({
 }) => {
     return (
         <div className="price_range__container">
-            <label htmlFor="price_range">{`Price Range ${price}/${defaultPrice}`}</label>
+            <label htmlFor="price_range">{`Price Range ${String(
+                price
+            )} CZK / ${String(defaultPrice)} CZK`}</label>
             <input
                 type="range"
                 min={1}
