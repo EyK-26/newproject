@@ -11,6 +11,7 @@ import ImageToggler from "./ImageToggler";
 import Pagination from "./Pagination";
 import SearchBar from "./SearchBar";
 import PriceRange from "./PriceRange";
+import OrderElements from "./OrderElements";
 
 const CustomOffers: FunctionComponent = () => {
     const { state, dispatch } = useContext(PropertyContext);
@@ -93,6 +94,28 @@ const CustomOffers: FunctionComponent = () => {
         }
     };
 
+    const handleOrderChange = (e: ChangeEvent<HTMLSelectElement>): void => {
+        switch (e.target.name) {
+            case "search_locality":
+                setSearchTerm(e.target.value);
+                dispatch({
+                    type: "customProductLocation/set",
+                    payload: e.target.value,
+                });
+
+                break;
+            case "price_range":
+                setPrice(Number(e.target.value));
+                dispatch({
+                    type: "customProductPrice/set",
+                    payload: Number(e.target.value),
+                });
+                break;
+            default:
+                break;
+        }
+    };
+
     return (
         <div className="custom_product__container">
             <div className="filters">
@@ -105,6 +128,7 @@ const CustomOffers: FunctionComponent = () => {
                     price={price}
                     defaultPrice={defaultPrice}
                 />
+                <OrderElements handleOrderChange={handleOrderChange} />
             </div>
             <Pagination products={renderedProducts} />
         </div>

@@ -178,11 +178,26 @@ body {
                     }
                 }
 
+                span {
+                    min-width: max-content;
+
+                }
             }
 
             .custom_product {
                 @include column();
-                width: 50%;
+                width: 30%;
+                margin: 0.8em;
+                background-color: #91a1c2;
+                padding: 0.6em;
+                border-radius: 0.8em;
+                box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
+                cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.03);
+                }
+
 
                 .custom_product_detail__container {
                     padding: 0 2.2em;
@@ -198,9 +213,15 @@ body {
                     @include column();
 
                     img {
-                        width: 80%;
+                        width: 60%;
                         margin: auto;
-                        padding: 0.5em
+                        margin-bottom: 0.5em;
+                        border-radius: 0.8em;
+                        box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
+
+                        &:hover {
+                            transform: scale(1.06);
+                        }
                     }
                 }
 
@@ -221,6 +242,20 @@ body {
                         margin-right: 0.5em;
                         min-width: 20em;
 
+                    }
+                }
+
+                .order_by_container {
+                    @include flex-between();
+                    padding: 0.5em 1em 2em 1em;
+
+                    .order_by_element {
+                        @include column();
+                        padding: 0.4em;
+
+                        select {
+                            width: max-content;
+                        }
                     }
                 }
             }
