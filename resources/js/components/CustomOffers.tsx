@@ -25,6 +25,10 @@ const CustomOffers: FunctionComponent = () => {
             type: "customProducts/set",
             payload: response.data,
         });
+        dispatch({
+            type: "searchedCustomProducts/set",
+            payload: response.data,
+        });
     };
 
     useEffect(() => {

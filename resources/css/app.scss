@@ -210,8 +210,7 @@ body {
             }
 
             .filters {
-                @include justify();
-                align-items: center;
+                @include column();
 
                 .price_range__container,
                 .search_bar {

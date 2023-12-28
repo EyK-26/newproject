@@ -56,7 +56,8 @@ export type PropertyAction =
     | { type: "price/set"; payload: number }
     | { type: "customProducts/set"; payload: Array<CustomProduct> }
     | { type: "customProductLocation/set"; payload: string }
-    | { type: "customProductPrice/set"; payload: number };
+    | { type: "customProductPrice/set"; payload: number }
+    | { type: "searchedCustomProducts/set"; payload: Array<CustomProduct> };
 
 const PropertyReducer = (
     state: PropertyState,
@@ -106,6 +107,12 @@ const PropertyReducer = (
                 ...state,
                 searchedProducts: action.payload,
                 searchedProductsLoading: false,
+            };
+        case "searchedCustomProducts/set":
+            return {
+                ...state,
+                searchedCustomProducts: action.payload,
+                searchedCustomProductsLoading: false,
             };
         case "location/set":
             return {
