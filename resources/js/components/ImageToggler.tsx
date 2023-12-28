@@ -14,7 +14,6 @@ const ImageToggler: FunctionComponent<ImageTogglerProps> = ({
     mainview,
 }) => {
     const [imageIndex, setImageIndex] = useState<number>(0);
-    console.log(images);
 
     return !mainview ? (
         <div className="image__container">
