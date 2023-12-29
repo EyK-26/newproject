@@ -217,6 +217,10 @@ body {
                         &:hover {
                             transform: scale(1.03);
                         }
+
+                        .property__added {
+                            fill: rgb(0, 4, 255);
+                        }
                     }
 
                     .custom_product_detail__container {

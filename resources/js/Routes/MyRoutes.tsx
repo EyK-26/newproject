@@ -63,7 +63,10 @@ const MyRoutes: FunctionComponent = () => {
             <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
                 <Route path="/properties" element={<SearchProductsAll />} />
-                <Route path="/custom-offers" element={<CustomOffers />} />
+                <Route
+                    path="/custom-offers"
+                    element={<CustomOffers fetchUserStatus={fetchUserStatus} />}
+                />
                 {!state.user ? (
                     <>
                         <Route

@@ -14,15 +14,25 @@ import PriceRange from "./PriceRange";
 import OrderElements from "./OrderElements";
 import { FaHeart } from "react-icons/fa";
 import UserContext from "../myApp/context/UserContext";
+import { CustomProduct } from "../myApp/store/PropertyReducer";
 
-const CustomOffers: FunctionComponent = () => {
+type CustomOffersProps = {
+    fetchUserStatus(): void;
+};
+
+const CustomOffers: FunctionComponent<CustomOffersProps> = ({
+    fetchUserStatus,
+}) => {
     const { state: userState, dispatch: userDispatch } =
         useContext(UserContext);
     const { state, dispatch } = useContext(PropertyContext);
     const defaultPrice: number = 10000000;
     const [price, setPrice] = useState<number>(defaultPrice);
     const [searchTerm, setSearchTerm] = useState<string>("");
-    const [added, setAdded] = useState<boolean>(false);
+    const userLoggedInState =
+        userState.user !== null &&
+        typeof userState.user !== "boolean" &&
+        userState.user.id;
 
     const fetchCustomOffers = async (): Promise<void> => {
         const response = await axios.get("/api/custom-offers");
@@ -44,20 +54,23 @@ const CustomOffers: FunctionComponent = () => {
         try {
             const response = await axios.post("/api/toggle-wishlist", {
                 product_id: id,
-                user_id:
-                    userState.user !== null &&
-                    typeof userState.user !== "boolean" &&
-                    userState.user.id,
+                user_id: userLoggedInState,
             });
             if (Math.floor(response.status / 100) === 2) {
-                setAdded((prev) => !prev);
                 if (response.data.message.includes("removed")) {
                     userDispatch({
                         type: "addedProducts/unset",
                         payload: Number(id),
                     });
+                } else if (response.data.message.includes("added")) {
+                    userDispatch({
+                        type: "addedProducts/set",
+                        payload: state.customProducts.find(
+                            (el: CustomProduct) => Number(el.id) === Number(id)
+                        ),
+                    });
                 }
-                // fetchUserStatus();
+                fetchUserStatus();
             }
         } catch (error: any) {
             userDispatch({
@@ -102,18 +115,24 @@ const CustomOffers: FunctionComponent = () => {
                                 <li>{prod.locality}</li>
                             </div>
                         </div>
-                        <div
-                            className="wishlist__container"
-                            onClick={toggleWishlist.bind(null, prod.id)}
-                        >
-                            <FaHeart
-                            // className={added ? "property__added" : undefined}
-                            />
-                            <span>
-                                Add to Wishlist
-                                {/* {!added ? "Add to Wishlist" : "Added to wishlish"} */}
-                            </span>
-                        </div>
+                        {userLoggedInState && (
+                            <div
+                                className="wishlist__container"
+                                onClick={toggleWishlist.bind(null, prod.id)}
+                            >
+                                <FaHeart
+                                // className={
+                                //     added ? "property__added" : undefined
+                                // }
+                                />
+                                <span>
+                                    add
+                                    {/* {!added
+                                        ? "Add to Wishlist"
+                                        : "Added to wishlish"} */}
+                                </span>
+                            </div>
+                        )}
                     </div>
                 </div>
             </ul>
@@ -175,7 +194,9 @@ const CustomOffers: FunctionComponent = () => {
                 />
                 <OrderElements handleChange={handleChange} />
             </div>
-            <Pagination products={renderedProducts} />
+            {!userState.spanMessage && (
+                <Pagination products={renderedProducts} />
+            )}
         </div>
     );
 };

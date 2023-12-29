@@ -23,7 +23,7 @@ export interface CustomProduct {
     price: number;
     title: string;
     user_id: number;
-    user: User;
+    user?: User;
 }
 
 export interface PropertyState {

@@ -1,4 +1,4 @@
-import { Product } from "./PropertyReducer";
+import { CustomProduct, Product } from "./PropertyReducer";
 
 export interface Wish {
     created_at: string;
@@ -36,7 +36,7 @@ export interface UserState {
     theme: string;
     user: User | null | boolean;
     messages: Array<string>;
-    addedProducts: Array<Product>;
+    addedProducts: Array<Product | CustomProduct>;
     spanMessage: string;
 }
 
@@ -47,7 +47,7 @@ export type UserAction =
     | { type: "messages/unset" }
     | { type: "spanMessage/set"; payload: string }
     | { type: "spanMessage/unset" }
-    | { type: "addedProducts/set"; payload: Product }
+    | { type: "addedProducts/set"; payload: Product | CustomProduct }
     | { type: "addedProducts/unset"; payload: number };
 
 const UserReducer = (state: UserState, action: UserAction): UserState => {

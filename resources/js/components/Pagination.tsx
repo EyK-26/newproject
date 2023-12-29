@@ -1,8 +1,8 @@
 import React, { ChangeEvent, FunctionComponent, useState } from "react";
 
-interface PaginationProps {
+type PaginationProps = {
     products: JSX.Element[];
-}
+};
 
 const Pagination: FunctionComponent<PaginationProps> = ({ products }) => {
     const [currentPage, setCurrentPage] = useState<number>(1);
