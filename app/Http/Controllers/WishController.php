@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class WishController extends Controller
 {
+    public function index(Request $request): array
+    {
+        return Wish::where('user_id', $request->id)->select('product_id') ?: null;
+    }
+
     public function store(Request $request): array
     {
         $added_product = Wish::query()

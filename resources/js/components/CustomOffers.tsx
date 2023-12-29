@@ -15,6 +15,7 @@ import OrderElements from "./OrderElements";
 import { FaHeart } from "react-icons/fa";
 import UserContext from "../myApp/context/UserContext";
 import { CustomProduct } from "../myApp/store/PropertyReducer";
+import WishlistControls from "./WishlistControls";
 
 type CustomOffersProps = {
     fetchUserStatus(): void;
@@ -50,7 +51,7 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
         fetchCustomOffers();
     }, []);
 
-    const toggleWishlist = async (id: number) => {
+    const toggleWishlist = async (id: number): Promise<void> => {
         try {
             const response = await axios.post("/api/toggle-wishlist", {
                 product_id: id,
@@ -116,22 +117,10 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
                             </div>
                         </div>
                         {userLoggedInState && (
-                            <div
-                                className="wishlist__container"
-                                onClick={toggleWishlist.bind(null, prod.id)}
-                            >
-                                <FaHeart
-                                // className={
-                                //     added ? "property__added" : undefined
-                                // }
-                                />
-                                <span>
-                                    add
-                                    {/* {!added
-                                        ? "Add to Wishlist"
-                                        : "Added to wishlish"} */}
-                                </span>
-                            </div>
+                            <WishlistControls
+                                toggleWishlist={toggleWishlist}
+                                prod={prod}
+                            />
                         )}
                     </div>
                 </div>

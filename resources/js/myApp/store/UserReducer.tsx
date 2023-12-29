@@ -47,7 +47,7 @@ export type UserAction =
     | { type: "messages/unset" }
     | { type: "spanMessage/set"; payload: string }
     | { type: "spanMessage/unset" }
-    | { type: "addedProducts/set"; payload: Product | CustomProduct }
+    | { type: "addedProducts/set"; payload?: Product | CustomProduct }
     | { type: "addedProducts/unset"; payload: number };
 
 const UserReducer = (state: UserState, action: UserAction): UserState => {
@@ -83,10 +83,12 @@ const UserReducer = (state: UserState, action: UserAction): UserState => {
                 spanMessage: "",
             };
         case "addedProducts/set":
-            return {
-                ...state,
-                addedProducts: [...state.addedProducts, action.payload],
-            };
+            if (action.payload) {
+                return {
+                    ...state,
+                    addedProducts: [...state.addedProducts, action.payload],
+                };
+            }
         case "addedProducts/unset":
             return {
                 ...state,

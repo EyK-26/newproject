@@ -42,10 +42,10 @@ const WishList: FunctionComponent = () => {
             )}
             {state.addedProducts.length > 0 ? (
                 state.addedProducts.map((prod) => (
-                    <div className="wishlist_product" key={prod.id}>
-                        <li>{prod.name}</li>
-                        <img src={prod.images[0]} alt={prod.name} />
-                        <Link to={`/prod_view/${prod.id}`}>See Property</Link>
+                    <div className="wishlist_product" key={prod?.id}>
+                        <li>{prod?.name}</li>
+                        <img src={prod?.images[0]} alt={prod?.name} />
+                        <Link to={`/prod_view/${prod?.id}`}>See Property</Link>
                     </div>
                 ))
             ) : (
