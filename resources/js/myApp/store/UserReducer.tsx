@@ -3,7 +3,8 @@ import { CustomProduct, Product } from "./PropertyReducer";
 export interface Wish {
     created_at: string;
     id: number;
-    pffer_id: number;
+    offer_id: number;
+    offer: CustomProduct;
     updated_at: string;
     user_id: number;
 }

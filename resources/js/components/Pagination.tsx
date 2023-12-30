@@ -1,10 +1,13 @@
 import React, { ChangeEvent, FunctionComponent, useState } from "react";
 
 type PaginationProps = {
-    products: JSX.Element[];
+    products: JSX.Element[] | JSX.Element;
 };
 
 const Pagination: FunctionComponent<PaginationProps> = ({ products }) => {
+    if (!Array.isArray(products)) {
+        return products;
+    }
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [contentPerPage, setContentPerPage] = useState<number>(5);
     const totalPages: number = Math.ceil(products.length / contentPerPage);
