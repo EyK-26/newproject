@@ -257,6 +257,7 @@ body {
 
             .filters {
                 @include column();
+                width: 70%;
 
                 .price_range__container,
                 .search_bar {
