@@ -12,7 +12,6 @@ import Pagination from "./Pagination";
 import SearchBar from "./SearchBar";
 import PriceRange from "./PriceRange";
 import OrderElements from "./OrderElements";
-import { FaHeart } from "react-icons/fa";
 import UserContext from "../myApp/context/UserContext";
 import { CustomProduct } from "../myApp/store/PropertyReducer";
 import WishlistControls from "./WishlistControls";
@@ -36,19 +35,28 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
         userState.user.id;
 
     const fetchCustomOffers = async (): Promise<void> => {
-        const response = await axios.get("/api/custom-offers");
-        dispatch({
-            type: "customProducts/set",
-            payload: response.data,
-        });
-        dispatch({
-            type: "searchedCustomProducts/set",
-            payload: response.data,
-        });
+        try {
+            const response = await axios.get("/api/custom-offers");
+            dispatch({
+                type: "customProducts/set",
+                payload: response.data,
+            });
+            dispatch({
+                type: "searchedCustomProducts/set",
+                payload: response.data,
+            });
+        } catch (err) {
+            userDispatch({
+                type: "spanMessage/set",
+                payload: "an error occured",
+            });
+        }
     };
 
     useEffect(() => {
-        fetchCustomOffers();
+        if (!(state.customProducts.length > 0)) {
+            fetchCustomOffers();
+        }
     }, []);
 
     const toggleWishlist = async (id: number): Promise<void> => {

@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class WishController extends Controller
 {
-    public function index(Request $request): array
-    {
-        return Wish::where('user_id', $request->id)->select('product_id') ?: null;
-    }
-
     public function store(Request $request): array
     {
         $added_product = Wish::query()
@@ -38,24 +33,24 @@ class WishController extends Controller
         return empty($added_product);
     }
 
-    // private function flatten(array $products): array
-    // {
-    //     $new_array = array();
-    //     array_walk_recursive($products, function ($array) use (&$new_array) {
-    //         $new_array[] = $array;
-    //     });
-    //     return $new_array;
-    // }
+    private function flatten(array $products): array
+    {
+        $new_array = array();
+        array_walk_recursive($products, function ($array) use (&$new_array) {
+            $new_array[] = $array;
+        });
+        return $new_array;
+    }
 
-    // public function show(Request $request): array
-    // {
-    //     $wishlist_products = Wish::where('user_id', $request->id)->select('product_id')->get()->toArray();
-    //     if ($wishlist_products) {
-    //         return $this->flatten($wishlist_products);
-    //     } else {
-    //         return ['message' => 'Your wishlist is empty.'];
-    //     }
-    // }
+    public function index(Request $request): array
+    {
+        $wishlist_products = Wish::where('user_id', $request->id)->select('product_id')->get()->toArray();
+        if (count($wishlist_products) > 0) {
+            return $this->flatten($wishlist_products);
+        } else {
+            return ['message' => 'Your wishlist is empty.'];
+        }
+    }
 
     public function is_added(Request $request): bool
     {

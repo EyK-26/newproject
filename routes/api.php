@@ -23,6 +23,7 @@ Route::put('/change-username', [UserController::class, 'update']);
 
 Route::get('/get-wishlist', [WishController::class, 'is_added']);
 Route::post('/toggle-wishlist', [WishController::class, 'store']);
+Route::get('/set-wishlist', [WishController::class, 'index']);
 
 Route::get('/enquiry', [EnquiryController::class, 'index']);
 Route::post('/enquiry', [EnquiryController::class, 'store']);
