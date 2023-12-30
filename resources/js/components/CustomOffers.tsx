@@ -17,6 +17,7 @@ import UserContext from "../myApp/context/UserContext";
 import { CustomProduct } from "../myApp/store/PropertyReducer";
 import WishlistControls from "./WishlistControls";
 import { useNavigate } from "react-router-dom";
+import ImageToggler from "./ImageToggler";
 
 type CustomOffersProps = {
     fetchUserStatus(): void;
