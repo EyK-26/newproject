@@ -2,8 +2,10 @@ import axios from "axios";
 import React, {
     ChangeEvent,
     FunctionComponent,
+    MutableRefObject,
     useContext,
     useEffect,
+    useRef,
     useState,
 } from "react";
 import PropertyContext from "../myApp/context/PropertyContext";
@@ -15,6 +17,7 @@ import OrderElements from "./OrderElements";
 import UserContext from "../myApp/context/UserContext";
 import { CustomProduct } from "../myApp/store/PropertyReducer";
 import WishlistControls from "./WishlistControls";
+import { useNavigate } from "react-router-dom";
 
 type CustomOffersProps = {
     fetchUserStatus(): void;
@@ -33,6 +36,9 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
         userState.user !== null &&
         typeof userState.user !== "boolean" &&
         userState.user.id;
+    const navigate = useNavigate();
+    const wishlistRef: MutableRefObject<null> = useRef(null);
+    const ImageTogglerRef: MutableRefObject<null> = useRef(null);
 
     const fetchCustomOffers = async (): Promise<void> => {
         try {
@@ -53,6 +59,18 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
         }
     };
 
+    const handleClick = (e, prod_id: number) => {
+        console.log(!wishlistRef.current.contains(e.target));
+        console.log(!ImageTogglerRef.current.contains(e.target));
+
+        // if (cardRef.current && !cardRef.current.contains(e.target)) {
+        //     console.log("dsadasda");
+        //     return;
+        // } else {
+        //     navigate(`/prod_view/${prod_id}`);
+        // }
+    };
+
     useEffect(() => {
         if (
             !(state.customProducts.length > 0) &&
@@ -60,6 +78,12 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
         ) {
             fetchCustomOffers();
         }
+        // if (!cardRef.current) {
+        document.addEventListener("click", handleClick, true);
+        return () => {
+            document.removeEventListener("click", handleClick, true);
+        };
+        // }
     }, []);
 
     const toggleWishlist = async (id: number): Promise<void> => {
@@ -95,7 +119,13 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
     const renderedProducts: JSX.Element[] | JSX.Element =
         !state.searchedCustomProductsLoading ? (
             state.searchedCustomProducts.map((prod) => (
-                <ul key={prod.id} className="custom_product">
+                <ul
+                    key={prod.id}
+                    className="custom_product"
+                    onClick={(e) => {
+                        handleClick(e, prod.id);
+                    }}
+                >
                     <h4>{prod.title}</h4>
                     <ImageToggler
                         images={prod.photo_path
@@ -103,6 +133,7 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
                             .map((path) => `/uploads/${path}`)}
                         name={prod.title}
                         mainview={true}
+                        ImageTogglerRef={ImageTogglerRef}
                     />
                     <div className="custom_product_detail__container">
                         <div className="custom_product_detail">
@@ -132,6 +163,7 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
                                 <WishlistControls
                                     toggleWishlist={toggleWishlist}
                                     prod={prod}
+                                    wishlistRef={wishlistRef}
                                 />
                             )}
                         </div>
