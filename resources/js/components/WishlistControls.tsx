@@ -7,13 +7,11 @@ import { Wish } from "../myApp/store/UserReducer";
 type WishlistControlsProps = {
     toggleWishlist(id: number): Promise<void>;
     prod: CustomProduct;
-    wishlistRef: LegacyRef<HTMLDivElement>;
 };
 
 const WishlistControls: FunctionComponent<WishlistControlsProps> = ({
     toggleWishlist,
     prod,
-    wishlistRef,
 }) => {
     const { state } = useContext(UserContext);
     const loggedInUserWishlist =
@@ -24,7 +22,6 @@ const WishlistControls: FunctionComponent<WishlistControlsProps> = ({
     return (
         <div
             className="wishlist__container"
-            ref={wishlistRef}
             onClick={() => {
                 toggleWishlist(prod.id);
             }}
