@@ -15,12 +15,12 @@ class WishController extends Controller
             ->first();
         if (!$this->check($request->user_id, $request->product_id)) {
             $added_product->delete();
-            return ['message' => 'removed from wishlist'];
+            return ['message' => 'removed'];
         } else {
             $wish = new Wish();
             $wish->fill(['user_id' => $request->user_id, 'product_id' => $request->product_id]);
             $wish->save();
-            return ['message' => 'added to wishlist'];
+            return ['message' => 'added'];
         }
     }
 

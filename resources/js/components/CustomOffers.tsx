@@ -54,7 +54,10 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
     };
 
     useEffect(() => {
-        if (!(state.customProducts.length > 0)) {
+        if (
+            !(state.customProducts.length > 0) &&
+            !(state.searchedCustomProducts.length > 0)
+        ) {
             fetchCustomOffers();
         }
     }, []);
@@ -66,12 +69,12 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
                 user_id: userLoggedInState,
             });
             if (Math.floor(response.status / 100) === 2) {
-                if (response.data.message.includes("removed")) {
+                if (response.data.message === "removed") {
                     userDispatch({
                         type: "addedProducts/unset",
                         payload: Number(id),
                     });
-                } else if (response.data.message.includes("added")) {
+                } else if (response.data.message === "added") {
                     userDispatch({
                         type: "addedProducts/set",
                         payload: state.customProducts.find(
