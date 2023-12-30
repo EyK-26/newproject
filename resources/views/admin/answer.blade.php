@@ -27,7 +27,7 @@
             <td>{{ $enquiry->user->id }}</td>
             <td>{{ $enquiry->user->name }}</td>
             <td>{{ $enquiry->user->email }}</td>
-            <td><a href={{ "/prod_view/$enquiry->product_id" }} target="_blank">View property</a></td>
+            <td><a href={{ "/prod_view/$enquiry->offer_id" }} target="_blank">View property</a></td>
         </tr>
     </tbody>
 </table>

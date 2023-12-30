@@ -10,8 +10,8 @@ Route::get('/password-reset/{email}/{token}/{datetime}', [PasswordResetControlle
     ->name('password.reset');
 
 Route::group(['middleware' => 'can:admin'], function () {
-    Route::get('/enquiry/{product_id}/{user_id}', [EnquiryController::class, 'show'])
-        ->whereNumber(['product_id', 'user_id'])
+    Route::get('/enquiry/{offer_id}/{user_id}', [EnquiryController::class, 'show'])
+        ->whereNumber(['offer_id', 'user_id'])
         ->name('enquiry.show');
 
     Route::get('/enquiry/answer/{enquiry_id}', [EnquiryController::class, 'answer'])

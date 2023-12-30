@@ -53,7 +53,7 @@ const EnquiryForm: FunctionComponent<EnquiryFormProps> = ({
                     state.user !== null &&
                     typeof state.user !== "boolean" &&
                     state.user.id,
-                product_id: id,
+                offer_id: id,
                 message: formData.message,
             });
             if (Math.floor(response.status / 100) === 2) {

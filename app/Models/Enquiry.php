@@ -10,7 +10,7 @@ class Enquiry extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'product_id',
+        'offer_id',
         'message'
     ];
 

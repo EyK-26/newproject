@@ -65,7 +65,7 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
     const toggleWishlist = async (id: number): Promise<void> => {
         try {
             const response = await axios.post("/api/toggle-wishlist", {
-                product_id: id,
+                offer_id: id,
                 user_id: userLoggedInState,
             });
             if (Math.floor(response.status / 100) === 2) {

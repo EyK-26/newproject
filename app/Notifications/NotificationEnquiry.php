@@ -15,13 +15,13 @@ class NotificationEnquiry extends Notification
     use Queueable;
     protected ?User $user;
     protected ?string $message;
-    protected ?int $product_id;
+    protected ?int $offer_id;
 
-    public function __construct(User $user, string $message, int $product_id)
+    public function __construct(User $user, string $message, int $offer_id)
     {
         $this->user = $user;
         $this->message = $message;
-        $this->product_id = $product_id;
+        $this->offer_id = $offer_id;
     }
 
     public function via(object $notifiable): array
@@ -35,10 +35,10 @@ class NotificationEnquiry extends Notification
         $this->notify_admin();
         return (new MailMessage)
             ->greeting("Dear {$notifiable->name}")
-            ->line("You have made enquiry about the property, id: {$this->product_id}")
+            ->line("You have made enquiry about the property, id: {$this->offer_id}")
             ->action(
                 'Click to see the property you made enquiry of',
-                url("/prod_view/{$this->product_id}")
+                url("/prod_view/{$this->offer_id}")
             )
             ->line("We will come back to you in 3 working days.")
             ->line('Thank you for using our application!')
@@ -49,7 +49,7 @@ class NotificationEnquiry extends Notification
     {
         $users = User::where('role', 'admin')->get();
         if (!empty($users)) {
-            FacadesNotification::send($users, new NotifyAdmin($this->user, $this->product_id));
+            FacadesNotification::send($users, new NotifyAdmin($this->user, $this->offer_id));
         }
     }
 
@@ -58,7 +58,7 @@ class NotificationEnquiry extends Notification
         return [
             'to' => $notifiable->email,
             'user_id' => $this->user->id,
-            'product_id' => $this->product_id,
+            'offer_id' => $this->offer_id,
             'message' => $this->message,
         ];
     }

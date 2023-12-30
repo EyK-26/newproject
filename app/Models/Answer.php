@@ -13,7 +13,7 @@ class Answer extends Model
         'user_id',
         'enquiry_id',
         'client_id',
-        'product_id',
+        'offer_id',
         'message,'
     ];
 

@@ -28,31 +28,31 @@ class EnquiryController extends Controller
         $enquiry = new Enquiry();
         $enquiry->fill($request->all());
         $enquiry->save();
-        $this->notify($request->user_id, $request->message, $request->product_id);
+        $this->notify($request->user_id, $request->message, $request->offer_id);
         return ['message' => 'message sent'];
     }
 
-    private function notify(int $user_id, string $message, int $product_id)
+    private function notify(int $user_id, string $message, int $offer_id)
     {
         try {
             $user = User::findOrFail($user_id);
-            $user->notify(new NotificationEnquiry($user, $message, $product_id));
+            $user->notify(new NotificationEnquiry($user, $message, $offer_id));
         } catch (ModelNotFoundException $e) {
             return ['message' => 'User not found'];
         }
     }
 
-    public function show(string $product_id, string $user_id): View|array
+    public function show(string $offer_id, string $user_id): View|array
     {
         try {
             $user = Auth::user();
             $client = User::findOrFail($user_id);
             $enquiry = Enquiry::query()
                 ->where('user_id', $user_id)
-                ->where('product_id', $product_id)
+                ->where('offer_id', $offer_id)
                 ->firstOrFail();
             $enquiry_id = $enquiry->id;
-            return view('admin.enquiry', compact('enquiry', 'product_id', 'client', 'user', 'enquiry_id'));
+            return view('admin.enquiry', compact('enquiry', 'offer_id', 'client', 'user', 'enquiry_id'));
         } catch (ModelNotFoundException $e) {
             return ['message' => 'User not found'];
         }

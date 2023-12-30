@@ -30,7 +30,7 @@ const ProductView: FunctionComponent<ProductViewProps> = ({
     const toggleWishlist = async () => {
         try {
             const response = await axios.post("/api/toggle-wishlist", {
-                product_id: id,
+                offer_id: id,
                 user_id:
                     state.user !== null &&
                     typeof state.user !== "boolean" &&
@@ -72,7 +72,7 @@ const ProductView: FunctionComponent<ProductViewProps> = ({
             try {
                 const response = await axios.get("/api/get-wishlist", {
                     params: {
-                        product_id: id,
+                        offer_id: id,
                         user_id:
                             state.user !== null &&
                             typeof state.user !== "boolean" &&

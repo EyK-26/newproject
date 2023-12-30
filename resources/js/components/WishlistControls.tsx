@@ -19,34 +19,11 @@ const WishlistControls: FunctionComponent<WishlistControlsProps> = ({
     toggleWishlist,
     prod,
 }) => {
-    const { state, dispatch } = useContext(UserContext);
-    const [wishlistData, setWishlistData] = useState<number[]>([]);
-    const userLoggedInState =
-        state.user !== null && typeof state.user !== "boolean" && state.user.id;
+    const { state } = useContext(UserContext);
     const loggedInUserWishlist =
         state.user !== null &&
         typeof state.user !== "boolean" &&
         state.user.wishes;
-
-    // const setWishlist = async (): Promise<void> => {
-    //     try {
-    //         const response = await axios.get("/api/set-wishlist", {
-    //             params: {
-    //                 id: userLoggedInState,
-    //             },
-    //         });
-    //         setWishlistData(response.data);
-    //     } catch (error) {
-    //         dispatch({
-    //             type: "spanMessage/set",
-    //             payload: "an error occured",
-    //         });
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     setWishlist();
-    // }, [userLoggedInProductsState]);
 
     return (
         <div
@@ -59,7 +36,7 @@ const WishlistControls: FunctionComponent<WishlistControlsProps> = ({
                 className={
                     Array.isArray(loggedInUserWishlist) &&
                     loggedInUserWishlist.find(
-                        (el: Wish) => el.product_id === prod.id
+                        (el: Wish) => el.offer_id === prod.id
                     )
                         ? "property__added"
                         : undefined
@@ -68,7 +45,7 @@ const WishlistControls: FunctionComponent<WishlistControlsProps> = ({
             <span>
                 {Array.isArray(loggedInUserWishlist) &&
                 !loggedInUserWishlist.find(
-                    (el: Wish) => el.product_id === prod.id
+                    (el: Wish) => el.offer_id === prod.id
                 )
                     ? "Add to Wishlist"
                     : "Added to wishlish"}

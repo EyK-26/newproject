@@ -6,7 +6,7 @@
 @if($user->can('admin') && isset($enquiry))
 <h1>See Enquiry Details</h1>
 <textarea resize="none" disabled id="enquiry">{{ $enquiry->message }}</textarea>
-@isset($product_id)
+@isset($offer_id)
 <h2>From</h2>
 @isset($client)
 <table>
@@ -23,7 +23,7 @@
             <td>{{ $client->id }}</td>
             <td>{{ $client->name }}</td>
             <td>{{ $client->email }}</td>
-            <td><a href={{ "/prod_view/$product_id" }} target="_blank">{{ $product_id }}</a></td>
+            <td><a href={{ "/prod_view/$offer_id" }} target="_blank">{{ $offer_id }}</a></td>
         </tr>
     </tbody>
 </table>

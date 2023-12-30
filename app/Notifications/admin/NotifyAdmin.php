@@ -12,13 +12,13 @@ class NotifyAdmin extends Notification
 {
     use Queueable;
     protected $user;
-    protected $product_id;
+    protected $offer_id;
 
 
-    public function __construct(Model $user, int $product_id)
+    public function __construct(Model $user, int $offer_id)
     {
         $this->user = $user;
-        $this->product_id = $product_id;
+        $this->offer_id = $offer_id;
     }
 
     public function via(object $notifiable): array
@@ -30,14 +30,14 @@ class NotifyAdmin extends Notification
     {
         return (new MailMessage)
             ->greeting("Dear {$notifiable->name}")
-            ->line("{$this->user->name} made an enquiry about {$this->product_id}")
+            ->line("{$this->user->name} made an enquiry about {$this->offer_id}")
             ->action(
                 'Click to see the property',
-                url("/prod_view/{$this->product_id}")
+                url("/prod_view/{$this->offer_id}")
             )
             ->action(
                 'Click to see the enquiry',
-                url("/enquiry/{$this->product_id}/{$this->user->id}")
+                url("/enquiry/{$this->offer_id}/{$this->user->id}")
             )
             ->line('Please contact the user in 3 days')
             ->salutation('Regards,');
@@ -48,7 +48,7 @@ class NotifyAdmin extends Notification
         return [
             'to' => $notifiable->email,
             'user_id' => $this->user->id,
-            'product_id' => $this->product_id,
+            'offer_id' => $this->offer_id,
         ];
     }
 }

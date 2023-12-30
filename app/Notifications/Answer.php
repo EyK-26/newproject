@@ -45,7 +45,7 @@ class Answer extends Notification
             ->subject("About your enquiry no: {$this->initial_enquiry->id}")
             ->line($this->text)
             ->line("Information about your enquiry:")
-            ->action('See your property', url("/prod_view/{$this->initial_enquiry->product_id}"))
+            ->action('See your property', url("/prod_view/{$this->initial_enquiry->offer_id}"))
             ->line("Your enquiry:")
             ->line("Sent at: {$this->initial_enquiry->created_at}")
             ->line($this->initial_enquiry->message)
@@ -59,7 +59,7 @@ class Answer extends Notification
         return [
             'to' => $notifiable->email,
             'user_id' => $this->from_admin->id,
-            'product_id' => $this->initial_enquiry->product_id
+            'offer_id' => $this->initial_enquiry->offer_id
         ];
     }
 }

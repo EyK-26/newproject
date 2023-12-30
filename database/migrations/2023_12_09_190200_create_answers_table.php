@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');;
             $table->foreignId('enquiry_id')->constrained('enquiries');
             $table->bigInteger('client_id');
-            $table->bigInteger('product_id');
+            $table->bigInteger('offer_id');
             $table->longText('message');
             $table->timestamps();
         });
