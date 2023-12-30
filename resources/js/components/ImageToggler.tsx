@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, LegacyRef, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 
@@ -6,12 +6,14 @@ interface ImageTogglerProps {
     images: string[];
     name: string;
     mainview: boolean;
+    ImageTogglerRef: LegacyRef<HTMLDivElement>;
 }
 
 const ImageToggler: FunctionComponent<ImageTogglerProps> = ({
     images,
     name,
     mainview,
+    ImageTogglerRef,
 }) => {
     const [imageIndex, setImageIndex] = useState<number>(0);
 
@@ -36,7 +38,7 @@ const ImageToggler: FunctionComponent<ImageTogglerProps> = ({
             />
         </div>
     ) : (
-        <div className="image__container--main">
+        <div className="image__container--main" ref={ImageTogglerRef}>
             <img src={images[imageIndex]} alt={name} />
             <div className="controls">
                 <FaArrowLeft

@@ -2,8 +2,10 @@ import axios from "axios";
 import React, {
     ChangeEvent,
     FunctionComponent,
+    MutableRefObject,
     useContext,
     useEffect,
+    useRef,
     useState,
 } from "react";
 import PropertyContext from "../myApp/context/PropertyContext";
@@ -13,7 +15,8 @@ import PriceRange from "./PriceRange";
 import OrderElements from "./OrderElements";
 import UserContext from "../myApp/context/UserContext";
 import { CustomProduct } from "../myApp/store/PropertyReducer";
-import RenderedCustomOffers from "./RenderedCustomOffers";
+import WishlistControls from "./WishlistControls";
+import { useNavigate } from "react-router-dom";
 
 type CustomOffersProps = {
     fetchUserStatus(): void;
@@ -32,6 +35,9 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
         userState.user !== null &&
         typeof userState.user !== "boolean" &&
         userState.user.id;
+    const navigate = useNavigate();
+    const wishlistRef: MutableRefObject<null> = useRef(null);
+    const ImageTogglerRef: MutableRefObject<null> = useRef(null);
 
     const fetchCustomOffers = async (): Promise<void> => {
         try {
@@ -52,6 +58,18 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
         }
     };
 
+    const handleClick = (e, prod_id: number) => {
+        console.log(!wishlistRef.current.contains(e.target));
+        console.log(!ImageTogglerRef.current.contains(e.target));
+
+        // if (cardRef.current && !cardRef.current.contains(e.target)) {
+        //     console.log("dsadasda");
+        //     return;
+        // } else {
+        //     navigate(`/prod_view/${prod_id}`);
+        // }
+    };
+
     useEffect(() => {
         if (
             !(state.customProducts.length > 0) &&
@@ -59,6 +77,12 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
         ) {
             fetchCustomOffers();
         }
+        // if (!cardRef.current) {
+        document.addEventListener("click", handleClick, true);
+        return () => {
+            document.removeEventListener("click", handleClick, true);
+        };
+        // }
     }, []);
 
     const toggleWishlist = async (id: number): Promise<void> => {
@@ -90,6 +114,64 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
             });
         }
     };
+
+    const renderedProducts: JSX.Element[] | JSX.Element =
+        !state.searchedCustomProductsLoading ? (
+            state.searchedCustomProducts.map((prod) => (
+                <ul
+                    key={prod.id}
+                    className="custom_product"
+                    onClick={(e) => {
+                        handleClick(e, prod.id);
+                    }}
+                >
+                    <h4>{prod.title}</h4>
+                    <ImageToggler
+                        images={prod.photo_path
+                            .split(", ")
+                            .map((path) => `/uploads/${path}`)}
+                        name={prod.title}
+                        mainview={true}
+                        ImageTogglerRef={ImageTogglerRef}
+                    />
+                    <div className="custom_product_detail__container">
+                        <div className="custom_product_detail">
+                            <span>Item description: </span>
+                            <li>{prod.description}</li>
+                        </div>
+                        <div className="details_controls">
+                            <div>
+                                <div className="custom_product_detail">
+                                    <span>Floor area: </span>
+                                    <li>{prod.floor_area}</li>
+                                </div>
+                                <div className="custom_product_detail">
+                                    <span>Land area: </span>
+                                    <li>{prod.land_area}</li>
+                                </div>
+                                <div className="custom_product_detail">
+                                    <span>Price: </span>
+                                    <li>{prod.price}</li>
+                                </div>
+                                <div className="custom_product_detail">
+                                    <span>Locality: </span>
+                                    <li>{prod.locality}</li>
+                                </div>
+                            </div>
+                            {userLoggedInState && (
+                                <WishlistControls
+                                    toggleWishlist={toggleWishlist}
+                                    prod={prod}
+                                    wishlistRef={wishlistRef}
+                                />
+                            )}
+                        </div>
+                    </div>
+                </ul>
+            ))
+        ) : (
+            <span>Loading Products</span>
+        );
 
     const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -147,14 +229,7 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
                 <OrderElements handleChange={handleChange} />
             </div>
             {!userState.spanMessage && (
-                <Pagination
-                    products={
-                        <RenderedCustomOffers
-                            toggleWishlist={toggleWishlist}
-                            userLoggedInState={userLoggedInState}
-                        />
-                    }
-                />
+                <Pagination products={renderedProducts} />
             )}
         </div>
     );
