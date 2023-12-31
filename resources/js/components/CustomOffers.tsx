@@ -16,7 +16,7 @@ import OrderElements from "./OrderElements";
 import UserContext from "../myApp/context/UserContext";
 import { CustomProduct } from "../myApp/store/PropertyReducer";
 import WishlistControls from "./WishlistControls";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ImageToggler from "./ImageToggler";
 
 type CustomOffersProps = {
@@ -56,21 +56,6 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
         }
     };
 
-    // const handleClick = (e, prod_id: number) => {
-    //     //console.log(e);
-
-    //     //console.log(!wishlistRef.current.contains(e.target));
-    //     //console.log(!ImageTogglerRef.current.contains(e.target));
-    //     console.log(ImageTogglerRef.current.contains(e.target));
-
-    //     // if (cardRef.current && !cardRef.current.contains(e.target)) {
-    //     //     console.log("dsadasda");
-    //     //     return;
-    //     // } else {
-    //     //     navigate(`/prod_view/${prod_id}`);
-    //     // }
-    // };
-
     useEffect(() => {
         if (
             !(state.customProducts.length > 0) &&
@@ -78,10 +63,6 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
         ) {
             fetchCustomOffers();
         }
-        // document.addEventListener("click", handleClick, true);
-        // return () => {
-        //     document.removeEventListener("click", handleClick, true);
-        // };
     }, []);
 
     const toggleWishlist = async (id: number): Promise<void> => {
@@ -157,6 +138,9 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
                                 />
                             )}
                         </div>
+                        <Link to={`/custom_prod_view/${prod.id}`}>
+                            Go to Property
+                        </Link>
                     </div>
                 </ul>
             ))

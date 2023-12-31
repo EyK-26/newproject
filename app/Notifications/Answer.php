@@ -30,14 +30,6 @@ class Answer extends Notification
         return ['mail', 'database'];
     }
 
-    // private function convert_datetime($datetime): string
-    // {
-    //     $split = preg_split("/T|\:\d\d\.\w/", $datetime);
-    //     unset($split[count($split) - 1]);
-    //     $implode = implode(" ", $split);
-    //     return $implode;
-    // }
-
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)

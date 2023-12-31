@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Offer;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +31,27 @@ class OfferController extends Controller
             return $offers->load('user');
         } else {
             return ['message' => 'no property available'];
+        }
+    }
+
+    // private function convert_datetime($datetime): string
+    // {
+    //     preg_match("/\d{4}-\d+-\d+/", $datetime, $matches);
+    //     $split = preg_replace("/-/", "/", $matches[0]);
+    //     return preg_replace('/^(\d{4})\/(\d{2})\/(\d{2})$/', '$3/$2/$1', $split);
+    // }
+
+    public function show(Request $request): array | Offer
+    {
+        try {
+            $offer = Offer::findOrFail($request->query('id'));
+            if (!empty($offer)) {
+                return $offer->load('user');
+            } else {
+                return ['message' => 'no property available'];
+            }
+        } catch (ModelNotFoundException $e) {
+            return ['message' => 'record not found'];
         }
     }
 

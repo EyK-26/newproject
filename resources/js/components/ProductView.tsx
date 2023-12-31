@@ -91,7 +91,7 @@ const ProductView: FunctionComponent<ProductViewProps> = ({
         })();
     }, []);
 
-    const convertObject: any = (product: Product) =>
+    const convertObject: any = (product: Product): ReactNode =>
         Object.keys(product).map((attribute: string, index: number) => {
             if (typeof product[attribute as keyof Product] !== "object") {
                 return (

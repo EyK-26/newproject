@@ -29,3 +29,4 @@ Route::get('/enquiry', [EnquiryController::class, 'index']);
 Route::post('/enquiry', [EnquiryController::class, 'store']);
 
 Route::get('/custom-offers', [OfferController::class, 'custom_offers']);
+Route::get('/custom-product', [OfferController::class, 'show'])->whereNumber('product');

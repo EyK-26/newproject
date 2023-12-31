@@ -17,6 +17,7 @@ import Enquiries from "../components/Enquiries";
 import UserContext from "../myApp/context/UserContext";
 import SearchProductsAll from "../components/SearchProductsAll";
 import CustomOffers from "../components/CustomOffers";
+import CustomProductView from "../components/CustomProductView";
 
 const MyRoutes: FunctionComponent = () => {
     const { state, dispatch } = useContext(UserContext);
@@ -96,6 +97,10 @@ const MyRoutes: FunctionComponent = () => {
                                     fetchUserStatus={fetchUserStatus}
                                 />
                             }
+                        />
+                        <Route
+                            path="/custom_prod_view/:id"
+                            element={<CustomProductView />}
                         />
                         <Route path="/user/:id" element={<UserSettings />} />
                         <Route
