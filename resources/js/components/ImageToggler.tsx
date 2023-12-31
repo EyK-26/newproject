@@ -42,15 +42,6 @@ const ImageToggler: FunctionComponent<ImageTogglerProps> = ({
                     }}
                 />
             </div>
-            {isImageClicked && (
-                <ImagePreview
-                    setIsImageClicked={setIsImageClicked}
-                    setImageIndex={setImageIndex}
-                    images={images}
-                    imageIndex={imageIndex}
-                    name={name}
-                />
-            )}
         </>
     ) : (
         <>

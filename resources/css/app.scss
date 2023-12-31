@@ -27,6 +27,19 @@
     padding: 0.4em 0.7em;
 }
 
+@mixin modal_button_rules {
+    background-color: #91a1c2;
+    border-radius: 0.8em;
+    padding: 1em;
+    box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
+    width: 2em;
+    height: 2em;
+
+    &:hover {
+        transform: scale(1.02);
+    }
+}
+
 html {
     box-sizing: border-box;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -133,8 +146,13 @@ body {
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 0;
+            background: rgba(105, 105, 105, 0.726);
+            z-index: 10;
+
+            &:hover {
+                background-color: #91a1c2;
+                transition-duration: 1000ms;
+            }
         }
 
         .image__container__overlay {
@@ -142,10 +160,34 @@ body {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 10;
-            width: 60%;
-            margin: 0.8em;
-            background-color: #91a1c2;
+            z-index: 11;
+            width: 55%;
+
+            .exit_icon {
+                position: fixed;
+                top: 3%;
+                right: 3%;
+                @include modal_button_rules();
+            }
+
+            img {
+                width: 100%;
+            }
+
+            svg.arrowLeft {
+                position: fixed;
+                top: 50%;
+                left: 3%;
+                @include modal_button_rules();
+            }
+
+            svg.arrowRight {
+                position: fixed;
+                top: 50%;
+                right: 3%;
+                @include modal_button_rules();
+            }
+
             padding: 0.6em;
             border-radius: 0.8em;
             box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
