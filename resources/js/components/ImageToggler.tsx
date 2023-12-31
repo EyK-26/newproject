@@ -20,7 +20,14 @@ const ImageToggler: FunctionComponent<ImageTogglerProps> = ({
     return !mainview ? (
         <>
             <div className="image__container">
-                <FaArrowLeft className="arrowLeft" />
+                <FaArrowLeft
+                    className="arrowLeft"
+                    onClick={() => {
+                        if (imageIndex > 0) {
+                            setImageIndex((prev) => prev - 1);
+                        }
+                    }}
+                />
                 <img
                     src={images[imageIndex]}
                     alt={name}
@@ -38,6 +45,7 @@ const ImageToggler: FunctionComponent<ImageTogglerProps> = ({
             {isImageClicked && (
                 <ImagePreview
                     setIsImageClicked={setIsImageClicked}
+                    setImageIndex={setImageIndex}
                     images={images}
                     imageIndex={imageIndex}
                     name={name}
@@ -77,6 +85,7 @@ const ImageToggler: FunctionComponent<ImageTogglerProps> = ({
                     setIsImageClicked={setIsImageClicked}
                     images={images}
                     imageIndex={imageIndex}
+                    setImageIndex={setImageIndex}
                     name={name}
                 />
             )}
