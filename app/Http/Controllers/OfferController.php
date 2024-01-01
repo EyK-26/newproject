@@ -13,6 +13,35 @@ use Illuminate\Support\Facades\Auth;
 
 class OfferController extends Controller
 {
+    public function edit(string $id): View|RedirectResponse
+    {
+        try {
+            $offer = Offer::findOrFail($id);
+            $user = Auth::user();
+            if (!empty($offer)) {
+                return view('admin.offer', ['offer' => $offer, 'user' => $user]);
+            } else {
+                return redirect()->back()->with("error", "not found");
+            }
+        } catch (ModelNotFoundException $e) {
+            return abort(404);
+        }
+    }
+    public function update(Request $request, string $id): View|RedirectResponse
+    {
+        try {
+            $offer = Offer::findOrFail($id);
+            if (!empty($offer)) {
+                $offer->fill($request->all())->save();
+                return redirect()->back()->with("message", "update done");
+            } else {
+                return redirect()->back()->with("error", "not found");
+            }
+        } catch (ModelNotFoundException $e) {
+            return abort(404);
+        }
+    }
+
     public function index(Request $request): View
     {
         $user = Auth::user();

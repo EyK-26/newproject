@@ -11,7 +11,7 @@
     @else
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @endisset
-    @can('has_role', 'admin')
+    @can('admin')
     <title>Real Estate Comparator - Admin</title>
     @else
     <title>Real Estate Comparator</title>

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('enquiries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->bigInteger('offer_id');
+            $table->foreignId('offer_id');
             $table->longText('message');
             $table->timestamps();
             $table->unique(['user_id', 'offer_id']);

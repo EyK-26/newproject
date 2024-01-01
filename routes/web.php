@@ -29,6 +29,12 @@ Route::group(['middleware' => 'can:admin'], function () {
 
     Route::get('/offers', [OfferController::class, 'index'])
         ->name('offers.index');
+
+    Route::get('/offers/{offer}', [OfferController::class, 'edit'])->whereNumber('offer')
+        ->name('offers.edit');
+
+    Route::post('/offers/{offer}', [OfferController::class, 'update'])->whereNumber('offer')
+        ->name('offers.update');
 });
 
 Route::view('/{path?}', 'home')

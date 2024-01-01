@@ -27,4 +27,8 @@ class Offer extends Model
     {
         return $this->hasMany(Wish::class);
     }
+    public function enquiries()
+    {
+        return $this->hasMany(Enquiry::class);
+    }
 }

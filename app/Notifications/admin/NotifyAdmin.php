@@ -33,7 +33,7 @@ class NotifyAdmin extends Notification
             ->line("{$this->user->name} made an enquiry about {$this->offer_id}")
             ->action(
                 'Click to see the property',
-                url("/prod_view/{$this->offer_id}")
+                url("/custom_prod_view/{$this->offer_id}")
             )
             ->action(
                 'Click to see the enquiry',

@@ -7,7 +7,7 @@
     <link rel="icon" type="image/x-icon" href="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite('resources/css/app.scss')
-    @can('has_role', 'admin')
+    @can('admin')
     <title>Real Estate Comparator - Admin</title>
     @else
     <title>Real Estate Comparator</title>

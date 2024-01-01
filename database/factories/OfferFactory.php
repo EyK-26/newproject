@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class OfferFactory extends Factory
 {
-    private function generate_image(): string
+    private function generate_image_paths(): string
     {
         $amount_photo = rand(0, 6);
         $file_paths = [];
@@ -32,7 +32,7 @@ class OfferFactory extends Factory
             'floor_area' => $floor_area,
             'land_area' => $land_area,
             'price' => fake()->numberBetween(10000, 10000000),
-            'photo_path' => $this->generate_image()
+            'photo_path' => $this->generate_image_paths()
         ];
     }
 }

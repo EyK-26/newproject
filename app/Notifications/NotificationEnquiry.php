@@ -38,7 +38,7 @@ class NotificationEnquiry extends Notification
             ->line("You have made enquiry about the property, id: {$this->offer_id}")
             ->action(
                 'Click to see the property you made enquiry of',
-                url("/prod_view/{$this->offer_id}")
+                url("/custon_prod_view/{$this->offer_id}")
             )
             ->line("We will come back to you in 3 working days.")
             ->line('Thank you for using our application!')

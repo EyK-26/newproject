@@ -14,7 +14,7 @@
         @foreach(explode(', ', $offer->photo_path) as $photo)
         <img src="{{ asset('uploads/' . $photo) }}" alt="{{ $offer->title }}">
         @endforeach
-
+        <a href="{{ route('offers.edit', ['offer' => $offer->id]) }}">Edit offer</a>
         @endforeach
     </div>
     {{ $offers->links() }}
