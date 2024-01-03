@@ -1,3 +1,11 @@
+@php
+$authKey = "393c4bea-d902-58be-5818-ad4f90aa90e4:fx";
+$translator = new \DeepL\Translator($authKey);
+
+$result = $translator->translateText('Hello, world!', null, 'cs');
+echo $result->text;
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
