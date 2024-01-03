@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use App\Models\User;
 use App\Notifications\admin\NotifyAdmin;
+use App\Notifications\admin\TranslateCustomText;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -32,6 +33,9 @@ class NotificationEnquiry extends Notification
 
     public function toMail(object $notifiable): MailMessage
     {
+        $translator = new TranslateCustomText("We will come back to you in 3 working days.", "cs");
+        //give a line and translate into Czech language. cs is the code.
+
         $this->notify_admin();
         return (new MailMessage)
             ->greeting("Dear {$notifiable->name}")
@@ -41,6 +45,7 @@ class NotificationEnquiry extends Notification
                 url("/custon_prod_view/{$this->offer_id}")
             )
             ->line("We will come back to you in 3 working days.")
+            ->line($translator->translate()) // !!!test line!!!
             ->line('Thank you for using our application!')
             ->salutation('Regards');
     }
