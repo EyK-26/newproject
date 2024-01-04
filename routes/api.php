@@ -30,3 +30,15 @@ Route::post('/enquiry', [EnquiryController::class, 'store']);
 
 Route::get('/custom-offers', [OfferController::class, 'custom_offers']);
 Route::get('/custom-product', [OfferController::class, 'show'])->whereNumber('product');
+
+Route::get('/get-languages', function (): array {
+    $authKey = "393c4bea-d902-58be-5818-ad4f90aa90e4:fx";
+    $translator = new \DeepL\Translator($authKey);
+    $targetLanguages = $translator->getTargetLanguages();
+    return $targetLanguages;
+    // foreach ($targetLanguages as $targetLanguage) {
+    //     if ($targetLanguage->supportsFormality) {
+    //         echo $targetLanguage->name . ' (' . $targetLanguage->code . ') supports formality';
+    //     }
+    // }
+});

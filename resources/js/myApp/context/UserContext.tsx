@@ -7,11 +7,12 @@ interface UserContextProps {
 }
 const initialUserContextVal: UserContextProps = {
     state: {
-        theme: "light",
+        theme: "",
         user: null,
         messages: [],
         addedProducts: [],
         spanMessage: "",
+        selectedLanguage: "",
     },
     dispatch: () => {},
 };

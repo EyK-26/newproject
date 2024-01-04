@@ -39,6 +39,7 @@ export interface UserState {
     messages: Array<string>;
     addedProducts: Array<CustomProduct>;
     spanMessage: string;
+    selectedLanguage: string;
 }
 
 export type UserAction =
@@ -49,10 +50,16 @@ export type UserAction =
     | { type: "spanMessage/set"; payload: string }
     | { type: "spanMessage/unset" }
     | { type: "addedProducts/set"; payload?: CustomProduct }
-    | { type: "addedProducts/unset"; payload: number };
+    | { type: "addedProducts/unset"; payload: number }
+    | { type: "language/set"; payload: string };
 
 const UserReducer = (state: UserState, action: UserAction): UserState => {
     switch (action.type) {
+        case "language/set":
+            return {
+                ...state,
+                selectedLanguage: action.payload,
+            };
         case "theme/set":
             return {
                 ...state,
