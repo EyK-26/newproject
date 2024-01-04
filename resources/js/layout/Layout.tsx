@@ -5,7 +5,11 @@ import Footer from "./Footer";
 import PropertyContext from "../myApp/context/PropertyContext";
 import PropertyReducer, { CustomProduct } from "../myApp/store/PropertyReducer";
 
-const Layout: FunctionComponent = () => {
+type LayoutProps = {
+    fetchUserStatus(): void;
+};
+
+const Layout: FunctionComponent<LayoutProps> = ({ fetchUserStatus }) => {
     const [propertyContextValue, setPropertyContextValue] = useReducer(
         PropertyReducer,
         {
@@ -48,7 +52,7 @@ const Layout: FunctionComponent = () => {
 
     return (
         <>
-            <Header />
+            <Header fetchUserStatus={fetchUserStatus} />
             <PropertyContext.Provider
                 value={{
                     state: propertyContextValue,

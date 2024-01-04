@@ -31,6 +31,7 @@ export interface User {
     two_factor_recovery_codes: string | null;
     two_factor_secret: string | null;
     updated_at: string;
+    language: string;
 }
 
 export interface UserState {

@@ -1,9 +1,13 @@
-import React, { useContext } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import Navigation from "../components/Navigation";
 import { Link } from "react-router-dom";
 import UserContext from "../myApp/context/UserContext";
 
-const Header = () => {
+type HeaderProps = {
+    fetchUserStatus(): void;
+};
+
+const Header: FunctionComponent<HeaderProps> = ({ fetchUserStatus }) => {
     const { state } = useContext(UserContext);
     const userAdminState =
         state.user !== null &&
@@ -14,7 +18,7 @@ const Header = () => {
         <div className="header">
             <Link to="/">Home</Link>
             {userAdminState === "admin" && <a href="/offers">Admin Page</a>}
-            <Navigation />
+            <Navigation fetchUserStatus={fetchUserStatus} />
         </div>
     );
 };

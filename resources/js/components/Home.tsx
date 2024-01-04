@@ -14,6 +14,11 @@ const Home: FunctionComponent<HomeProps> = ({ fetchUserStatus }) => {
     const { userDeleted, userRegistered, userLoggedIn, userLoggedOut } =
         locationState || false;
 
+        const fetchUserDefaultLanguage = async (): Promise<void> => {
+            
+        };
+    
+
     useEffect(() => {
         if (locationState) {
             dispatch({

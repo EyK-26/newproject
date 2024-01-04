@@ -58,7 +58,10 @@ const MyRoutes: FunctionComponent = () => {
 
     return (
         <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route
+                path="/"
+                element={<Layout fetchUserStatus={fetchUserStatus} />}
+            >
                 <Route
                     index
                     element={<Home fetchUserStatus={fetchUserStatus} />}
@@ -87,7 +90,11 @@ const MyRoutes: FunctionComponent = () => {
                         <Route path="/logout" element={<Logout />} />
                         <Route
                             path="/custom_prod_view/:id"
-                            element={<CustomProductView fetchUserStatus = {fetchUserStatus}/>}
+                            element={
+                                <CustomProductView
+                                    fetchUserStatus={fetchUserStatus}
+                                />
+                            }
                         />
                         <Route path="/user/:id" element={<UserSettings />} />
                         <Route

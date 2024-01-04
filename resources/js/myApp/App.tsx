@@ -12,7 +12,7 @@ const App: FunctionComponent = () => {
         messages: [],
         addedProducts: [],
         spanMessage: "",
-        selectedLanguage: "en-gb",
+        selectedLanguage: "",
     });
 
     return (

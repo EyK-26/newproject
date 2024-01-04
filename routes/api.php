@@ -6,8 +6,11 @@ use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishController;
+use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user()->load(['enquiries.answers', 'wishes.offer']);
@@ -41,4 +44,15 @@ Route::get('/get-languages', function (): array {
     //         echo $targetLanguage->name . ' (' . $targetLanguage->code . ') supports formality';
     //     }
     // }
+});
+
+Route::post('/set-language', function (Request $request): array {
+    try {
+        $user = User::findOrFail($request->input('user_id'));
+        $user->language = $request->input('user_language');
+        $user->save();
+        return ['message' => 'language has been updated'];
+    } catch (ModelNotFoundException $e) {
+        return ['message' => 'error occured'];
+    }
 });

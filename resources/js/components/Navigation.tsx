@@ -1,4 +1,5 @@
 import React, {
+    ChangeEvent,
     FunctionComponent,
     ReactElement,
     useContext,
@@ -17,16 +18,25 @@ interface Languages {
     supportsFormality: boolean;
 }
 
-const Navigation: FunctionComponent = () => {
+type LayoutProps = {
+    fetchUserStatus(): void;
+};
+
+const Navigation: FunctionComponent<LayoutProps> = ({ fetchUserStatus }) => {
     const { state, dispatch } = useContext(UserContext);
     const [languages, setLanguages] = useState<Languages[]>([]);
+    const userLanguageState =
+        state.user !== null &&
+        typeof state.user !== "boolean" &&
+        state.user.language;
+    const userIdState =
+        state.user !== null && typeof state.user !== "boolean" && state.user.id;
 
     const fetchAllLanguages = async (): Promise<void> => {
         try {
             const response = await axios.get("/api/get-languages");
             if (Math.floor(response.status / 100) === 2) {
                 setLanguages(response.data);
-                console.log(response.data);
             }
         } catch (err: any) {
             dispatch({
@@ -42,7 +52,28 @@ const Navigation: FunctionComponent = () => {
         }
     }, []);
 
-    // const handleLanguageChange =
+    const handleLanguageChange = async (
+        e: ChangeEvent<HTMLSelectElement>
+    ): Promise<void> => {
+        try {
+            const response = await axios.post("/api/set-language", {
+                user_id: userIdState,
+                user_language: e.target.value,
+            });
+            if (Math.floor(response.status / 100) === 2) {
+                fetchUserStatus();
+                dispatch({
+                    type: "messages/set",
+                    payload: response.data.message,
+                });
+            }
+        } catch (err: any) {
+            dispatch({
+                type: "spanMessage/set",
+                payload: err,
+            });
+        }
+    };
 
     return (
         <nav className="navbar">
@@ -51,11 +82,19 @@ const Navigation: FunctionComponent = () => {
                 <select
                     name="select_language"
                     id="select_language"
-                    // onChange={handleLanguageChange}
+                    value={
+                        state.user
+                            ? String(userLanguageState).toLowerCase()
+                            : "en-gb"
+                    }
+                    onChange={handleLanguageChange}
                 >
                     {languages.map(
                         (element: Languages, index: number): ReactElement => (
-                            <option value={element.code} key={index}>
+                            <option
+                                value={String(element.code).toLowerCase()}
+                                key={index}
+                            >
                                 {element.name}
                             </option>
                         )
