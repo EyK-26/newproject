@@ -1,18 +1,5 @@
 import { User } from "./UserReducer";
 
-export interface Product {
-    id: number;
-    locality: string;
-    prize_czk: number;
-    building_area: number;
-    land_area: number;
-    images: string[];
-    name: string;
-    company_logo: string;
-    company_name: string;
-    name_extracted: string;
-}
-
 export interface CustomProduct {
     floor_area: number;
     description: string;
@@ -33,13 +20,7 @@ export interface PropertyState {
     selectedCustomProductIds: number[];
     searchedCustomProducts: Array<CustomProduct>;
     searchedCustomProductsLoading: boolean;
-    products: Array<Product>;
-    productsLoading: boolean;
-    selectedIds: number[];
-    selectedProducts: Array<Product>;
     error: string;
-    searchedProducts: Array<Product>;
-    searchedProductsLoading: boolean;
     lowestPrice(): number;
     highestFloorArea(): number;
     highestLandArea(): number;
@@ -47,8 +28,6 @@ export interface PropertyState {
 
 export type PropertyAction =
     | { type: "error/set"; payload: string }
-    | { type: "location/set"; payload: string }
-    | { type: "price/set"; payload: number }
     | { type: "customProducts/set"; payload: Array<CustomProduct> }
     | { type: "customProductLocation/set"; payload: string }
     | { type: "customProductPrice/set"; payload: number }
@@ -66,29 +45,19 @@ const PropertyReducer = (
             return {
                 ...state,
                 customProducts: action.payload,
-                productsLoading: false,
+                searchedCustomProductsLoading: false,
             };
         case "error/set":
             return {
                 ...state,
                 error: action.payload,
-                productsLoading: false,
+                searchedCustomProductsLoading: false,
             };
         case "searchedCustomProducts/set":
             return {
                 ...state,
                 searchedCustomProducts: action.payload,
                 searchedCustomProductsLoading: false,
-            };
-        case "location/set":
-            return {
-                ...state,
-                searchedProducts: [...state.searchedProducts].filter((prod) =>
-                    prod.locality
-                        .trim()
-                        .toLowerCase()
-                        .includes(action.payload.trim().toLowerCase())
-                ),
             };
         case "customProductLocation/set":
             return {
@@ -99,13 +68,6 @@ const PropertyReducer = (
                             .trim()
                             .toLowerCase()
                             .includes(action.payload.trim().toLowerCase())
-                ),
-            };
-        case "price/set":
-            return {
-                ...state,
-                searchedProducts: [...state.searchedProducts].filter(
-                    (prod) => prod.prize_czk <= action.payload
                 ),
             };
         case "customProductPrice/set":

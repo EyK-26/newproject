@@ -3,10 +3,7 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import PropertyContext from "../myApp/context/PropertyContext";
-import PropertyReducer, {
-    CustomProduct,
-    Product,
-} from "../myApp/store/PropertyReducer";
+import PropertyReducer, { CustomProduct } from "../myApp/store/PropertyReducer";
 
 const Layout: FunctionComponent = () => {
     const [propertyContextValue, setPropertyContextValue] = useReducer(
