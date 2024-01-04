@@ -7,19 +7,13 @@ interface PropertyContextProps {
 }
 const initialPropertyContextVal: PropertyContextProps = {
     state: {
-        products: [],
-        productsLoading: true,
         customProducts: [],
         customProductsLoading: true,
         selectedCustomProducts: [],
         selectedCustomProductIds: [],
         searchedCustomProducts: [],
         searchedCustomProductsLoading: true,
-        selectedIds: [],
-        selectedProducts: [],
         error: "",
-        searchedProducts: [],
-        searchedProductsLoading: true,
         lowestPrice: function (): number {
             return 0;
         },

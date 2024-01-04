@@ -3,7 +3,10 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import PropertyContext from "../myApp/context/PropertyContext";
-import PropertyReducer, { Product } from "../myApp/store/PropertyReducer";
+import PropertyReducer, {
+    CustomProduct,
+    Product,
+} from "../myApp/store/PropertyReducer";
 
 const Layout: FunctionComponent = () => {
     const [propertyContextValue, setPropertyContextValue] = useReducer(
@@ -15,36 +18,30 @@ const Layout: FunctionComponent = () => {
             selectedCustomProductIds: [],
             searchedCustomProducts: [],
             searchedCustomProductsLoading: true,
-            products: [],
-            productsLoading: true,
-            selectedIds: [],
-            selectedProducts: [],
             error: "",
-            searchedProducts: [],
-            searchedProductsLoading: true,
             lowestPrice: function (): number {
-                return this.selectedProducts.length > 0
+                return this.selectedCustomProducts.length > 0
                     ? Math.min(
-                          ...this.selectedProducts.map(
-                              (obj: Product) => obj.prize_czk
+                          ...this.selectedCustomProducts.map(
+                              (obj: CustomProduct) => obj.price
                           )
                       )
                     : 0;
             },
             highestFloorArea: function (): number {
-                return this.selectedProducts.length > 0
+                return this.selectedCustomProducts.length > 0
                     ? Math.max(
-                          ...this.selectedProducts.map(
-                              (obj: Product) => obj.building_area
+                          ...this.selectedCustomProducts.map(
+                              (obj: CustomProduct) => obj.floor_area
                           )
                       )
                     : 0;
             },
             highestLandArea: function (): number {
-                return this.selectedProducts.length > 0
+                return this.selectedCustomProducts.length > 0
                     ? Math.max(
-                          ...this.selectedProducts.map(
-                              (obj: Product) => obj.land_area
+                          ...this.selectedCustomProducts.map(
+                              (obj: CustomProduct) => obj.land_area
                           )
                       )
                     : 0;

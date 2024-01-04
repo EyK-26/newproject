@@ -46,12 +46,7 @@ export interface PropertyState {
 }
 
 export type PropertyAction =
-    | { type: "products/set"; payload: Array<Product> }
     | { type: "error/set"; payload: string }
-    | { type: "id/add"; payload: number }
-    | { type: "id/remove"; payload: number }
-    | { type: "product/add"; payload: Product }
-    | { type: "searchedProducts/set"; payload: Array<Product> }
     | { type: "location/set"; payload: string }
     | { type: "price/set"; payload: number }
     | { type: "customProducts/set"; payload: Array<CustomProduct> }
