@@ -138,7 +138,10 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
                                 />
                             )}
                         </div>
-                        <Link to={`/custom_prod_view/${prod.id}`}>
+                        <Link
+                            to={`/custom_prod_view/${prod.id}`}
+                            className="go_to_link"
+                        >
                             Go to Property
                         </Link>
                     </div>

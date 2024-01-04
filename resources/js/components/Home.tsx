@@ -1,17 +1,13 @@
-import React, {
-    FunctionComponent,
-    useContext,
-    useEffect,
-    useReducer,
-} from "react";
-import PropertyContext from "../myApp/context/PropertyContext";
+import React, { FunctionComponent, useContext, useEffect } from "react";
 import UserContext from "../myApp/context/UserContext";
-import PropertyReducer from "../myApp/store/PropertyReducer";
-import ProductList from "./ProductList";
-import SelectedProductList from "./SelectedProductList";
 import { useLocation, useNavigate } from "react-router-dom";
+import CustomOffers from "./CustomOffers";
 
-const Home: FunctionComponent = () => {
+type HomeProps = {
+    fetchUserStatus(): void;
+};
+
+const Home: FunctionComponent<HomeProps> = ({ fetchUserStatus }) => {
     const { state: locationState, pathname } = useLocation();
     const navigate = useNavigate();
     const { state, dispatch } = useContext(UserContext);
@@ -38,8 +34,8 @@ const Home: FunctionComponent = () => {
                 <span className="span_message">{state.spanMessage}</span>
             )}
             <div className="products__content">
-                <ProductList />
-                <SelectedProductList />
+                <CustomOffers fetchUserStatus={fetchUserStatus} />
+                {/* <SelectedProductList /> */}
             </div>
         </div>
     );

@@ -232,7 +232,7 @@ body {
             flex-wrap: wrap;
 
             .pagination_controls {
-                width: 90%;
+                width: 68%;
                 @include align();
                 justify-content: space-between;
 
@@ -272,6 +272,7 @@ body {
                 .details_controls {
                     @include align();
                     justify-content: space-between;
+                    margin-bottom: 1em;
 
                     .wishlist__container {
                         background-color: #9fabb6;
@@ -298,6 +299,17 @@ body {
                             justify-content: center;
                             margin: 0.5em;
                         }
+
+                    }
+
+                }
+
+                .go_to_link {
+                    padding: 0.5em;
+                    border-radius: 1em;
+
+                    &:hover {
+                        background-color: white;
                     }
                 }
 
@@ -320,6 +332,7 @@ body {
                 .controls {
                     @include justify();
                 }
+
             }
 
             .filters {
@@ -441,43 +454,6 @@ body {
 
                     .search_bar {
                         @include align();
-                    }
-                }
-
-                .products_all__container {
-                    display: flex;
-                    justify-content: space-evenly;
-                    flex-wrap: wrap;
-
-                    .product {
-                        @include column();
-                        margin: 0.8em;
-                        background-color: #91a1c2;
-                        padding: 0.6em;
-                        border-radius: 0.8em;
-                        box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
-                        cursor: pointer;
-
-                        &:hover {
-                            transform: scale(1.03);
-                        }
-
-                        img {
-                            align-self: center;
-                            width: 24em;
-                            border-radius: 0.3em;
-                            box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
-                        }
-
-                        .name__container {
-                            @include flex-between();
-                            align-items: center;
-                            width: 100%;
-
-                            .name_container--spans {
-                                width: 50%;
-                            }
-                        }
                     }
                 }
             }
@@ -651,55 +627,6 @@ body {
 
                     input[type="submit"] {
                         align-self: flex-end;
-                    }
-                }
-            }
-
-            .home__content {
-                padding-top: 3em;
-                @include column();
-
-                .products__content {
-                    @include column();
-                    width: 80%;
-                    margin: auto;
-
-                    .product_list--container {
-                        @include column();
-
-                        ul.product_list {
-                            display: flex;
-                            overflow: auto;
-                            padding: 0;
-                            height: min-content;
-
-                            li.product {
-                                @include column();
-                                height: fit-content;
-                                cursor: pointer;
-                                margin: 0.5em 1em;
-                                padding: 0.3em;
-                                border-radius: 1em;
-                                box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
-                                background-color: #c5c6d6;
-
-                                &.selected {
-                                    border: 0.3em solid rgb(0, 128, 128);
-                                    box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
-                                }
-
-                                img {
-                                    width: 12em;
-                                    border-radius: 1em;
-                                    box-shadow: 0 3px 6px rgba(41, 41, 53, 0.808);
-                                }
-
-                                .name__container {
-                                    width: 50%;
-                                    @include column();
-                                }
-                            }
-                        }
                     }
                 }
             }

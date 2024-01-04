@@ -14,7 +14,13 @@ import { FaHeart } from "react-icons/fa";
 import EnquiryForm from "./EnquiryForm";
 import PropertyContext from "../myApp/context/PropertyContext";
 
-const CustomProductView: FunctionComponent = () => {
+type CustomProductViewProps = {
+    fetchUserStatus(): void;
+};
+
+const CustomProductView: FunctionComponent<CustomProductViewProps> = ({
+    fetchUserStatus,
+}) => {
     const { id } = useParams();
     const { state: userState, dispatch: userDispatch } =
         useContext(UserContext);
@@ -86,17 +92,20 @@ const CustomProductView: FunctionComponent = () => {
                     return (
                         <li key={index}>
                             Owner:{" "}
-                            {product[attribute as keyof CustomProduct] ||
-                                "unknown"}
+                            {String(
+                                product[attribute as keyof CustomProduct]
+                            ) || "unknown"}
                         </li>
                     );
                 } else if (attribute === "created_at") {
                     const regex = /^(\d{4})-(\d+)-(\d+)T.*$/;
-                    const match =
-                        product[attribute as keyof CustomProduct].match(regex);
+                    const match: string[] | null = String(
+                        product[attribute as keyof CustomProduct]
+                    ).match(regex);
                     return (
                         <li key={index}>
-                            Posted at: {`${match[3]}/${match[2]}/${match[1]}`}
+                            {match &&
+                                `Posted at ${match[3]}/${match[2]}/${match[1]}`}
                         </li>
                     );
                 }
@@ -106,8 +115,9 @@ const CustomProductView: FunctionComponent = () => {
                     attribute !== "updated_at" && (
                         <li key={index}>
                             {attribute}:{" "}
-                            {product[attribute as keyof CustomProduct] ||
-                                "unknown"}
+                            {String(
+                                product[attribute as keyof CustomProduct]
+                            ) || "unknown"}
                         </li>
                     )
                 );
@@ -168,6 +178,7 @@ const CustomProductView: FunctionComponent = () => {
                                 <EnquiryForm
                                     id={Number(id)}
                                     setFormOpen={setFormOpen}
+                                    fetchUserStatus={fetchUserStatus}
                                 />
                             )}
                         </div>

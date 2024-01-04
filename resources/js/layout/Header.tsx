@@ -5,7 +5,7 @@ import UserContext from "../myApp/context/UserContext";
 
 const Header = () => {
     const { state } = useContext(UserContext);
-    const userState =
+    const userAdminState =
         state.user !== null &&
         typeof state.user !== "boolean" &&
         state.user.role;
@@ -13,9 +13,7 @@ const Header = () => {
     return (
         <div className="header">
             <Link to="/">Home</Link>
-            <Link to="/properties">List All Properties</Link>
-            <Link to="/custom-offers">List All Custom Offers</Link>
-            {userState === "admin" && <a href="/offers">Admin Page</a>}
+            {userAdminState === "admin" && <a href="/offers">Admin Page</a>}
             <Navigation />
         </div>
     );

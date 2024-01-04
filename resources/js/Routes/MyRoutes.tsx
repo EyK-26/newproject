@@ -8,15 +8,12 @@ import axios from "axios";
 import Unauthorized from "../auth/Unauthorized";
 import Home from "../components/Home";
 import PasswordReset from "../auth/password-reset/PasswordReset";
-import ProductView from "../components/ProductView";
 import UserSettings from "../auth/UserSettings";
 import DeleteAccount from "../auth/DeleteAccount";
 import ChangeUserName from "../auth/ChangeUserName";
 import WishList from "../components/WishList";
 import Enquiries from "../components/Enquiries";
 import UserContext from "../myApp/context/UserContext";
-import SearchProductsAll from "../components/SearchProductsAll";
-import CustomOffers from "../components/CustomOffers";
 import CustomProductView from "../components/CustomProductView";
 
 const MyRoutes: FunctionComponent = () => {
@@ -62,11 +59,9 @@ const MyRoutes: FunctionComponent = () => {
     return (
         <Routes>
             <Route path="/" element={<Layout />}>
-                <Route index element={<Home />} />
-                <Route path="/properties" element={<SearchProductsAll />} />
                 <Route
-                    path="/custom-offers"
-                    element={<CustomOffers fetchUserStatus={fetchUserStatus} />}
+                    index
+                    element={<Home fetchUserStatus={fetchUserStatus} />}
                 />
                 {!state.user ? (
                     <>
@@ -91,16 +86,8 @@ const MyRoutes: FunctionComponent = () => {
                     <>
                         <Route path="/logout" element={<Logout />} />
                         <Route
-                            path="/prod_view/:id"
-                            element={
-                                <ProductView
-                                    fetchUserStatus={fetchUserStatus}
-                                />
-                            }
-                        />
-                        <Route
                             path="/custom_prod_view/:id"
-                            element={<CustomProductView />}
+                            element={<CustomProductView fetchUserStatus = {fetchUserStatus}/>}
                         />
                         <Route path="/user/:id" element={<UserSettings />} />
                         <Route
