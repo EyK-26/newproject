@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import Logout from "../auth/Logout";
 import UserContext from "../myApp/context/UserContext";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 import axios from "axios";
 
@@ -23,6 +23,7 @@ type LayoutProps = {
 };
 
 const Navigation: FunctionComponent<LayoutProps> = ({ fetchUserStatus }) => {
+    const { state: locationState, pathname } = useLocation();
     const { state, dispatch } = useContext(UserContext);
     const [languages, setLanguages] = useState<Languages[]>([]);
     const userLanguageState =
@@ -31,6 +32,7 @@ const Navigation: FunctionComponent<LayoutProps> = ({ fetchUserStatus }) => {
         state.user.language;
     const userIdState =
         state.user !== null && typeof state.user !== "boolean" && state.user.id;
+    const navigate = useNavigate();
 
     const fetchAllLanguages = async (): Promise<void> => {
         try {
@@ -62,6 +64,9 @@ const Navigation: FunctionComponent<LayoutProps> = ({ fetchUserStatus }) => {
             });
             if (Math.floor(response.status / 100) === 2) {
                 fetchUserStatus();
+                navigate(pathname, {
+                    state: { userLoggedIn: response.data.message },
+                });
                 dispatch({
                     type: "messages/set",
                     payload: response.data.message,

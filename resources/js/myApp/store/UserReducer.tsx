@@ -46,7 +46,7 @@ export interface UserState {
 export type UserAction =
     | { type: "theme/set"; payload: string }
     | { type: "user/set"; payload: User | null | boolean }
-    | { type: "messages/set"; payload: Array<string> }
+    | { type: "messages/set"; payload: string }
     | { type: "messages/unset" }
     | { type: "spanMessage/set"; payload: string }
     | { type: "spanMessage/unset" }
@@ -74,7 +74,7 @@ const UserReducer = (state: UserState, action: UserAction): UserState => {
         case "messages/set":
             return {
                 ...state,
-                messages: action.payload,
+                messages: [...state.messages, action.payload],
             };
         case "messages/unset":
             return {

@@ -28,7 +28,7 @@ const Login: FunctionComponent<LoginProps> = ({ fetchUserStatus }) => {
         password: "",
     });
     const [togglePassword, setTogglePassword] = useState<boolean>(false);
-    const { state, dispatch } = useContext(UserContext);
+    const { dispatch } = useContext(UserContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -43,10 +43,16 @@ const Login: FunctionComponent<LoginProps> = ({ fetchUserStatus }) => {
             }
         } catch (error: any) {
             const { password, email } = error.response.data.errors || false;
-            if (password || email) {
+            if (password) {
                 dispatch({
                     type: "messages/set",
-                    payload: [password, email],
+                    payload: password,
+                });
+            }
+            if (email) {
+                dispatch({
+                    type: "messages/set",
+                    payload: email,
                 });
             }
         }

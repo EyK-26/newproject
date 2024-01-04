@@ -11,13 +11,13 @@ const Home: FunctionComponent<HomeProps> = ({ fetchUserStatus }) => {
     const { state: locationState, pathname } = useLocation();
     const navigate = useNavigate();
     const { state, dispatch } = useContext(UserContext);
-    const { userDeleted, userRegistered, userLoggedIn, userLoggedOut } =
-        locationState || false;
-
-        const fetchUserDefaultLanguage = async (): Promise<void> => {
-            
-        };
-    
+    const {
+        userDeleted,
+        userRegistered,
+        userLoggedIn,
+        userLoggedOut,
+        languageChanged,
+    } = locationState || false;
 
     useEffect(() => {
         if (locationState) {
@@ -27,6 +27,7 @@ const Home: FunctionComponent<HomeProps> = ({ fetchUserStatus }) => {
                     userRegistered ||
                     userLoggedIn ||
                     userLoggedOut ||
+                    languageChanged ||
                     userDeleted,
             });
             navigate(pathname, { state: null });
