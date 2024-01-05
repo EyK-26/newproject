@@ -16,7 +16,7 @@ import OrderElements from "./OrderElements";
 import UserContext from "../myApp/context/UserContext";
 import { CustomProduct } from "../myApp/store/PropertyReducer";
 import WishlistControls from "./WishlistControls";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ImageToggler from "./ImageToggler";
 
 type CustomOffersProps = {
@@ -36,6 +36,10 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
         userState.user !== null &&
         typeof userState.user !== "boolean" &&
         userState.user.id;
+    const userLoggedInLanguage =
+        userState.user !== null &&
+        typeof userState.user !== "boolean" &&
+        userState.user.language;
 
     const fetchCustomOffers = async (): Promise<void> => {
         try {
@@ -57,13 +61,8 @@ const CustomOffers: FunctionComponent<CustomOffersProps> = ({
     };
 
     useEffect(() => {
-        if (
-            !(state.customProducts.length > 0) &&
-            !(state.searchedCustomProducts.length > 0)
-        ) {
-            fetchCustomOffers();
-        }
-    }, []);
+        fetchCustomOffers();
+    }, [userLoggedInLanguage]);
 
     const toggleWishlist = async (id: number): Promise<void> => {
         try {

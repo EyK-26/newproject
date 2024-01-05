@@ -27,12 +27,16 @@ const CustomProductView: FunctionComponent<CustomProductViewProps> = ({
     const { state } = useContext(PropertyContext);
     const [product, setProduct] = useState<CustomProduct | null>(null);
     const [formOpen, setFormOpen] = useState<boolean>(false);
-    const [added, setAdded] = useState<boolean>(false);
+    const [added] = useState<boolean>(false);
     const navigate = useNavigate();
     const userLoggedInState =
         userState.user !== null &&
         typeof userState.user !== "boolean" &&
         userState.user.id;
+    const userLoggedInLanguage =
+        userState.user !== null &&
+        typeof userState.user !== "boolean" &&
+        userState.user.language;
 
     const toggleWishlist = async (id: number): Promise<void> => {
         try {
@@ -83,7 +87,7 @@ const CustomProductView: FunctionComponent<CustomProductViewProps> = ({
 
     useEffect(() => {
         fetchCustomProduct();
-    }, []);
+    }, [userLoggedInLanguage]);
 
     const convertObject: any = (product: CustomProduct): ReactNode =>
         Object.keys(product).map((attribute: string, index: number) => {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Offer;
+use App\Notifications\admin\TranslateCustomText;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
@@ -27,7 +28,7 @@ class OfferController extends Controller
             return abort(404);
         }
     }
-    public function update(Request $request, string $id): View|RedirectResponse
+    public function update(Request $request, string $id): RedirectResponse
     {
         try {
             $offer = Offer::findOrFail($id);
@@ -56,7 +57,12 @@ class OfferController extends Controller
     public function custom_offers(Request $request): array | Collection
     {
         $offers = Offer::orderBy("created_at", "desc")->get();
+
         if (!empty($offers)) {
+            foreach ($offers as $offer) {
+                $offer->title = TranslateCustomText::translate($offer->title);
+                $offer->description = TranslateCustomText::translate($offer->description);
+            }
             return $offers->load('user');
         } else {
             return ['message' => 'no property available'];
@@ -75,6 +81,8 @@ class OfferController extends Controller
         try {
             $offer = Offer::findOrFail($request->query('id'));
             if (!empty($offer)) {
+                $offer->title = TranslateCustomText::translate($offer->title);
+                $offer->description = TranslateCustomText::translate($offer->description);
                 return $offer->load('user');
             } else {
                 return ['message' => 'no property available'];
