@@ -47,6 +47,10 @@ const EnquiryForm: FunctionComponent<EnquiryFormProps> = ({
         e: FormEvent<HTMLFormElement>
     ): Promise<void> => {
         e.preventDefault();
+        dispatch({
+            type: "spanMessage/set",
+            payload: "sending",
+        });
         try {
             const response = await axios.post("/api/enquiry", {
                 user_id:

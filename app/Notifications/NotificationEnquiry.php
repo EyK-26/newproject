@@ -30,12 +30,8 @@ class NotificationEnquiry extends Notification
         return ['mail', 'database'];
     }
 
-
     public function toMail(object $notifiable): MailMessage
     {
-        $translator = new TranslateCustomText("We will come back to you in 3 working days.", "cs");
-        //give a line and translate into Czech language. cs is the code.
-
         $this->notify_admin();
         return (new MailMessage)
             ->greeting("Dear {$notifiable->name}")
@@ -45,7 +41,7 @@ class NotificationEnquiry extends Notification
                 url("/custon_prod_view/{$this->offer_id}")
             )
             ->line("We will come back to you in 3 working days.")
-            ->line($translator->translate()) // !!!test line!!!
+            ->line(TranslateCustomText::translate("We will come back to you in 3 working days.")) // !!!test line!!!
             ->line('Thank you for using our application!')
             ->salutation('Regards');
     }

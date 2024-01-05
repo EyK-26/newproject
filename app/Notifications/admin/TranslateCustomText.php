@@ -2,23 +2,16 @@
 
 namespace App\Notifications\admin;
 
+use Illuminate\Support\Facades\Auth;
+
 class TranslateCustomText
 {
-    private $authKey =
-    "393c4bea-d902-58be-5818-ad4f90aa90e4:fx";
-    public $sentence;
-    public $targetLang;
-    public $translator;
-
-    public function __construct(string $sentence, string $targetLang)
+    public static function translate(string $source): string
     {
-        $this->sentence = $sentence;
-        $this->targetLang = $targetLang;
-        $this->translator = new \DeepL\Translator($this->authKey);
-    }
-
-    public function translate(): string
-    {
-        return $this->translator->translateText($this->sentence, null, $this->targetLang); //when null it's auto detected.
+        $authKey =
+            "393c4bea-d902-58be-5818-ad4f90aa90e4:fx";
+        $target_language = Auth::user()->language;
+        $translator = new \DeepL\Translator($authKey);
+        return $translator->translateText($source, null, $target_language); //when null it's auto detected.
     }
 }

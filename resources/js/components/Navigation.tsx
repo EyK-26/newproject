@@ -23,7 +23,7 @@ type LayoutProps = {
 };
 
 const Navigation: FunctionComponent<LayoutProps> = ({ fetchUserStatus }) => {
-    const { state: locationState, pathname } = useLocation();
+    const { pathname } = useLocation();
     const { state, dispatch } = useContext(UserContext);
     const [languages, setLanguages] = useState<Languages[]>([]);
     const userLanguageState =

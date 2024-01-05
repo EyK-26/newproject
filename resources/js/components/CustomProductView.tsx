@@ -80,7 +80,7 @@ const CustomProductView: FunctionComponent<CustomProductViewProps> = ({
             });
         }
     };
-    console.log(product);
+
     useEffect(() => {
         fetchCustomProduct();
     }, []);
