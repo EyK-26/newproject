@@ -28,6 +28,20 @@ class OfferController extends Controller
             return abort(404);
         }
     }
+    public function destroy(string $id): View|RedirectResponse
+    {
+        try {
+            $offer = Offer::findOrFail($id);
+            if (!empty($offer)) {
+                $offer->delete();
+                return redirect()->back()->with("message", "deleted successfully");
+            } else {
+                return redirect()->back()->with("error", "not found");
+            }
+        } catch (ModelNotFoundException $e) {
+            return abort(404);
+        }
+    }
     public function update(Request $request, string $id): RedirectResponse
     {
         try {
@@ -59,10 +73,10 @@ class OfferController extends Controller
         $offers = Offer::orderBy("created_at", "desc")->get();
 
         if (!empty($offers)) {
-            foreach ($offers as $offer) {
-                $offer->title = TranslateCustomText::translate($offer->title);
-                $offer->description = TranslateCustomText::translate($offer->description);
-            }
+            // foreach ($offers as $offer) {
+            //     $offer->title = TranslateCustomText::translate($offer->title);
+            //     $offer->description = TranslateCustomText::translate($offer->description);
+            // }
             return $offers->load('user');
         } else {
             return ['message' => 'no property available'];
@@ -111,7 +125,7 @@ class OfferController extends Controller
             $file_paths = [];
             if ($request->hasFile('photos')) {
                 foreach ($request->file('photos') as $photo) {
-                    $path = $photo->storeAs('uploads',  $photo->getClientOriginalName());
+                    $path = $photo->storeAs('/', $photo->getClientOriginalName(), 'uploads');
                     $file_paths[] = $path;
                 }
                 $offer->photo_path = implode(', ', $file_paths);

@@ -15,6 +15,11 @@
         <img src="{{ asset('uploads/' . $photo) }}" alt="{{ $offer->title }}">
         @endforeach
         <a href="{{ route('offers.edit', ['offer' => $offer->id]) }}">Edit offer</a>
+        <form action="{{ route('offer.destroy', ['offer' => $offer->id]) }}" method="post">
+            @csrf
+            @method('DELETE')
+            <button type="submit">Delete this offer</button>
+        </form>
         @endforeach
     </div>
     {{ $offers->links() }}

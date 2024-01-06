@@ -35,6 +35,9 @@ Route::group(['middleware' => 'can:admin'], function () {
 
     Route::post('/offers/{offer}', [OfferController::class, 'update'])->whereNumber('offer')
         ->name('offers.update');
+
+    Route::delete('/offers/{offer}', [OfferController::class, 'destroy'])->whereNumber('offer')
+        ->name('offer.destroy');
 });
 
 Route::view('/{path?}', 'home')
