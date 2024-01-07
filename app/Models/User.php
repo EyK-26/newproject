@@ -50,4 +50,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Offer::class);
     }
+
+    public function questions()
+    {
+        return $this->belongsToMany(Question::class);
+    }
+
+    public function quizanswers()
+    {
+        return $this->belongsToMany(QuizAnswer::class);
+    }
 }

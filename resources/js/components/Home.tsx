@@ -41,7 +41,6 @@ const Home: FunctionComponent<HomeProps> = ({ fetchUserStatus }) => {
             )}
             <div className="products__content">
                 <CustomOffers fetchUserStatus={fetchUserStatus} />
-                {/* <SelectedProductList /> */}
             </div>
         </div>
     );

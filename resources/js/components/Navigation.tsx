@@ -38,7 +38,9 @@ const Navigation: FunctionComponent<LayoutProps> = ({ fetchUserStatus }) => {
         try {
             const response = await axios.get("/api/get-languages");
             if (Math.floor(response.status / 100) === 2) {
-                setLanguages(response.data);
+                if (response.data.length > 0) {
+                    setLanguages(response.data);
+                }
             }
         } catch (err: any) {
             dispatch({

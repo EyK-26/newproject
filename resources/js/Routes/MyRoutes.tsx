@@ -15,6 +15,7 @@ import WishList from "../components/WishList";
 import Enquiries from "../components/Enquiries";
 import UserContext from "../myApp/context/UserContext";
 import CustomProductView from "../components/CustomProductView";
+import Questions from "../components/Questions";
 
 const MyRoutes: FunctionComponent = () => {
     const { state, dispatch } = useContext(UserContext);
@@ -66,6 +67,7 @@ const MyRoutes: FunctionComponent = () => {
                     index
                     element={<Home fetchUserStatus={fetchUserStatus} />}
                 />
+                <Route path="/questions" index element={<Questions />} />
                 {!state.user ? (
                     <>
                         <Route

@@ -18,6 +18,7 @@ const Header: FunctionComponent<HeaderProps> = ({ fetchUserStatus }) => {
         <div className="header">
             <Link to="/">Home</Link>
             {userAdminState === "admin" && <a href="/offers">Admin Page</a>}
+            <Link to="/questions">Questions</Link>
             <Navigation fetchUserStatus={fetchUserStatus} />
         </div>
     );

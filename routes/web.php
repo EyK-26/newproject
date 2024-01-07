@@ -4,6 +4,7 @@ use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/password-reset/{email}/{token}/{datetime}', [PasswordResetController::class, 'reset'])
@@ -38,6 +39,12 @@ Route::group(['middleware' => 'can:admin'], function () {
 
     Route::delete('/offers/{offer}', [OfferController::class, 'destroy'])->whereNumber('offer')
         ->name('offer.destroy');
+
+    Route::post('/questions/', [QuestionController::class, 'store'])
+        ->name('questions.store');
+
+    Route::post('/questions/{question}', [QuestionController::class, 'update'])->whereNumber('question')
+        ->name('questions.update');
 });
 
 Route::view('/{path?}', 'home')

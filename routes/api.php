@@ -4,6 +4,7 @@ use App\Http\Controllers\api\AuthentificationController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishController;
 use App\Models\User;
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user()->load(['enquiries.answers', 'wishes.offer']);
 });
+
+Route::get('/question', [QuestionController::class, 'show']);
 
 Route::post('/forgot-password', [AuthentificationController::class, 'send']);
 Route::put('/password-reset/action', [PasswordResetController::class, 'update'])
@@ -38,7 +41,12 @@ Route::get('/get-languages', function (): array {
     $authKey = "393c4bea-d902-58be-5818-ad4f90aa90e4:fx";
     $translator = new \DeepL\Translator($authKey);
     $targetLanguages = $translator->getTargetLanguages();
-    return $targetLanguages;
+    if (count($targetLanguages) > 0) {
+        return $targetLanguages;
+    } else {
+        return [];
+    }
+
     // foreach ($targetLanguages as $targetLanguage) {
     //     if ($targetLanguage->supportsFormality) {
     //         echo $targetLanguage->name . ' (' . $targetLanguage->code . ') supports formality';
