@@ -40,6 +40,12 @@ Route::group(['middleware' => 'can:admin'], function () {
     Route::delete('/offers/{offer}', [OfferController::class, 'destroy'])->whereNumber('offer')
         ->name('offer.destroy');
 
+    Route::get('/questions/', [QuestionController::class, 'create'])
+        ->name('questions.create');
+
+    Route::get('/questions/{question}', [QuestionController::class, 'edit'])
+        ->name('questions.edit');
+
     Route::post('/questions/', [QuestionController::class, 'store'])
         ->name('questions.store');
 

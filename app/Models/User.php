@@ -31,6 +31,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function hasRole($role)
+    {
+        return User::where('role', $role)->get();
+    }
+
     public function wishes()
     {
         return $this->hasMany(Wish::class);

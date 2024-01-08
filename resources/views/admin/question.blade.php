@@ -5,7 +5,7 @@
 <div class="create_question__container">
     @if (!empty($question))
     <h2>Edit Question</h2>
-    <form action="{{ route('questions.update', ['question' => $question->id]) }}" method="post">
+    <form action="{{ route('questions.update', ['question_id' => $question->id]) }}" method="post">
         @else
         <h2>Create New Question</h2>
         <form action="{{ route('questions.store') }}" method="post">
@@ -20,28 +20,30 @@
             </div>
 
             <div>
-                <label>Answers</label>
-                @for($i = 0; $i <= 4; $i++) <div>
-                    <input type="text" name="answers[]" id="answer{{ $i }}"
-                        value="{{ old('answers.'.$i, optional($question->answers[$i - 1])->answer) }}" required>
-                    <input type="checkbox" name="correct_answers[]" id="correct_answer{{ $i }}" value="{{ $i }}" {{
-                        (old('correct_answers.'.$i) || (optional($question->answers[$i - 1])->is_correct)) ? 'checked' :
-                    '' }}>
-                    <label for="correct_answer{{ $i }}">Correct Answer</label>
+                @for($i = 0; $i
+                <= 4; $i++) <input type="text" name="quizanswers[]" id="quizanswers_{{ $i }}" value="{{ old(" text.$i",
+                    isset($question->quizanswers[$i]) ? $question->quizanswers[$i]->text : '') }}"
+                    required />
+                    <label for="quizanswers_correct_{{ $i }}">Correct</label>
+                    <input type="checkbox" name="quizanswers_correct[{{ $i }}]" id="quizanswers_correct_{{ $i }}"
+                        @if(old("quizanswers_correct.$i", isset($question->quizanswers[$i]) &&
+                    $question->quizanswers[$i]->is_correct))
+                    checked
+                    @endif
+                    />
+                    @endfor
             </div>
-            @endfor
-</div>
 
-<div>
-    @if (!empty($question))
-    <button type="submit">Edit</button>
-    @else
-    <button type="submit">Submit</button>
-    @endif
-</div>
-</form>
+            <div>
+                @if (!empty($question))
+                <button type="submit">Edit</button>
+                @else
+                <button type="submit">Submit</button>
+                @endif
+            </div>
+        </form>
 
-@include('layouts.messages')
+        @include('layouts.messages')
 </div>
 @else
 <h1>404. Not Authorized.</h1>
