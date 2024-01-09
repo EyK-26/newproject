@@ -7,13 +7,29 @@ import React, {
 } from "react";
 import UserContext from "../myApp/context/UserContext";
 
-type Props = {};
+interface Answer {
+    id: number;
+    question_id: number;
+    is_correct: number | boolean;
+    text: string;
+}
 
-const Questions: FunctionComponent = (props: Props) => {
+interface Question {
+    created_at: string;
+    updated_at: string;
+    text: string;
+    quizanswers: Array<Answer>;
+}
+
+const Questions: FunctionComponent = () => {
     const { state, dispatch } = useContext(UserContext);
     const user_id =
         state.user !== null && typeof state.user !== "boolean" && state.user.id;
-    const [question, setQuestion] = useState<string>("");
+    const [question, setQuestion] = useState<Question | null>(null);
+    const userLoggedInLanguage =
+        state.user !== null &&
+        typeof state.user !== "boolean" &&
+        state.user.language;
 
     useEffect(() => {
         (async (): Promise<void> => {
@@ -36,11 +52,24 @@ const Questions: FunctionComponent = (props: Props) => {
                 });
             }
         })();
-    }, []);
+    }, [userLoggedInLanguage]);
 
-    console.log(question);
+    const renderedAnswers = question?.quizanswers.map((el, idx) => (
+        <li key={el.id}>
+            {idx + 1}) {el.text}
+        </li>
+    ));
 
-    return <div>Questions</div>;
+    return (
+        <div>
+            {question && (
+                <div>
+                    <span>{question.text}</span>
+                    <ul>{renderedAnswers}</ul>
+                </div>
+            )}
+        </div>
+    );
 };
 
 export default Questions;

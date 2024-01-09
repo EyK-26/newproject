@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use App\Models\QuizAnswer;
 use App\Models\User;
+use App\Notifications\admin\TranslateCustomText;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -92,12 +93,18 @@ class QuestionController extends Controller
         if (empty($user_id)) {
             return ['message' => 'you have to login to do the quizzzzzzz'];
         } else {
-            return Question::orderBy("id", "asc")
+            $results = Question::orderBy("id", "asc")
                 ->with('quizanswers')
                 ->whereHas('users', function ($query) use ($user_id) {
                     $query->where('user_id', $user_id)
                         ->where('is_passed', false);
                 })->first();
+            $results->text = TranslateCustomText::translate($results->text);
+            foreach ($results->quizanswers as $answer) {
+                $answer->text =
+                    TranslateCustomText::translate($answer->text);
+            }
+            return $results;
         }
     }
 

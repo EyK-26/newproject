@@ -67,7 +67,6 @@ const MyRoutes: FunctionComponent = () => {
                     index
                     element={<Home fetchUserStatus={fetchUserStatus} />}
                 />
-                <Route path="/questions" index element={<Questions />} />
                 {!state.user ? (
                     <>
                         <Route
@@ -121,6 +120,11 @@ const MyRoutes: FunctionComponent = () => {
                         />
                         <Route path="/wishlist/:id" element={<WishList />} />
                         <Route path="/enquiries/:id" element={<Enquiries />} />
+                        <Route
+                            path="/questions-non-admin"
+                            index
+                            element={<Questions />}
+                        />
                     </>
                 )}
                 <Route path="*" element={<Unauthorized />} />

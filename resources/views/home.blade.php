@@ -8,9 +8,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite('resources/css/app.scss')
     @can('admin')
-    <title>Real Estate Comparator - Admin</title>
+    <title>Quiz and Properties - Admin</title>
     @else
-    <title>Real Estate Comparator</title>
+    <title>Quiz and Properties</title>
     @endcan
 </head>
 
