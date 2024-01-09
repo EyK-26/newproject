@@ -5,7 +5,7 @@
 <div class="create_question__container">
     @if (!empty($question))
     <h2>Edit Question</h2>
-    <form action="{{ route('questions.update', ['question_id' => $question->id]) }}" method="post">
+    <form action="{{ route('questions.update', ['question' => $question->id]) }}" method="post">
         @else
         <h2>Create New Question</h2>
         <form action="{{ route('questions.store') }}" method="post">
@@ -21,8 +21,8 @@
 
             <div>
                 @for($i = 0; $i
-                <= 4; $i++) <input type="text" name="quizanswers[]" id="quizanswers_{{ $i }}" value="{{ old(" text.$i",
-                    isset($question->quizanswers[$i]) ? $question->quizanswers[$i]->text : '') }}"
+                <= 4; $i++) <input type="text" name="quizanswers[]" id="quizanswers_{{ $i }}" value="{{ old("
+                    quizanswers.$i", isset($question->quizanswers[$i]) ? $question->quizanswers[$i]->text : '') }}"
                     required />
                     <label for="quizanswers_correct_{{ $i }}">Correct</label>
                     <input type="checkbox" name="quizanswers_correct[{{ $i }}]" id="quizanswers_correct_{{ $i }}"

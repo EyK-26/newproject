@@ -40,8 +40,14 @@ Route::group(['middleware' => 'can:admin'], function () {
     Route::delete('/offers/{offer}', [OfferController::class, 'destroy'])->whereNumber('offer')
         ->name('offer.destroy');
 
-    Route::get('/questions/', [QuestionController::class, 'create'])
+    Route::get('/questions-all/', [QuestionController::class, 'index'])
+        ->name('questions.index');
+
+    Route::get('/questions', [QuestionController::class, 'create'])
         ->name('questions.create');
+
+    Route::get('/question-show/{question}', [QuestionController::class, 'show'])->whereNumber('question')
+        ->name('questions.show');
 
     Route::get('/questions/{question}', [QuestionController::class, 'edit'])
         ->name('questions.edit');
@@ -51,6 +57,9 @@ Route::group(['middleware' => 'can:admin'], function () {
 
     Route::post('/questions/{question}', [QuestionController::class, 'update'])->whereNumber('question')
         ->name('questions.update');
+
+    Route::delete('/questions/{question}', [QuestionController::class, 'destroy'])->whereNumber('question')
+        ->name('questions.destroy');
 });
 
 Route::view('/{path?}', 'home')
