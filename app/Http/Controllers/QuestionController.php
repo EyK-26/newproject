@@ -86,16 +86,18 @@ class QuestionController extends Controller
         }
     }
 
-    public function show(Request $request): Collection | array
+    public function show(Request $request): Question | array
     {
         $user_id = $request->query('user_id');
-        $auth_user = Auth::user();
-        if ($user_id === 0 && empty($auth_user)) {
-            return Question::orderBy("id", "asc")->where('is_passed', false)->with('quizanswers')->first() ?? null;
-        } else if ($user_id !== 0 && intval($auth_user) === intval($user_id)) {
-            return Question::where('user_id', $user_id)->orderBy("id", "asc")->where('is_passed', false)->with('quizanswers')->first() ?? null;
+        if (empty($user_id)) {
+            return ['message' => 'you have to login to do the quizzzzzzz'];
         } else {
-            return [];
+            return Question::orderBy("id", "asc")
+                ->with('quizanswers')
+                ->whereHas('users', function ($query) use ($user_id) {
+                    $query->where('user_id', $user_id)
+                        ->where('is_passed', false);
+                })->first();
         }
     }
 

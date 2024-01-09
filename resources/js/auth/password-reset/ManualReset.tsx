@@ -39,7 +39,7 @@ const ManualReset: FunctionComponent = () => {
             if (Math.floor(response.status / 100) === 2) {
                 dispatch({
                     type: "messages/set",
-                    payload: [response.data.message],
+                    payload: String([response.data.message]),
                 });
                 setValues((prev) => ({
                     ...prev,
@@ -53,7 +53,7 @@ const ManualReset: FunctionComponent = () => {
             if (password || password_confirmation) {
                 dispatch({
                     type: "messages/set",
-                    payload: [password, password_confirmation],
+                    payload: String([password, password_confirmation]),
                 });
             }
         }

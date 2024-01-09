@@ -11,16 +11,16 @@ type Props = {};
 
 const Questions: FunctionComponent = (props: Props) => {
     const { state, dispatch } = useContext(UserContext);
-    const userId =
+    const user_id =
         state.user !== null && typeof state.user !== "boolean" && state.user.id;
     const [question, setQuestion] = useState<string>("");
 
     useEffect(() => {
         (async (): Promise<void> => {
             try {
-                const response = await axios.get("api/question-show", {
+                const response = await axios.get("/api/question-show", {
                     params: {
-                        user_id: userId || 0,
+                        user_id,
                     },
                 });
                 if (
@@ -36,7 +36,9 @@ const Questions: FunctionComponent = (props: Props) => {
                 });
             }
         })();
-    });
+    }, []);
+
+    console.log(question);
 
     return <div>Questions</div>;
 };

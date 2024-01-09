@@ -60,9 +60,4 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Question::class);
     }
-
-    public function quizanswers()
-    {
-        return $this->belongsToMany(QuizAnswer::class);
-    }
 }

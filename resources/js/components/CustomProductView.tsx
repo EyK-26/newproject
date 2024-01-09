@@ -69,7 +69,7 @@ const CustomProductView: FunctionComponent<CustomProductViewProps> = ({
 
     const fetchCustomProduct = async (): Promise<void> => {
         try {
-            const response = await axios.get("/api/custom-product/", {
+            const response = await axios.get("/api/custom-product", {
                 params: {
                     id,
                 },

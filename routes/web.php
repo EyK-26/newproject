@@ -46,9 +46,6 @@ Route::group(['middleware' => 'can:admin'], function () {
     Route::get('/questions', [QuestionController::class, 'create'])
         ->name('questions.create');
 
-    Route::get('/question-show/{question}', [QuestionController::class, 'show'])->whereNumber('question')
-        ->name('questions.show');
-
     Route::get('/questions/{question}', [QuestionController::class, 'edit'])
         ->name('questions.edit');
 
