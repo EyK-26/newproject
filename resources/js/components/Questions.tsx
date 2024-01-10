@@ -6,21 +6,18 @@ import React, {
     useState,
 } from "react";
 import UserContext from "../myApp/context/UserContext";
-
 interface Answer {
     id: number;
     question_id: number;
     is_correct: number | boolean;
     text: string;
 }
-
 interface Question {
     created_at: string;
     updated_at: string;
     text: string;
     quizanswers: Array<Answer>;
 }
-
 const Questions: FunctionComponent = () => {
     const { state, dispatch } = useContext(UserContext);
     const user_id =
